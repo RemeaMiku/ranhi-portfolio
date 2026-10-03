@@ -13,6 +13,10 @@ const flush = () => new Promise((resolve) => setImmediate(resolve));
 function boot(preferred, saved = null, options = {}) {
   let ready;
   const listeners = {};
+  const timers = new Map();
+  const fetched = [];
+  const session = options.session || new Map();
+  let timerId = 0;
   const select = {
     value: "", attrs: {},
     setAttribute(key, value) { this.attrs[key] = value; },
@@ -20,18 +24,27 @@ function boot(preferred, saved = null, options = {}) {
     addEventListener(key, fn) { this[key] = fn; },
   };
   const theme = { textContent: "", setAttribute() {} };
+  const updated = { dateTime: "2026-10-04", textContent: "" };
   const context = {
-    URL, console: { warn() {} },
-    window: { addEventListener(key, fn) { listeners[key] = fn; } },
+    URL, AbortController, console: { warn() {} },
+    window: {
+      addEventListener(key, fn) { listeners[key] = fn; },
+      setTimeout(fn, delay) { timers.set(++timerId, { fn, delay }); return timerId; },
+      clearTimeout(id) { timers.delete(id); },
+    },
     document: {
-      currentScript: { src: "https://example.test/ranhi-portfolio/i18n.js?v=test" },
+      currentScript: { src: "https://" + (options.local ? "localhost" : "example.test") + "/ranhi-portfolio/i18n.js?v=" + (options.version || "test") },
       documentElement: { lang: "en", dataset: { theme: "auto" } },
       querySelector(selector) {
         if (selector === "[data-language-select]") return select;
         if (selector === "[data-theme-toggle]") return theme;
         return null;
       },
-      querySelectorAll(selector) { return selector === "[data-language-select]" ? [select] : []; },
+      querySelectorAll(selector) {
+        if (selector === "[data-language-select]") return [select];
+        if (selector === "time[data-last-updated]") return [updated];
+        return [];
+      },
       addEventListener(name, fn) { if (name === "DOMContentLoaded") ready = fn; },
     },
     navigator: { languages: preferred, language: preferred[0] },
@@ -39,10 +52,18 @@ function boot(preferred, saved = null, options = {}) {
       getItem() { if (options.blockedStorage) throw new Error("Blocked"); return saved; },
       setItem(key, value) { if (options.blockedStorage) throw new Error("Blocked"); saved = value; },
     },
-    async fetch(url) {
+    sessionStorage: {
+      getItem(key) { if (options.blockedStorage) throw new Error("Blocked"); return session.get(key) || null; },
+      setItem(key, value) { if (options.blockedStorage) throw new Error("Blocked"); session.set(key, value); },
+    },
+    async fetch(url, init) {
       assert.ok(url.pathname.startsWith("/ranhi-portfolio/locales/"));
       const locale = path.basename(url.pathname, ".json");
-      if (options.gates?.[locale]) await options.gates[locale];
+      fetched.push(locale);
+      if (options.gates?.[locale]) await Promise.race([
+        options.gates[locale],
+        new Promise((_, reject) => init.signal.addEventListener("abort", () => reject(new Error("Timeout")), { once: true })),
+      ]);
       if (options.missing?.includes(locale)) return { ok: false, status: 404 };
       const data = structuredClone(resources[locale]);
       if (options.missingKey && locale !== "en") delete data.ui[options.missingKey];
@@ -50,13 +71,45 @@ function boot(preferred, saved = null, options = {}) {
     },
   };
   vm.runInNewContext(source, context);
-  ready();
-  return { context, select, theme, listeners, stored: () => saved,
+  if (!options.beforeDom) ready();
+  return { context, select, theme, updated, listeners, fetched, session, ready, stored: () => saved,
+    runTimers(delay) { for (const [id, timer] of [...timers]) if (timer.delay === delay) { timers.delete(id); timer.fn(); } },
     change(value) { select.value = value; select.change({ target: select }); },
   };
 }
 
 async function main() {
+  const early = boot(["zh-CN"], null, { beforeDom: true });
+  assert.equal(early.context.document.documentElement.lang, "zh-Hans");
+  assert.equal(early.context.document.documentElement.dataset.i18nState, "loading");
+  assert.deepEqual(early.fetched, ["en", "zh-Hans"], "Downloads begin in the head");
+  early.ready();
+  await flush();
+  assert.equal(early.context.document.documentElement.dataset.i18nState, "ready");
+  assert.equal(early.updated.textContent, "2026年10月4日");
+  const warm = boot(["zh-CN"], null, { session: early.session });
+  await flush();
+  assert.equal(warm.context.document.documentElement.lang, "zh-Hans");
+  assert.equal(warm.fetched.length, 0, "Page changes use the versioned tab cache");
+  const newRelease = boot(["zh-CN"], null, { session: early.session, version: "next" });
+  await flush();
+  assert.equal(newRelease.fetched.length, 2, "New releases invalidate cached text");
+  const localPreview = boot(["zh-CN"], null, { session: early.session, local: true });
+  await flush();
+  assert.equal(localPreview.fetched.length, 2, "Local edits remain immediately visible");
+  const stalled = boot(["ja-JP"], null, { gates: { en: new Promise(() => {}), ja: new Promise(() => {}) } });
+  stalled.runTimers(2500);
+  await flush();
+  assert.equal(stalled.context.document.documentElement.dataset.i18nState, "error");
+  assert.equal(stalled.context.document.documentElement.lang, "en");
+  assert.equal(stalled.select.attrs["aria-busy"], undefined);
+  const watchdog = boot(["ja-JP"], null, { beforeDom: true });
+  watchdog.runTimers(3000);
+  assert.equal(watchdog.context.document.documentElement.dataset.i18nState, "error");
+  const corruptSession = new Map([["ranhi-i18n:/ranhi-portfolio/locales/test:ja", '{"ui":[],"types":{},"artworkNotes":{}}']]);
+  const corrupt = boot(["ja-JP"], null, { session: corruptSession });
+  await flush();
+  assert.ok(corrupt.fetched.includes("ja"));
   const cases = [
     [["zh-CN"], "zh-Hans"], [["zh-SG"], "zh-Hans"], [["zh"], "zh-Hans"],
     [["zh-TW"], "zh-Hant"], [["zh-HK"], "zh-Hant"], [["zh-MO"], "zh-Hant"],
@@ -82,6 +135,7 @@ async function main() {
   manual.change("en");
   await flush();
   assert.equal(manual.stored(), "en");
+  assert.equal(manual.updated.textContent, "October 4, 2026");
   manual.context.navigator.languages = ["zh-CN"];
   manual.listeners.languagechange();
   await flush();
@@ -138,6 +192,9 @@ async function main() {
     assert.ok(!html.includes('<option value="auto"'));
     assert.ok(html.includes('class="language-icon"'));
     assert.ok(html.includes('>THANK YOU</small>'));
+    assert.ok(html.includes('html[data-i18n-state="loading"] body { visibility: hidden; }'));
+    assert.ok(/<script src="i18n\.js\?v=[^"]+"><\/script>/.test(html), "Locale boot must run before the body");
+    assert.equal((html.match(/data-last-updated datetime="2026-10-04"/g) || []).length, 1);
     for (const [, key] of html.matchAll(/data-i18n="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     if (page === "works") {
       for (const [, type] of html.matchAll(/<p class="type">([^<]+)<\/p>/g)) {
@@ -150,6 +207,6 @@ async function main() {
     }
   }
   assert.ok(!source.includes('bind(".miku-signature'));
-  console.log("PASS: four dictionaries, all bindings and notes, language matching, persistence, legacy preferences, blocked storage, resource/key fallback, request races, globe UI and three A/B switches.");
+  console.log("PASS: pre-paint language gate, versioned session cache, local refresh, request timeout/watchdog, localized release date, four dictionaries, language matching/fallback, request races and A/B switches.");
 }
 main().catch((error) => { console.error(error); process.exitCode = 1; });

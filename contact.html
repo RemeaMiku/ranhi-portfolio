@@ -7,11 +7,12 @@
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <link rel="apple-touch-icon" href="images/favicon.png" />
     <script src="theme.js?v=20261003-1"></script>
-    <script src="i18n.js?v=20261003-4" defer></script>
+    <style>html[data-i18n-state="loading"] body { visibility: hidden; }</style>
+    <script src="i18n.js?v=20261004-3"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="atmosphere.css" />
     <link rel="stylesheet" href="theme.css?v=20260922-7" />
-    <link rel="stylesheet" href="i18n.css?v=20261004-2" />
+    <link rel="stylesheet" href="i18n.css?v=20261004-3" />
   </head>
   <body>
     <header class="site-header">
@@ -75,7 +76,10 @@
       </section>
     </main>
     <footer class="footer container">
-      <span lang="en">RANHI / ILLUSTRATION PORTFOLIO</span>
+      <div class="footer-meta">
+        <span lang="en">RANHI / ILLUSTRATION PORTFOLIO</span>
+        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-10-04">October 4, 2026</time></span>
+      </div>
       <div class="footer-signoff">
         <span>© 2026 RANHI</span
         ><span class="miku-signature" lang="en" aria-label="39 — Thank you"

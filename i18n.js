@@ -4,7 +4,15 @@
   const languages = ["en", "zh-Hans", "zh-Hant", "ja"];
   const storageKey = "ranhi-language";
   // Keep resource URLs relative to this script for GitHub Pages subpaths.
-  const resourceRoot = new URL("locales/", document.currentScript.src);
+  const scriptURL = new URL(document.currentScript.src);
+  const resourceRoot = new URL("locales/", scriptURL);
+  const resourceVersion = scriptURL.searchParams.get("v") || "1";
+  const isLocal = ["localhost", "127.0.0.1", "[::1]"].includes(scriptURL.hostname);
+  const sessionKey = (locale) => "ranhi-i18n:" + resourceRoot.pathname + resourceVersion + ":" + locale;
+  const validResource = (value) => value && ["ui", "types", "artworkNotes"].every(
+    (section) => value[section] && typeof value[section] === "object" &&
+      !Array.isArray(value[section]) && Object.values(value[section]).every((text) => typeof text === "string"),
+  );
   const cache = new Map();
   let language = "en";
   let dictionary = {};
@@ -38,22 +46,50 @@
   );
   const translate = (key) => dictionary.ui?.[key] ?? english.ui?.[key] ?? key;
 
+  // Runs in <head>, before any fallback text can be painted.
+  document.documentElement.lang = preference || systemLanguage();
+  document.documentElement.dataset.i18nState = "loading";
+  const revealFallback = window.setTimeout(() => {
+    if (document.documentElement.dataset.i18nState !== "loading") return;
+    document.documentElement.lang = "en";
+    document.documentElement.dataset.i18nState = "error";
+  }, 3000);
+
   function loadResource(locale) {
     if (!cache.has(locale)) {
-      const request = fetch(new URL(locale + ".json", resourceRoot), {
-        cache: "no-cache",
+      // A versioned tab cache makes subsequent page changes network-independent.
+      if (!isLocal) {
+        try {
+          const saved = JSON.parse(sessionStorage.getItem(sessionKey(locale)));
+          if (validResource(saved)) {
+            const ready = Promise.resolve(saved);
+            cache.set(locale, ready);
+            return ready;
+          }
+        } catch { /* Storage is optional; local previews always read the JSON files. */ }
+      }
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 2500);
+      const url = new URL(locale + ".json", resourceRoot);
+      url.searchParams.set("v", resourceVersion);
+      const request = fetch(url, {
+        cache: "no-cache", signal: controller.signal,
       }).then((response) => {
         if (!response.ok) throw new Error("Language resource: " + response.status);
         return response.json();
       }).then((resource) => {
-        if (!resource.ui || !resource.types || !resource.artworkNotes) {
+        if (!validResource(resource)) {
           throw new Error("Invalid language resource: " + locale);
+        }
+        if (!isLocal) {
+          try { sessionStorage.setItem(sessionKey(locale), JSON.stringify(resource)); }
+          catch { /* Keep working when storage is blocked or full. */ }
         }
         return resource;
       }).catch((error) => {
         cache.delete(locale);
         throw error;
-      });
+      }).finally(() => window.clearTimeout(timeout));
       cache.set(locale, request);
     }
     return cache.get(locale);
@@ -125,6 +161,11 @@
     const select = document.querySelector("[data-language-select]");
     if (select) select.value = language;
     updateTheme(document.documentElement.dataset.theme || "auto");
+    document.querySelectorAll("time[data-last-updated]").forEach((element) => {
+      element.textContent = new Intl.DateTimeFormat(language, {
+        year: "numeric", month: "long", day: "numeric", timeZone: "UTC",
+      }).format(new Date(element.dateTime + "T00:00:00Z"));
+    });
     const page = document.querySelector(".navlinks [aria-current='page']")?.getAttribute("href");
     const titleKey = {
       "index.html": "portfolio", "works.html": "works",
@@ -156,14 +197,21 @@
       // Keep the existing page usable if a resource cannot be read.
       if (ticket !== revision) return;
       document.documentElement.dataset.i18nState = "error";
+      document.documentElement.lang = language;
       if (select) select.value = language;
       console.warn("Could not load translations.", error);
     } finally {
-      if (ticket === revision) select?.removeAttribute("aria-busy");
+      if (ticket === revision) {
+        window.clearTimeout(revealFallback);
+        select?.removeAttribute("aria-busy");
+      }
     }
   }
 
   window.RanhiI18n = { resolveLanguage, updateTheme };
+  // Start downloads while the HTML is still being parsed, not after it is visible.
+  void loadResource("en").catch(() => {});
+  void loadResource(preference || systemLanguage()).catch(() => {});
   document.addEventListener("DOMContentLoaded", () => {
     for (const page of ["home", "works", "about", "contact"]) {
       bind(".navlinks a[href='" + (page === "home" ? "index" : page) + ".html']", page);
