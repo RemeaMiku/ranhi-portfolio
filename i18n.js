@@ -9,7 +9,7 @@
   const resourceVersion = scriptURL.searchParams.get("v") || "1";
   const isLocal = ["localhost", "127.0.0.1", "[::1]"].includes(scriptURL.hostname);
   const sessionKey = (locale) => "ranhi-i18n:" + resourceRoot.pathname + resourceVersion + ":" + locale;
-  const validResource = (value) => value && ["ui", "types", "artworkNotes"].every(
+  const validResource = (value) => value && ["ui", "types", "artworkTitles", "artworkNotes"].every(
     (section) => value[section] && typeof value[section] === "object" &&
       !Array.isArray(value[section]) && Object.values(value[section]).every((text) => typeof text === "string"),
   );
@@ -132,6 +132,15 @@
     });
     document.querySelectorAll("[data-original-hours]").forEach((element) => {
       element.textContent = element.dataset.originalHours.replace(/\s*h/g, " " + translate("hours"));
+    });
+    document.querySelectorAll("[data-artwork-title]").forEach((element) => {
+      const id = element.dataset.artworkTitle;
+      const localized = dictionary.artworkTitles?.[id];
+      const fallback = english.artworkTitles?.[id] ?? element.dataset.originalTitle;
+      // Event names and explicitly preserved proper names stay in their original form.
+      const original = element.hasAttribute("data-title-original");
+      element.textContent = original ? element.dataset.originalTitle : localized ?? fallback;
+      element.lang = original ? element.dataset.originalTitleLang : localized ? language : "en";
     });
     document.querySelectorAll(".work-card").forEach((card) => {
       card.querySelector("img").alt = card.querySelector("h3").textContent + " — " + card.querySelector("p").textContent;
@@ -261,8 +270,9 @@
     document.querySelectorAll(".type, .work-card > p").forEach((element) => {
       element.dataset.originalType = element.textContent.trim();
     });
-    document.querySelectorAll(".detail-info h2, .work-card h3").forEach((element) => {
-      element.lang = "en";
+    document.querySelectorAll("[data-artwork-title]").forEach((element) => {
+      element.dataset.originalTitle = element.textContent.trim();
+      element.dataset.originalTitleLang = element.lang || "en";
     });
     document.querySelectorAll(".detail").forEach((article) => {
       article.querySelectorAll("dt").forEach((element) => {

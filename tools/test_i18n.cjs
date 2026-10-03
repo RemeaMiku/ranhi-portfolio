@@ -25,6 +25,11 @@ function boot(preferred, saved = null, options = {}) {
   };
   const theme = { textContent: "", setAttribute() {} };
   const updated = { dateTime: "2026-10-04", textContent: "" };
+  const fixedTitles = ["miku-with-you", "magical-mirai", "hikari", "miku-and-teto"];
+  const titles = Object.fromEntries(Object.entries(resources.en.artworkTitles).map(([id, title]) => [id, {
+    dataset: { artworkTitle: id }, textContent: title, lang: fixedTitles.includes(id) ? "en" : "",
+    hasAttribute(name) { return name === "data-title-original" && fixedTitles.includes(id); },
+  }]));
   const context = {
     URL, AbortController, console: { warn() {} },
     window: {
@@ -43,6 +48,7 @@ function boot(preferred, saved = null, options = {}) {
       querySelectorAll(selector) {
         if (selector === "[data-language-select]") return [select];
         if (selector === "time[data-last-updated]") return [updated];
+        if (selector === "[data-artwork-title]") return Object.values(titles);
         return [];
       },
       addEventListener(name, fn) { if (name === "DOMContentLoaded") ready = fn; },
@@ -67,12 +73,14 @@ function boot(preferred, saved = null, options = {}) {
       if (options.missing?.includes(locale)) return { ok: false, status: 404 };
       const data = structuredClone(resources[locale]);
       if (options.missingKey && locale !== "en") delete data.ui[options.missingKey];
+      if (options.missingTitle && locale !== "en") delete data.artworkTitles[options.missingTitle];
+      if (options.changedEventTitle && locale !== "en") data.artworkTitles["miku-with-you"] = "Do not translate this event";
       return { ok: true, json: async () => data };
     },
   };
   vm.runInNewContext(source, context);
   if (!options.beforeDom) ready();
-  return { context, select, theme, updated, listeners, fetched, session, ready, stored: () => saved,
+  return { context, select, theme, updated, titles, listeners, fetched, session, ready, stored: () => saved,
     runTimers(delay) { for (const [id, timer] of [...timers]) if (timer.delay === delay) { timers.delete(id); timer.fn(); } },
     change(value) { select.value = value; select.change({ target: select }); },
   };
@@ -87,6 +95,27 @@ async function main() {
   await flush();
   assert.equal(early.context.document.documentElement.dataset.i18nState, "ready");
   assert.equal(early.updated.textContent, "2026年10月4日");
+  assert.equal(early.titles["moonlight-and-osmanthus"].textContent, "中秋明月 桂影婵娟");
+  assert.equal(early.titles["the-new-mirai"].textContent, "新的未来");
+  assert.equal(early.titles["the-new-mirai"].lang, "zh-Hans");
+  const japaneseTitles = boot(["ja"], null, { changedEventTitle: true });
+  await flush();
+  for (const [id, expected] of Object.entries({
+    "winter-midnight": "Winter Midnight", "the-new-mirai": "新たなミライ",
+    "above-the-clouds": "雲の向こうで", "flower-terms": "花詞",
+    "place-for-two": "二人の場所", "first-step": "最初の一歩",
+    "gets-sucked-in": "吸い込まれちゃった！", "hikari": "HIKARI",
+    "miku-with-you": "MIKU WITH YOU 2026", "magical-mirai": "MAGICAL MIRAI 2026",
+  })) assert.equal(japaneseTitles.titles[id].textContent, expected);
+  assert.equal(japaneseTitles.titles["miku-with-you"].lang, "en");
+  japaneseTitles.change("en");
+  await flush();
+  assert.equal(japaneseTitles.titles["above-the-clouds"].textContent, "Above the Clouds");
+  assert.equal(japaneseTitles.titles["gets-sucked-in"].textContent, "Gets Sucked In");
+  const missingTitle = boot(["ja"], null, { missingTitle: "above-the-clouds" });
+  await flush();
+  assert.equal(missingTitle.titles["above-the-clouds"].textContent, "Above the Clouds");
+  assert.equal(missingTitle.titles["above-the-clouds"].lang, "en");
   const warm = boot(["zh-CN"], null, { session: early.session });
   await flush();
   assert.equal(warm.context.document.documentElement.lang, "zh-Hans");
@@ -169,10 +198,11 @@ async function main() {
   assert.equal(race.select.value, "zh-Hant", "A slow request must not overwrite the latest choice");
   assert.equal(race.context.document.documentElement.lang, "zh-Hant");
   for (const [locale, resource] of Object.entries(resources)) {
-    for (const section of ["ui", "types", "artworkNotes"]) {
+    for (const section of ["ui", "types", "artworkTitles", "artworkNotes"]) {
       assert.deepEqual(Object.keys(resource[section]).sort(), Object.keys(resources.en[section]).sort(), locale + "/" + section);
       assert.ok(Object.values(resource[section]).every((value) => typeof value === "string" && value.trim()), locale);
     }
+    assert.deepEqual(Object.keys(resource.artworkTitles), Object.keys(resource.artworkNotes));
     // Artist references must not infer gender; fictional characters are separate.
     for (const key of ["storyIntro", "storyClosingTitle", "storyClosingBody"]) {
       assert.ok(!/\b(?:she|her|hers|he|him|his)\b|[她他]|彼女|彼(?!方)/i.test(resource.ui[key]), locale + "/" + key);
@@ -196,7 +226,14 @@ async function main() {
     assert.ok(/<script src="i18n\.js\?v=[^"]+"><\/script>/.test(html), "Locale boot must run before the body");
     assert.equal((html.match(/data-last-updated datetime="2026-10-04"/g) || []).length, 1);
     for (const [, key] of html.matchAll(/data-i18n="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
+    for (const [, id] of html.matchAll(/data-artwork-title="([^"]+)"/g)) assert.ok(resources.en.artworkTitles[id], id);
+    if (page === "index") assert.equal((html.match(/data-artwork-title=/g) || []).length, 4);
     if (page === "works") {
+      assert.equal((html.match(/data-artwork-title=/g) || []).length, 14);
+      assert.ok(!html.includes('<p lang="zh-CN">中秋明月 桂影婵娟</p>'));
+      for (const id of ["miku-with-you", "magical-mirai", "hikari", "miku-and-teto"]) {
+        assert.ok(html.includes('data-artwork-title="' + id + '" data-title-original'));
+      }
       for (const [, type] of html.matchAll(/<p class="type">([^<]+)<\/p>/g)) {
         assert.ok(resources.en.types[type], "Unmapped work category: " + type);
       }
@@ -207,6 +244,6 @@ async function main() {
     }
   }
   assert.ok(!source.includes('bind(".miku-signature'));
-  console.log("PASS: pre-paint language gate, versioned session cache, local refresh, request timeout/watchdog, localized release date, four dictionaries, language matching/fallback, request races and A/B switches.");
+  console.log("PASS: localized titles and title fallback, original-name exceptions, pre-paint language gate, versioned session cache, local refresh, timeout/watchdog, localized release date, language matching/fallback, request races and A/B switches.");
 }
 main().catch((error) => { console.error(error); process.exitCode = 1; });

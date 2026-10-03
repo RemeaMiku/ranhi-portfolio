@@ -84,6 +84,12 @@ html:not(:lang(en)) .contact-page h1 {
 html:not(:lang(en)) .hero-subtitle {
   font-size: clamp(28px, 3.4vw, 48px);
 }
+/* Translated titles need natural CJK spacing; original event names keep Latin styling. */
+[data-artwork-title]:is(:lang(zh), :lang(ja)) {
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  overflow-wrap: anywhere;
+}
 @media (max-width: 1050px) {
   .navlinks {
     gap: 14px;
