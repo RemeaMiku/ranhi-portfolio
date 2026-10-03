@@ -1,0 +1,260 @@
+/* Language controls share the site's sharp-edged, theme-aware design. */
+.language-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+.language-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.language-picker select {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+.language-picker option {
+  color: var(--ink);
+  background: var(--paper);
+}
+.language-picker select:focus-visible {
+  outline: 2px solid var(--accent, var(--aqua));
+  outline-offset: 3px;
+}
+.language-picker select:hover {
+  border-color: var(--accent, var(--aqua));
+}
+.navlinks {
+  gap: clamp(12px, 2vw, 26px);
+}
+.navlinks > a,
+.theme-toggle {
+  white-space: nowrap;
+}
+html:lang(zh) body {
+  font-family: Inter, "Noto Sans SC", "Noto Sans TC", "Microsoft YaHei", "PingFang SC", "PingFang TC", sans-serif;
+}
+html:lang(zh-Hant) body {
+  font-family: Inter, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+/* CJK headings need more leading than the compact Latin display type. */
+html:not(:lang(en)) .section h2,
+html:not(:lang(en)) .page-intro h1,
+html:not(:lang(en)) .hero-subtitle {
+  line-height: 1.2;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+html:not(:lang(en)) .contact-page h1 {
+  font-size: clamp(38px, 6.4vw, 92px);
+}
+html:not(:lang(en)) .hero-subtitle {
+  font-size: clamp(28px, 3.4vw, 48px);
+}
+@media (max-width: 1050px) {
+  .navlinks {
+    gap: 14px;
+    letter-spacing: 0.04em;
+  }
+  .theme-toggle {
+    padding-left: 12px;
+  }
+}
+/* Two rows keep all four page links and both controls accessible on phones. */
+@media (max-width: 800px) {
+  .detail {
+    scroll-margin-top: 108px;
+  }
+  .site-header {
+    height: auto;
+    min-height: 96px;
+  }
+  .site-header .nav {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 8px;
+    padding-block: 10px;
+  }
+  .nav .brand {
+    grid-column: 1 / 4;
+    grid-row: 1;
+  }
+  .navlinks {
+    display: contents;
+  }
+  .navlinks > a {
+    grid-row: 2;
+    grid-column: span 3;
+    text-align: center;
+    padding-block: 5px;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+  .navlinks .theme-toggle {
+    grid-column: 4 / 8;
+    grid-row: 1;
+    padding: 6px 0;
+    border-left: 0;
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+  .language-picker {
+    grid-column: 8 / 13;
+    grid-row: 1;
+    justify-content: flex-end;
+  }
+  .language-picker select {
+    width: calc(100% - 26px);
+    font-size: 11px;
+  }
+}
+
+/* Dense CJK glyphs need larger controls, not the Latin display tracking. */
+html:is(:lang(zh), :lang(ja)) .navlinks > a,
+html:is(:lang(zh), :lang(ja)) .navlinks .theme-toggle,
+html:is(:lang(zh), :lang(ja)) .language-picker select,
+html:is(:lang(zh), :lang(ja)) .variant > span {
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+html:is(:lang(zh), :lang(ja)) .theme-toggle {
+  font-family: inherit;
+}
+html:is(:lang(zh), :lang(ja)) .text-link,
+html:is(:lang(zh), :lang(ja)) .hero-footer a {
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+@media (max-width: 800px) {
+  html:is(:lang(zh), :lang(ja)) .navlinks .theme-toggle,
+  html:is(:lang(zh), :lang(ja)) .language-picker select {
+    letter-spacing: 0;
+  }
+  html:is(:lang(zh), :lang(ja)) .language-picker select {
+    padding-inline: 4px;
+  }
+  /* Give the longer Japanese labels more room without shrinking the type. */
+  html:lang(ja) .site-header .nav {
+    column-gap: 4px;
+  }
+  html:lang(ja) .navlinks > a:nth-child(-n + 2) {
+    grid-column: span 2;
+  }
+  html:lang(ja) .navlinks > a:nth-child(n + 3) {
+    grid-column: span 4;
+  }
+}
+
+/* A single, square-edged A/B switch, matching the rest of the interface. */
+.variant .expression-switch {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 104px;
+  height: 44px;
+  padding: 3px;
+  flex: 0 0 104px;
+  isolation: isolate;
+  border-radius: 0;
+  transform: none;
+}
+.expression-switch::before {
+  content: "";
+  position: absolute;
+  inset: 3px auto 3px 3px;
+  width: calc(50% - 3px);
+  background: var(--accent, var(--aqua));
+  z-index: -1;
+  transition: transform 320ms ease-in-out;
+}
+.expression-switch[aria-checked="true"]::before {
+  transform: translateX(100%);
+}
+.expression-switch > span {
+  align-self: center;
+  color: var(--muted);
+  transition: color 320ms ease;
+}
+.expression-switch[aria-checked="false"] > span:first-child,
+.expression-switch[aria-checked="true"] > span:last-child {
+  color: #0b2428;
+}
+.expression-switch:focus-visible {
+  outline: 2px solid var(--accent, var(--aqua));
+  outline-offset: 4px;
+}
+.variant-error {
+  color: var(--muted);
+  font-size: 13px;
+}
+.artist-story {
+  border-top: 1px solid var(--line);
+}
+.artist-story h2 {
+  max-width: 18ch;
+  margin: 0 0 clamp(32px, 5vw, 64px);
+  font-size: clamp(30px, 4.4vw, 60px);
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+.artist-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.artist-timeline li {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 72px);
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+}
+.artist-timeline time {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent, var(--aqua));
+}
+.artist-timeline h3,
+.story-closing h3 {
+  font-size: clamp(20px, 2.5vw, 28px);
+  line-height: 1.45;
+  margin: 0 0 14px;
+}
+.artist-timeline p,
+.story-closing p {
+  max-width: 70ch;
+  margin: 0;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.9;
+}
+.story-closing {
+  margin-top: 40px;
+  padding: clamp(24px, 4vw, 48px);
+  border-left: 2px solid var(--accent, var(--aqua));
+  background: color-mix(in srgb, var(--accent, var(--aqua)) 5%, transparent);
+}
+@media (max-width: 600px) {
+  html:lang(en) .works-intro h1 {
+    font-size: clamp(36px, 10vw, 60px);
+  }
+  .artist-timeline li {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

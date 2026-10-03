@@ -6,10 +6,12 @@
     <title>About — RANHI</title>
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <link rel="apple-touch-icon" href="images/favicon.png" />
-    <script src="theme.js?v=20260922-4"></script>
+    <script src="theme.js?v=20261003-1"></script>
+    <script src="i18n.js?v=20261003-4" defer></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="atmosphere.css" />
     <link rel="stylesheet" href="theme.css?v=20260922-7" />
+    <link rel="stylesheet" href="i18n.css?v=20261004-2" />
   </head>
   <body>
     <header class="site-header">
@@ -22,15 +24,28 @@
           ><button class="theme-toggle" type="button" data-theme-toggle>
             THEME / AUTO
           </button>
+          <label class="language-picker">
+            <svg class="language-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="9"></circle>
+              <ellipse cx="12" cy="12" rx="4" ry="9"></ellipse>
+              <path d="M3 12h18"></path>
+            </svg>
+            <select data-language-select aria-label="Language">
+              <option value="zh-Hans" lang="zh-Hans">简体中文</option>
+              <option value="zh-Hant" lang="zh-Hant">繁體中文</option>
+              <option value="en" lang="en">English</option>
+              <option value="ja" lang="ja">日本語</option>
+            </select>
+          </label>
         </nav>
       </div>
     </header>
     <main class="container">
       <section class="page-intro">
-        <p class="eyebrow">ABOUT THE ARTIST</p>
+        <p class="eyebrow" lang="en">PROFILE</p>
         <h1>RANHI</h1>
         <p class="page-lead">
-          Illustrator creating anime, Vocaloid, and character art.
+          The world is my school; nature and human life are my textbooks.
         </p>
       </section>
       <section class="about-page-grid">
@@ -42,10 +57,10 @@
           />
           <div>
             <p class="bio">
-              アニメ・Vocaloidを中心としたイラスト制作を行っています。キャラクターの表情や色彩、透明感のある画面づくりを得意としています。
+              Hello! I'm RANHI (岚曦), based in Tokyo. I mainly draw Vocaloid and anime characters, especially Hatsune Miku. Japanese digital illustration from the 2010s has been a major influence on my work, and I've always loved its fresh colours and sense of clarity.
             </p>
             <p class="bio">
-              一枚の絵のなかに、そのキャラクターが生きる空気や物語を感じられるような表現を目指しています。
+              I want to develop my own way of drawing Miku and express my feelings through art. If a picture I share online reaches someone, somewhere in the world, and moves them, that alone makes me happy.
             </p>
           </div>
         </div>
@@ -57,8 +72,7 @@
           <div class="fact">
             <span>FOCUS</span
             ><strong
-              >Anime Illustration<br />Character Art<br />Vocaloid / Fan
-              Art</strong
+              >Anime illustration<br />Vocaloid / Fan art</strong
             >
           </div>
           <div class="fact">
@@ -66,12 +80,56 @@
           </div>
         </div>
       </section>
+      <section class="section artist-story" aria-labelledby="story-title">
+        <h2 id="story-title" data-i18n="storyTitle">My journey into drawing</h2>
+        <ol class="artist-timeline">
+          <li>
+            <time datetime="2016">2016</time>
+            <div>
+              <h3 data-i18n="milestone2016Title">It started with a drawing I loved</h3>
+              <p data-i18n="storyIntro">In 2016, not long after becoming a Hatsune Miku fan, I discovered the work of Kyod+, now known as あさひクロイ and often called 旭酱 by Chinese fans. The artist's Miku illustrations were adorable and full of life, with beautifully clear colours. Many still stop me in my tracks today. That was when I picked up a pencil and began making studies of those drawings.</p>
+            </div>
+          </li>
+          <li>
+            <time datetime="2021">2021</time>
+            <div>
+              <h3 data-i18n="milestone2021Title">From pencil to digital</h3>
+              <p data-i18n="milestone2021Body">I bought a drawing tablet and began learning Photoshop. During university, I gradually moved from studies to composing my own pictures. I also displayed my work at Wuhan University's anime club booth and made promotional flyers.</p>
+            </div>
+          </li>
+          <li>
+            <time datetime="2024">2024</time>
+            <div>
+              <h3 data-i18n="milestone2024Title">Reaching more people</h3>
+              <p data-i18n="milestone2024Body">After graduating and starting work, I made time to draw a MAGICAL MIRAI 2024 illustration. It was later featured by the official Hatsune Miku / piapro account. I was thrilled—it was the first time I really felt my work was reaching further out into the world.</p>
+            </div>
+          </li>
+          <li>
+            <time datetime="2025">2025</time>
+            <div>
+              <h3 data-i18n="milestone2025Title">A new chapter in Tokyo</h3>
+              <p data-i18n="milestone2025Body">I moved to Tokyo on my own to live and work, hoping to attend more Miku and anime events. The creative atmosphere, city streets, and natural scenery around me offered plenty of inspiration, but my job still left little time or energy for drawing.</p>
+            </div>
+          </li>
+          <li>
+            <time datetime="2026-04">2026.04</time>
+            <div>
+              <h3 data-i18n="milestone2026Title">Making time for drawing</h3>
+              <p data-i18n="milestone2026Body">In April, I left my job to focus on practice and study drawing more systematically. I made more pieces in the next six months than in the previous four years combined, and could finally see a real difference in my work.</p>
+            </div>
+          </li>
+        </ol>
+        <div class="story-closing">
+          <h3 data-i18n="storyClosingTitle">The artist who inspired me saw my work</h3>
+          <p data-i18n="storyClosingBody">Recently, あさひクロイ followed me on Pixiv. Going from picking up a pencil because of this artist's work to having my own drawings seen in return was one of the most memorable moments of my creative life. I still love the style that first moved me, and I want to carry that love forward as I slowly tell stories of my own.</p>
+        </div>
+      </section>
     </main>
     <footer class="footer container">
-      <span>RANHI / ILLUSTRATION PORTFOLIO</span>
+      <span lang="en">RANHI / ILLUSTRATION PORTFOLIO</span>
       <div class="footer-signoff">
         <span>© 2026 RANHI</span
-        ><span class="miku-signature" aria-label="39 — Thank you"
+        ><span class="miku-signature" lang="en" aria-label="39 — Thank you"
           ><b aria-hidden="true">39</b
           ><small aria-hidden="true">THANK YOU</small></span
         >

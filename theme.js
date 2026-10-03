@@ -1,6 +1,12 @@
 (() => {
   const key = "ranhi-theme";
-  const saved = localStorage.getItem(key) || "auto";
+  let saved = "auto";
+  try {
+    const stored = localStorage.getItem(key);
+    if (["auto", "dark", "light"].includes(stored)) saved = stored;
+  } catch {
+    /* Themes still work when storage is unavailable. */
+  }
   document.documentElement.dataset.theme = saved;
 
   const introKey = "ranhi-home-intro-seen";
@@ -23,6 +29,10 @@
   const order = ["auto", "dark", "light"];
 
   function updateButton(theme) {
+    if (window.RanhiI18n) {
+      window.RanhiI18n.updateTheme(theme);
+      return;
+    }
     const button = document.querySelector("[data-theme-toggle]");
     if (!button) return;
     button.textContent = `THEME / ${labels[theme]}`;
@@ -186,7 +196,11 @@
       ?.addEventListener("click", () => {
         theme = order[(order.indexOf(theme) + 1) % order.length];
         document.documentElement.dataset.theme = theme;
-        localStorage.setItem(key, theme);
+        try {
+          localStorage.setItem(key, theme);
+        } catch {
+          /* Keep the selection for this page. */
+        }
         updateButton(theme);
       });
 
