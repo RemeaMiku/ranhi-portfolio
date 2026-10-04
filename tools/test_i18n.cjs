@@ -241,10 +241,17 @@ async function main() {
       assert.ok(html.includes('id="series"'));
       assert.ok(html.includes('data-i18n="anniversarySoon"'));
       assert.ok(!html.includes('class="work-card"'), "Do not assign existing art to the new series");
-      assert.ok(html.includes('viewBox="193 317 550 475"'), "Frame the logo without modifying the original image");
+      assert.ok(html.includes('viewBox="247 289 506 520"'), "Frame the updated logo without cropping its artwork");
     }
     for (const [, id] of html.matchAll(/data-artwork-title="([^"]+)"/g)) assert.ok(resources.en.artworkTitles[id], id);
-    if (page === "index") assert.equal((html.match(/data-artwork-title=/g) || []).length, 4);
+    if (page === "index") {
+      assert.equal((html.match(/data-artwork-title=/g) || []).length, 4);
+      assert.equal((html.match(/class="anniversary-promo container"/g) || []).length, 1);
+      assert.ok(html.indexOf('class="anniversary-promo container"') < html.indexOf('class="section selected"'));
+      assert.ok(html.includes('data-home-content-start'));
+      const theme = fs.readFileSync(path.join(root, "theme.js"), "utf8");
+      assert.ok(theme.includes('document.querySelector(".home-page [data-home-content-start]")'));
+    }
     if (page === "works") {
       assert.equal((html.match(/data-artwork-title=/g) || []).length, 14);
       assert.ok(!html.includes('<p lang="zh-CN">中秋明月 桂影婵娟</p>'));

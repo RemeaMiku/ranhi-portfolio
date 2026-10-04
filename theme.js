@@ -68,17 +68,18 @@
       window.addEventListener("scroll", updateHeader, { passive: true });
       window.addEventListener("pageshow", updateHeader);
     }
-    // Only the cover / selected-work boundary snaps; the rest stays native.
+    // Snap to the first content block so the special-project entry is not skipped.
     const hero = document.querySelector(".home-page .hero");
-    const selected = document.querySelector(".home-page .selected");
-    if (hero && selected) {
+    const firstContent = document.querySelector(".home-page [data-home-content-start]") ||
+      document.querySelector(".home-page .selected");
+    if (hero && firstContent) {
       let animating = false;
       let lastInput = 0;
       let locked = false;
       let gesture = 0;
       let touchStart = null;
       const destination = () =>
-        selected.getBoundingClientRect().top +
+        firstContent.getBoundingClientRect().top +
         window.scrollY -
         (header?.offsetHeight || 0);
       const eligible = (delta) => {

@@ -5,12 +5,15 @@
   --anniversary-peach: #f2c58b;
   --anniversary-pink: #eb8aa6;
 }
+.anniversary-entry {
+  padding-top: clamp(48px, 7vw, 96px);
+}
 .anniversary-promo {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(24px, 4vw, 58px);
-  margin-bottom: clamp(84px, 11vw, 165px);
+  margin-bottom: 0;
   padding: clamp(24px, 4vw, 48px);
   border-block: 1px solid var(--line);
   background: linear-gradient(110deg, #70d0d716, #f2c58b12);
@@ -28,7 +31,7 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 550 / 475;
+  aspect-ratio: 506 / 520;
   overflow: hidden;
 }
 .anniversary-promo h2 {
