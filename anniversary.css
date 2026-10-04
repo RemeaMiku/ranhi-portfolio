@@ -1,0 +1,234 @@
+/* A separate visual identity, using the colours of the original anniversary logo. */
+.anniversary-page,
+.anniversary-promo {
+  --anniversary-mint: #70d0d7;
+  --anniversary-peach: #f2c58b;
+  --anniversary-pink: #eb8aa6;
+}
+.anniversary-promo {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(24px, 4vw, 58px);
+  margin-bottom: clamp(84px, 11vw, 165px);
+  padding: clamp(24px, 4vw, 48px);
+  border-block: 1px solid var(--line);
+  background: linear-gradient(110deg, #70d0d716, #f2c58b12);
+  transition: background-color 350ms ease, border-color 350ms ease;
+}
+.anniversary-promo:hover {
+  border-color: var(--anniversary-mint);
+  background-color: #70d0d709;
+}
+.anniversary-promo:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+.anniversary-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 550 / 475;
+  overflow: hidden;
+}
+.anniversary-promo h2 {
+  font-size: clamp(26px, 3.5vw, 44px);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  margin: 10px 0 14px;
+}
+.anniversary-promo p {
+  margin: 0;
+  line-height: 1.8;
+}
+.anniversary-kicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.anniversary-promo-cta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 0;
+  font-size: 16px;
+  white-space: nowrap;
+}
+.anniversary-page {
+  background:
+    radial-gradient(ellipse at 80% 20%, #70d0d71b, transparent 46%),
+    radial-gradient(ellipse at 10% 45%, #f2c58b16, transparent 42%),
+    var(--paper);
+}
+.anniversary-hero {
+  padding-top: clamp(36px, 5vw, 72px);
+}
+.anniversary-topline,
+.anniversary-dateline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.anniversary-topline p { margin: 0; }
+.anniversary-stage {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: clamp(40px, 7vw, 100px);
+  padding-block: clamp(60px, 8vw, 110px);
+}
+.anniversary-heading {
+  font-size: clamp(58px, 7.6vw, 108px);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+  margin: 0 0 32px;
+}
+.anniversary-heading span { display: block; }
+.anniversary-heading span:last-child { color: var(--accent); }
+.anniversary-lead {
+  max-width: 38ch;
+  font-size: clamp(20px, 2.2vw, 28px);
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+.anniversary-intro {
+  max-width: 54ch;
+  font-size: 17px;
+  line-height: 1.95;
+  margin: 0 0 32px;
+  color: var(--muted);
+}
+.anniversary-emblem {
+  position: relative;
+  padding: clamp(30px, 4vw, 56px);
+  background: radial-gradient(ellipse, #70d0d70d, transparent 70%);
+}
+/* Frame only the transparent margins; never modify or recolour the supplied logo. */
+.anniversary-emblem::before,
+.anniversary-emblem::after {
+  content: "";
+  position: absolute;
+  width: 38px;
+  height: 38px;
+}
+.anniversary-emblem::before {
+  inset: 0 auto auto 0;
+  border-top: 1px solid var(--anniversary-mint);
+  border-left: 1px solid var(--anniversary-mint);
+}
+.anniversary-emblem::after {
+  inset: auto 0 0 auto;
+  border-bottom: 1px solid var(--anniversary-peach);
+  border-right: 1px solid var(--anniversary-peach);
+}
+.anniversary-dateline {
+  border-block: 1px solid var(--line);
+  padding-block: 20px;
+}
+.anniversary-thread {
+  flex: 1;
+  height: 2px;
+  margin-inline: 14px;
+  background: linear-gradient(90deg, var(--anniversary-mint), var(--anniversary-peach), var(--anniversary-pink));
+}
+.anniversary-series {
+  scroll-margin-top: 120px;
+}
+.anniversary-page .anniversary-series h2 {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.2;
+}
+.anniversary-waiting {
+  display: grid;
+  grid-template-columns: 0.65fr 1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+  padding: clamp(28px, 6vw, 76px);
+  border: 1px solid var(--line);
+  background: linear-gradient(125deg, #70d0d70c, #f2c58b09);
+}
+.anniversary-monogram {
+  font-size: clamp(90px, 14vw, 190px);
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: -0.09em;
+  color: var(--anniversary-mint);
+  user-select: none;
+}
+.anniversary-monogram span {
+  font-size: 0.28em;
+  letter-spacing: -0.04em;
+  vertical-align: super;
+}
+.anniversary-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.anniversary-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--anniversary-pink);
+}
+.anniversary-waiting h3 {
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.5;
+  margin: 16px 0;
+}
+.anniversary-waiting p:last-child {
+  font-size: 17px;
+  line-height: 1.9;
+  max-width: 48ch;
+  color: var(--muted);
+  margin: 0;
+}
+.anniversary-afterword {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 36px;
+}
+.anniversary-afterword p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .anniversary-emblem { animation: anniversary-arrive 1s ease-out both; }
+  @keyframes anniversary-arrive {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+@media (max-width: 900px) {
+  .anniversary-promo { grid-template-columns: 120px minmax(0, 1fr); }
+  .anniversary-promo-cta { grid-column: 2; padding: 0; }
+  .anniversary-stage { gap: 32px; }
+  .anniversary-emblem { padding: 24px; }
+}
+@media (max-width: 650px) {
+  .anniversary-stage { grid-template-columns: 1fr; padding-block: 48px; }
+  .anniversary-emblem { grid-row: 1; width: min(100%, 300px); justify-self: center; }
+  .anniversary-heading { font-size: clamp(55px, 12vw, 78px); }
+  .anniversary-topline { font-size: 11px; letter-spacing: 0.06em; }
+  .anniversary-dateline { font-size: 11px; letter-spacing: 0.04em; }
+  .anniversary-thread { margin-inline: 0; }
+  .anniversary-waiting { grid-template-columns: 1fr; }
+  .anniversary-monogram { font-size: 100px; }
+  .anniversary-promo { grid-template-columns: 1fr; gap: 20px; }
+  .anniversary-promo .anniversary-logo { width: 110px; }
+  .anniversary-promo-cta { grid-column: 1; }
+}

@@ -38,6 +38,7 @@ function boot(preferred, saved = null, options = {}) {
       clearTimeout(id) { timers.delete(id); },
     },
     document: {
+      body: { dataset: options.pageData || {} },
       currentScript: { src: "https://" + (options.local ? "localhost" : "example.test") + "/ranhi-portfolio/i18n.js?v=" + (options.version || "test") },
       documentElement: { lang: "en", dataset: { theme: "auto" } },
       querySelector(selector) {
@@ -87,6 +88,11 @@ function boot(preferred, saved = null, options = {}) {
 }
 
 async function main() {
+  for (const locale of locales) {
+    const special = boot([locale], null, { pageData: { pageTitle: "anniversaryTitle" } });
+    await flush();
+    assert.equal(special.context.document.title, "RANHI — 10 Years with Miku");
+  }
   const early = boot(["zh-CN"], null, { beforeDom: true });
   assert.equal(early.context.document.documentElement.lang, "zh-Hans");
   assert.equal(early.context.document.documentElement.dataset.i18nState, "loading");
@@ -215,7 +221,7 @@ async function main() {
   }
   const bindings = vm.runInNewContext("(" + source.match(/const simpleBindings = (\{[\s\S]*?\n    \});/)[1] + ")");
   for (const key of Object.values(bindings)) assert.ok(resources.en.ui[key], "Missing UI binding " + key);
-  for (const page of ["index", "works", "about", "contact"]) {
+  for (const page of ["index", "works", "about", "contact", "10-years-with-miku"]) {
     const html = fs.readFileSync(path.join(root, page + ".html"), "utf8");
     assert.equal((html.match(/<select data-language-select/g) || []).length, 1);
     assert.equal((html.match(/<option /g) || []).length, 4);
@@ -226,6 +232,17 @@ async function main() {
     assert.ok(/<script src="i18n\.js\?v=[^"]+"><\/script>/.test(html), "Locale boot must run before the body");
     assert.equal((html.match(/data-last-updated datetime="2026-10-04"/g) || []).length, 1);
     for (const [, key] of html.matchAll(/data-i18n="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
+    for (const [, key] of html.matchAll(/data-page-(?:title|description)="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
+    for (const [, asset] of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
+      if (/^(?:https?:|mailto:)/.test(asset)) continue;
+      assert.ok(fs.existsSync(path.join(root, asset.split(/[?#]/)[0])), page + ": " + asset);
+    }
+    if (page === "10-years-with-miku") {
+      assert.ok(html.includes('id="series"'));
+      assert.ok(html.includes('data-i18n="anniversarySoon"'));
+      assert.ok(!html.includes('class="work-card"'), "Do not assign existing art to the new series");
+      assert.ok(html.includes('viewBox="193 317 550 475"'), "Frame the logo without modifying the original image");
+    }
     for (const [, id] of html.matchAll(/data-artwork-title="([^"]+)"/g)) assert.ok(resources.en.artworkTitles[id], id);
     if (page === "index") assert.equal((html.match(/data-artwork-title=/g) || []).length, 4);
     if (page === "works") {

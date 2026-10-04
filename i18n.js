@@ -176,7 +176,7 @@
       }).format(new Date(element.dateTime + "T00:00:00Z"));
     });
     const page = document.querySelector(".navlinks [aria-current='page']")?.getAttribute("href");
-    const titleKey = {
+    const titleKey = document.body?.dataset.pageTitle || {
       "index.html": "portfolio", "works.html": "works",
       "about.html": "about", "contact.html": "contact",
     }[page] || "portfolio";
@@ -258,7 +258,7 @@
     bind(".hero-background", "cover", "", "aria-label");
     bind(".artist-portrait", "avatar", "", "alt");
     bind(".brand", "home", "RANHI / ", "aria-label");
-    bind("meta[name='description']", "portfolio", "RANHI — ", "content");
+    bind("meta[name='description']", document.body?.dataset.pageDescription || "portfolio", "RANHI — ", "content");
     if (document.querySelector(".about-page-grid")) {
       bind(".page-intro .page-lead", "aboutLead");
     }
