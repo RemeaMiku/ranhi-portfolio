@@ -113,6 +113,28 @@
   padding: clamp(30px, 4vw, 56px);
   background: radial-gradient(ellipse, #70d0d70d, transparent 70%);
 }
+/* Align the original 1000px animation with the existing logo framing. */
+.anniversary-emblem.anniversary-emblem--animated {
+  overflow: hidden;
+  animation: none !important;
+}
+.anniversary-logo-player {
+  position: relative;
+  aspect-ratio: 506 / 520;
+}
+.anniversary-logo-canvas {
+  position: absolute;
+  width: calc(100% * 1000 / 506);
+  height: calc(100% * 1000 / 520);
+  left: calc(-100% * 247 / 506);
+  top: calc(-100% * 289 / 520);
+  pointer-events: none;
+}
+.anniversary-logo-canvas[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .anniversary-logo-canvas { display: none; }
+  .anniversary-logo-player > svg { visibility: visible !important; }
+}
 /* Frame only the transparent margins; never modify or recolour the supplied logo. */
 .anniversary-emblem::before,
 .anniversary-emblem::after {

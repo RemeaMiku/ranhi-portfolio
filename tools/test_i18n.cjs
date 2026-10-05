@@ -230,7 +230,7 @@ async function main() {
     assert.ok(html.includes('>THANK YOU</small>'));
     assert.ok(html.includes('html[data-i18n-state="loading"] body { visibility: hidden; }'));
     assert.ok(/<script src="i18n\.js\?v=[^"]+"><\/script>/.test(html), "Locale boot must run before the body");
-    assert.equal((html.match(/data-last-updated datetime="2026-10-04"/g) || []).length, 1);
+    assert.equal((html.match(/data-last-updated datetime="2026-10-05"/g) || []).length, 1);
     for (const [, key] of html.matchAll(/data-i18n="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     for (const [, key] of html.matchAll(/data-page-(?:title|description)="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     for (const [, asset] of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {

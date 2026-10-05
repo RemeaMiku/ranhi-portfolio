@@ -9,12 +9,13 @@
     <link rel="apple-touch-icon" href="images/favicon.png" />
     <script src="theme.js?v=20261003-1"></script>
     <style>html[data-i18n-state="loading"] body { visibility: hidden; }</style>
-    <script src="i18n.js?v=20261004-6"></script>
+    <script src="i18n.js?v=20261005-1"></script>
+    <script src="logo-reveal.js?v=20261005-2" defer></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="atmosphere.css" />
     <link rel="stylesheet" href="theme.css?v=20260922-8" />
     <link rel="stylesheet" href="i18n.css?v=20261004-4" />
-    <link rel="stylesheet" href="anniversary.css?v=20261004-2" />
+    <link rel="stylesheet" href="anniversary.css?v=20261005-2" />
   </head>
   <body class="anniversary-page" data-page-title="anniversaryTitle" data-page-description="anniversaryDescription">
     <header class="site-header">
@@ -53,11 +54,14 @@
             <p class="anniversary-intro" data-i18n="anniversaryIntro">It's almost ten years since I discovered Hatsune Miku. With this new illustration series, I want to celebrate the time I've spent with Miku and keep expressing that love through my art.</p>
             <a class="text-link" href="#series" data-i18n="anniversaryExplore">THE ILLUSTRATION SERIES <span aria-hidden="true">↓</span></a>
           </div>
-          <div class="anniversary-emblem">
-            <!-- The viewBox trims empty transparent space, leaving the original PNG intact. -->
-            <svg class="anniversary-logo" viewBox="247 289 506 520" role="img" aria-label="MIKU &amp; RANHI 10th" lang="en" focusable="false">
-              <image href="images/10-years-with-miku.png?v=20261004-2" width="1000" height="1000" />
-            </svg>
+          <div class="anniversary-emblem anniversary-emblem--animated">
+            <div class="anniversary-logo-player" data-logo-player role="img" aria-label="MIKU &amp; RANHI 10th" lang="en">
+              <!-- Static fallback also supplies the exact final frame and reduced-motion view. -->
+              <svg class="anniversary-logo" viewBox="247 289 506 520" aria-hidden="true" focusable="false">
+                <image href="images/10-years-with-miku.png?v=20261004-2" width="1000" height="1000" />
+              </svg>
+              <canvas class="anniversary-logo-canvas" width="1000" height="1000" aria-hidden="true" hidden></canvas>
+            </div>
           </div>
         </div>
         <div class="anniversary-dateline" lang="en">
@@ -89,7 +93,7 @@
     <footer class="footer container">
       <div class="footer-meta">
         <span lang="en">RANHI / ILLUSTRATION PORTFOLIO</span>
-        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-10-04">October 4, 2026</time></span>
+        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-10-05">October 5, 2026</time></span>
       </div>
       <div class="footer-signoff">
         <span>© 2026 RANHI</span>
