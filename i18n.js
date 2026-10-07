@@ -175,11 +175,7 @@
         year: "numeric", month: "long", day: "numeric", timeZone: "UTC",
       }).format(new Date(element.dateTime + "T00:00:00Z"));
     });
-    const page = document.querySelector(".navlinks [aria-current='page']")?.getAttribute("href");
-    const titleKey = document.body?.dataset.pageTitle || {
-      "index.html": "portfolio", "works.html": "works",
-      "about.html": "about", "contact.html": "contact",
-    }[page] || "portfolio";
+    const titleKey = document.body?.dataset.pageTitle || "portfolio";
     document.title = "RANHI — " + translate(titleKey);
   }
 
@@ -222,9 +218,6 @@
   void loadResource("en").catch(() => {});
   void loadResource(preference || systemLanguage()).catch(() => {});
   document.addEventListener("DOMContentLoaded", () => {
-    for (const page of ["home", "works", "about", "contact"]) {
-      bind(".navlinks a[href='" + (page === "home" ? "index" : page) + ".html']", page);
-    }
     const simpleBindings = {
       ".hero-subtitle": "heroTitle",
       ".hero-footer a": "viewWorks",

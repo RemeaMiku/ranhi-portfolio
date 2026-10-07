@@ -10,9 +10,10 @@
   document.documentElement.dataset.theme = saved;
 
   const introKey = "ranhi-home-intro-seen";
+  const homePath = new URL("./", document.currentScript.src).pathname;
   const isHome =
-    /(?:^|\/)index\.html$/.test(location.pathname) ||
-    location.pathname.endsWith("/");
+    location.pathname === homePath ||
+    location.pathname === homePath + "index.html";
   let playHomeIntro = false;
   try {
     playHomeIntro =

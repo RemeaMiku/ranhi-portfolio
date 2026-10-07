@@ -1,5 +1,9 @@
 {
   "ui": {
+    "musicLabel": "BACKGROUND MUSIC",
+    "musicPlay": "Play",
+    "musicPause": "Pause",
+    "musicError": "Unable to play the music. Please try again.",
     "anniversaryTitle": "10 Years with Miku",
     "anniversaryDescription": "10 Years with Miku: an illustration project celebrating ten years since discovering Hatsune Miku.",
     "anniversaryLabel": "Anniversary illustration project",

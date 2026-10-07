@@ -91,7 +91,7 @@ for (const missing of [false, true]) {
   assert.equal(state.canvas.hidden, true);
   assert.equal(state.frames.size, 0);
 }
-const page = fs.readFileSync(path.join(root, "10-years-with-miku.html"), "utf8");
+const page = fs.readFileSync(path.join(root, "10-years-with-miku/index.html"), "utf8");
 assert.ok(page.includes('data-logo-player role="img"'));
 assert.ok(!page.includes("data-logo-replay"));
 assert.ok(!page.includes("anniversaryReplay"));

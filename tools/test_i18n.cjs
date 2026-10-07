@@ -222,20 +222,21 @@ async function main() {
   const bindings = vm.runInNewContext("(" + source.match(/const simpleBindings = (\{[\s\S]*?\n    \});/)[1] + ")");
   for (const key of Object.values(bindings)) assert.ok(resources.en.ui[key], "Missing UI binding " + key);
   for (const page of ["index", "works", "about", "contact", "10-years-with-miku"]) {
-    const html = fs.readFileSync(path.join(root, page + ".html"), "utf8");
+    const pageFile = path.join(root, page === "index" ? "index.html" : page + "/index.html");
+    const html = fs.readFileSync(pageFile, "utf8");
     assert.equal((html.match(/<select data-language-select/g) || []).length, 1);
     assert.equal((html.match(/<option /g) || []).length, 4);
     assert.ok(!html.includes('<option value="auto"'));
     assert.ok(html.includes('class="language-icon"'));
     assert.ok(html.includes('>THANK YOU</small>'));
     assert.ok(html.includes('html[data-i18n-state="loading"] body { visibility: hidden; }'));
-    assert.ok(/<script src="i18n\.js\?v=[^"]+"><\/script>/.test(html), "Locale boot must run before the body");
-    assert.equal((html.match(/data-last-updated datetime="2026-10-05"/g) || []).length, 1);
+    assert.ok(/<script src="(?:\.\.\/)?i18n\.js\?v=[^"]+"><\/script>/.test(html), "Locale boot must run before the body");
+    assert.equal((html.match(/data-last-updated datetime="2026-10-07"/g) || []).length, 1);
     for (const [, key] of html.matchAll(/data-i18n="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     for (const [, key] of html.matchAll(/data-page-(?:title|description)="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     for (const [, asset] of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
       if (/^(?:https?:|mailto:)/.test(asset)) continue;
-      assert.ok(fs.existsSync(path.join(root, asset.split(/[?#]/)[0])), page + ": " + asset);
+      assert.ok(fs.existsSync(path.resolve(path.dirname(pageFile), asset.split(/[?#]/)[0])), page + ": " + asset);
     }
     if (page === "10-years-with-miku") {
       assert.ok(html.includes('id="series"'));
@@ -264,7 +265,7 @@ async function main() {
       for (const [, id] of html.matchAll(/<article class="detail" id="([^"]+)"/g)) assert.ok(resources.en.artworkNotes[id], id);
       assert.equal((html.match(/role="switch"/g) || []).length, 3);
       assert.ok(!html.includes("aria-pressed="));
-      for (const [, asset] of html.matchAll(/data-image-[ab]="([^"]+)"/g)) assert.ok(fs.existsSync(path.join(root, asset)), asset);
+      for (const [, asset] of html.matchAll(/data-image-[ab]="([^"]+)"/g)) assert.ok(fs.existsSync(path.resolve(path.dirname(pageFile), asset)), asset);
     }
   }
   assert.ok(!source.includes('bind(".miku-signature'));

@@ -1,5 +1,9 @@
 {
   "ui": {
+    "musicLabel": "背景音樂",
+    "musicPlay": "播放",
+    "musicPause": "暫停",
+    "musicError": "音樂暫時無法播放，請重試。",
     "anniversaryTitle": "10 Years with Miku",
     "anniversaryDescription": "10 Years with Miku：RANHI 與初音未來相遇十週年插畫特別企劃。",
     "anniversaryLabel": "相遇十週年 · 插畫特別企劃",
