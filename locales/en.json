@@ -1,5 +1,13 @@
 {
   "ui": {
+    "contactEmail": "EMAIL",
+    "contactArtPlatforms": "Art platforms",
+    "contactSocialPlatforms": "Social updates",
+    "contactWechat": "WeChat stickers",
+    "contactNickname": "Nickname",
+    "contactWechatHint": "Scan with WeChat, or save the code and open it in WeChat.",
+    "contactSaveQr": "SAVE QR CODE",
+    "contactQrAlt": "QR code for Ranhi’s WeChat sticker account",
     "musicLabel": "BACKGROUND MUSIC",
     "musicPlay": "Play",
     "musicPause": "Pause",

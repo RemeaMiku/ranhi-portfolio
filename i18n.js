@@ -255,11 +255,7 @@
     if (document.querySelector(".about-page-grid")) {
       bind(".page-intro .page-lead", "aboutLead");
     }
-    const social = document.querySelector(".contact-list a[href*='xiaohongshu.com']");
-    if (social) {
-      social.querySelector("span")?.setAttribute("aria-hidden", "true");
-      bind(".contact-list a[href*='xiaohongshu.com']", "xiaohongshu");
-    }
+    bind(".wechat-qr", "contactQrAlt", "", "alt");
     document.querySelectorAll(".type, .work-card > p").forEach((element) => {
       element.dataset.originalType = element.textContent.trim();
     });

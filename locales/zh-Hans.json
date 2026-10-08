@@ -1,5 +1,13 @@
 {
   "ui": {
+    "contactEmail": "邮箱",
+    "contactArtPlatforms": "作品平台",
+    "contactSocialPlatforms": "社交动态",
+    "contactWechat": "微信贴图号",
+    "contactNickname": "昵称",
+    "contactWechatHint": "用微信扫一扫，或保存二维码后在微信内识别。",
+    "contactSaveQr": "保存二维码",
+    "contactQrAlt": "Ranhi 微信贴图号二维码",
     "musicLabel": "背景音乐",
     "musicPlay": "播放",
     "musicPause": "暂停",

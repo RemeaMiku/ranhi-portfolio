@@ -1,5 +1,13 @@
 {
   "ui": {
+    "contactEmail": "電子郵件",
+    "contactArtPlatforms": "作品平台",
+    "contactSocialPlatforms": "社群動態",
+    "contactWechat": "微信貼圖號",
+    "contactNickname": "暱稱",
+    "contactWechatHint": "用微信掃描，或儲存 QR Code 後在微信內辨識。",
+    "contactSaveQr": "儲存 QR Code",
+    "contactQrAlt": "Ranhi 微信貼圖號 QR Code",
     "musicLabel": "背景音樂",
     "musicPlay": "播放",
     "musicPause": "暫停",

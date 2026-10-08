@@ -1,5 +1,13 @@
 {
   "ui": {
+    "contactEmail": "メール",
+    "contactArtPlatforms": "作品投稿サイト",
+    "contactSocialPlatforms": "SNS",
+    "contactWechat": "WeChatスタンプ",
+    "contactNickname": "ニックネーム",
+    "contactWechatHint": "WeChatでスキャンするか、QRコードを保存してWeChatで読み取ってください。",
+    "contactSaveQr": "QRコードを保存",
+    "contactQrAlt": "RanhiのWeChatスタンプアカウントのQRコード",
     "musicLabel": "BGM",
     "musicPlay": "再生",
     "musicPause": "一時停止",

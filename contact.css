@@ -1,0 +1,99 @@
+/* Group platforms without changing the site's square, lightly tinted surfaces. */
+.contact-email,
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--paper) 70%, transparent);
+  text-decoration: none;
+  min-width: 0;
+  transition: border-color 200ms ease, background-color 200ms ease;
+}
+.contact-email { margin-top: 36px; width: fit-content; max-width: 100%; }
+.social-card:hover,
+.contact-email:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--paper));
+}
+.social-card:focus-visible,
+.contact-email:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.social-mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  background: color-mix(in srgb, var(--ink) 5%, var(--paper));
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+/* Local brand silhouettes, unchanged; masks inherit the current theme's ink. */
+.brand-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: currentColor;
+  -webkit-mask: var(--brand-icon) center / contain no-repeat;
+  mask: var(--brand-icon) center / contain no-repeat;
+}
+.mail-icon { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.brand-icon--pixiv { --brand-icon: url("images/social/pixiv.svg"); }
+.brand-icon--piapro { --brand-icon: url("images/social/piapro.svg"); }
+.brand-icon--x { --brand-icon: url("images/social/x.svg"); }
+.brand-icon--xiaohongshu { --brand-icon: url("images/social/xiaohongshu.svg"); width: 34px; height: 34px; }
+.brand-icon--instagram { --brand-icon: url("images/social/instagram.svg"); }
+.brand-icon--threads { --brand-icon: url("images/social/threads.svg"); }
+.brand-icon--tiktok { --brand-icon: url("images/social/tiktok.svg"); }
+.brand-icon--wechat { --brand-icon: url("images/social/wechat.svg"); }
+.social-mark--pixiv { --brand-hover: #0096fa; }
+.social-mark--piapro { --brand-hover: #e77725; }
+.social-mark--xiaohongshu { --brand-hover: #ff2442; }
+.social-mark--instagram { --brand-hover: #e4405f; }
+.social-mark--tiktok { --brand-hover: #fe2c55; }
+.social-mark--wechat { --brand-hover: #07c160; }
+.social-card:is(:hover, :focus-visible) .social-mark,
+.contact-email:is(:hover, :focus-visible) .social-mark,
+.wechat-card:hover .social-mark {
+  color: var(--brand-hover, var(--ink));
+  background: color-mix(in srgb, var(--brand-hover, var(--ink)) 9%, var(--paper));
+}
+.social-copy { display: grid; gap: 5px; min-width: 0; font-size: 19px; line-height: 1.4; overflow-wrap: anywhere; }
+.social-copy small { color: var(--muted); font-size: 14px; letter-spacing: 0; }
+.social-arrow { margin-left: auto; color: var(--muted); flex-shrink: 0; }
+.contact-channels { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px; margin-top: 56px; align-items: start; }
+.contact-platforms { display: grid; gap: 40px; min-width: 0; }
+.contact-group { min-width: 0; }
+.contact-group h2 { display: flex; align-items: baseline; gap: 14px; margin: 0 0 20px; font-size: 24px; line-height: 1.5; letter-spacing: 0; }
+.contact-group-number { color: var(--accent); font-size: 12px; letter-spacing: 0.08em; }
+.social-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.wechat-card { padding: 24px; border: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 70%, transparent); }
+.wechat-name { display: flex; gap: 16px; align-items: baseline; margin: 0 0 20px; }
+.wechat-name > span:not(.social-mark) { color: var(--muted); font-size: 14px; }
+.wechat-name strong { font-size: 24px; font-weight: 500; }
+.wechat-qr { display: block; width: 100%; max-width: 280px; height: auto; aspect-ratio: 1; margin-inline: auto; background: #fff; filter: none; }
+.wechat-hint { font-size: 15px; line-height: 1.8; color: var(--muted); margin: 20px 0; }
+.wechat-save { width: 100%; font-size: 15px; }
+@media (max-width: 1050px) {
+  .contact-channels { gap: 28px; grid-template-columns: minmax(0, 1fr) 280px; }
+  .social-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .contact-channels { grid-template-columns: 1fr; gap: 40px; margin-top: 40px; }
+  .social-card, .contact-email { padding: 18px 16px; gap: 12px; }
+  .social-copy { font-size: 18px; }
+  .contact-email { width: 100%; }
+  .contact-group h2 { font-size: 22px; }
+  .wechat-card { max-width: 400px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-email, .social-card, .social-mark { transition: none; }
+}
