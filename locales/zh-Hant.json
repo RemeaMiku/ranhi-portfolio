@@ -87,6 +87,7 @@
     "xiaohongshu": "小紅書"
   },
   "types": {
+    "GUMI / Illustration": "GUMI / 插畫",
     "Snow Miku / Illustration": "雪未來 / 插畫",
     "Hatsune Miku / Illustration": "初音未來 / 插畫",
     "Hikari / Illustration": "Hikari / 插畫",
@@ -94,6 +95,7 @@
     "Anime / Illustration": "動漫 / 插畫"
   },
   "artworkTitles": {
+    "rain-and-hydrangeas": "雨聲與紫陽花",
     "winter-midnight": "冬日午夜",
     "moonlight-and-osmanthus": "中秋明月 桂影嬋娟",
     "miku-with-you": "MIKU WITH YOU 2026",
@@ -110,6 +112,7 @@
     "miku-and-teto": "MIKU & TETO"
   },
   "artworkNotes": {
+    "rain-and-hydrangeas": "參加 charaforio 舉辦的「GUMI 2027年公式カレンダーイラストコンテスト」的六月主題應徵作品。GUMI 俯身望向眼前的紫陽花，左手伸向花朵，右手撐著傘。雨才剛停，陽光從畫面右上方的天空灑落，想描繪雨後片刻的清新與寧靜。",
     "winter-midnight": "參加 piapro「SAPPORO❅雪ミクWAON 2027」卡面徵集的作品。札幌的某個雪夜，雪未來橫躺在水面上。水面倒映著星空，遠處的札幌電視塔和大樓隱約閃爍著光芒。",
     "moonlight-and-osmanthus": "2026 年中秋賀圖。Miku 在湖邊回眸微笑，手中的團扇遮住半張臉。遠方湖畔燈火通明，孔明燈點綴夜空，身旁的桂花枝上，花瓣正隨風飄落。",
     "miku-with-you": "身著「未來有你 2026」服裝的 Miku，主題是嘉年華。Miku 飄浮在空中，列車向遠處延伸。列車長竹音站在列車上，手中拿著氣球，彷彿在向鏡頭招手。彩帶和氣球隨風飄動，遠方的摩天輪和熱氣球點綴晴空，想畫出熱鬧的節慶氣氛。",
