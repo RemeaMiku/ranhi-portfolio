@@ -12,6 +12,7 @@ const links = [
   "https://www.instagram.com/ranhi_illust",
   "https://www.threads.com/@ranhi_illust",
   "https://www.tiktok.com/@ranhi_illust",
+  "https://misskey.io/@remeamiku",
 ];
 for (const href of links) assert.equal(page.split('href="' + href + '"').length - 1, 1, href);
 for (const href of [links[1], links[4]]) {
@@ -34,7 +35,7 @@ assert.ok(fs.statSync(path.join(root, "images/wechat-ranhi-qr.jpg")).size > 0);
 assert.ok(page.includes('<strong lang="en">Ranhi</strong>'));
 assert.ok(!page.includes('class="contact-list"'));
 const css = fs.readFileSync(path.join(root, "contact.css"), "utf8");
-for (const icon of ["pixiv", "piapro", "x", "xiaohongshu", "instagram", "threads", "tiktok", "wechat"]) {
+for (const icon of ["pixiv", "piapro", "x", "misskey", "xiaohongshu", "instagram", "threads", "tiktok", "wechat"]) {
   assert.ok(page.includes('brand-icon--' + icon + '"'), icon);
   assert.ok(css.includes('url("images/social/' + icon + '.svg")'), icon);
   const svg = fs.readFileSync(path.join(root, "images/social", icon + ".svg"), "utf8");
@@ -46,6 +47,10 @@ assert.ok(!/aria-hidden="true">(?:IG|Th|pi|红|♪|P)<\/span>/.test(page), "No t
 for (const locale of ["en", "ja", "zh-Hans", "zh-Hant"]) {
   const ui = JSON.parse(fs.readFileSync(path.join(root, "locales", locale + ".json"), "utf8")).ui;
   for (const key of ["contactEmail", "contactArtPlatforms", "contactSocialPlatforms", "contactWechat",
-    "contactNickname", "contactWechatHint", "contactSaveQr", "contactQrAlt"]) assert.ok(ui[key]?.trim(), locale + "/" + key);
+    "contactNickname", "contactWechatHint", "contactSaveQr", "contactQrAlt", "pixivMilestone"]) assert.ok(ui[key]?.trim(), locale + "/" + key);
+  assert.ok(ui.pixivMilestone.includes("100"));
 }
-console.log("PASS: all eight contact links, grouped headings, translated QR card and downloadable original image.");
+assert.equal((page.match(/data-i18n="pixivMilestone"/g) || []).length, 1);
+assert.ok(page.split('href="https://www.pixiv.net/users/24701727"')[1].split("</a>")[0].includes('class="social-milestone"'));
+assert.ok(page.includes("@remeamiku@misskey.io"));
+console.log("PASS: all nine contact links, brand icons, localized Pixiv milestone, grouped headings and QR card.");

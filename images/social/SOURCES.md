@@ -10,3 +10,7 @@ See its [CC0 license](https://github.com/simple-icons/simple-icons/blob/98820a4d
 and [disclaimer](https://github.com/simple-icons/simple-icons/blob/98820a4dc8c363ca72fa2c0d294ea4a0a9bba75d/DISCLAIMER.md).
 Brand trademarks belong to their respective owners; these icons identify profile links.
 CSS masks preserve the paths and let the site set accessible monochrome colours.
+
+Misskey added 2026-10-19, unmodified path from
+https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/misskey.svg
+(same Simple Icons CC0 license and trademark disclaimer).

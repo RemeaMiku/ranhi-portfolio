@@ -49,6 +49,8 @@
 .brand-icon--pixiv { --brand-icon: url("images/social/pixiv.svg"); }
 .brand-icon--piapro { --brand-icon: url("images/social/piapro.svg"); }
 .brand-icon--x { --brand-icon: url("images/social/x.svg"); }
+.brand-icon--misskey { --brand-icon: url("images/social/misskey.svg"); }
+.social-mark--misskey { --brand-hover: #86b300; }
 .brand-icon--xiaohongshu { --brand-icon: url("images/social/xiaohongshu.svg"); width: 34px; height: 34px; }
 .brand-icon--instagram { --brand-icon: url("images/social/instagram.svg"); }
 .brand-icon--threads { --brand-icon: url("images/social/threads.svg"); }
@@ -68,6 +70,23 @@
 }
 .social-copy { display: grid; gap: 5px; min-width: 0; font-size: 19px; line-height: 1.4; overflow-wrap: anywhere; }
 .social-copy small { color: var(--muted); font-size: 14px; letter-spacing: 0; }
+/* A quiet, square-edged keepsake that remains legible in either theme. */
+.social-milestone {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 5px;
+  padding: 5px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  background: color-mix(in srgb, var(--accent) 12%, var(--paper));
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.social-milestone svg { width: 14px; height: 14px; flex: 0 0 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .social-arrow { margin-left: auto; color: var(--muted); flex-shrink: 0; }
 .contact-channels { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 48px; margin-top: 56px; align-items: start; }
 .contact-platforms { display: grid; gap: 40px; min-width: 0; }
