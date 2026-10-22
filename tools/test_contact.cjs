@@ -35,7 +35,7 @@ assert.ok(fs.statSync(path.join(root, "images/wechat-ranhi-qr.jpg")).size > 0);
 assert.ok(page.includes('<strong lang="en">Ranhi</strong>'));
 assert.ok(!page.includes('class="contact-list"'));
 const css = fs.readFileSync(path.join(root, "contact.css"), "utf8");
-for (const icon of ["pixiv", "piapro", "x", "misskey", "xiaohongshu", "instagram", "threads", "tiktok", "wechat"]) {
+for (const icon of ["pixiv", "piapro", "x", "misskey", "xiaohongshu", "instagram", "threads", "tiktok", "wechat", "qq"]) {
   assert.ok(page.includes('brand-icon--' + icon + '"'), icon);
   assert.ok(css.includes('url("images/social/' + icon + '.svg")'), icon);
   const svg = fs.readFileSync(path.join(root, "images/social", icon + ".svg"), "utf8");
@@ -47,10 +47,25 @@ assert.ok(!/aria-hidden="true">(?:IG|Th|pi|红|♪|P)<\/span>/.test(page), "No t
 for (const locale of ["en", "ja", "zh-Hans", "zh-Hant"]) {
   const ui = JSON.parse(fs.readFileSync(path.join(root, "locales", locale + ".json"), "utf8")).ui;
   for (const key of ["contactEmail", "contactArtPlatforms", "contactSocialPlatforms", "contactWechat",
-    "contactNickname", "contactWechatHint", "contactSaveQr", "contactQrAlt", "pixivMilestone"]) assert.ok(ui[key]?.trim(), locale + "/" + key);
+    "contactNickname", "contactWechatHint", "contactSaveQr", "contactQrAlt", "pixivMilestone", "wechatMilestone"]) assert.ok(ui[key]?.trim(), locale + "/" + key);
   assert.ok(ui.pixivMilestone.includes("100"));
+  assert.ok(ui.wechatMilestone.includes("100"));
 }
 assert.equal((page.match(/data-i18n="pixivMilestone"/g) || []).length, 1);
 assert.ok(page.split('href="https://www.pixiv.net/users/24701727"')[1].split("</a>")[0].includes('class="social-milestone"'));
 assert.ok(page.includes("@remeamiku@misskey.io"));
-console.log("PASS: all nine contact links, brand icons, localized Pixiv milestone, grouped headings and QR card.");
+assert.equal((page.match(/data-i18n="wechatMilestone"/g) || []).length, 1);
+assert.ok(page.split('class="wechat-card"')[1].split("</section>")[0].includes('data-i18n="wechatMilestone"'));
+const socialGroup = page.split('aria-labelledby="social-updates"')[1].split("</section>")[0];
+assert.ok(socialGroup.includes('class="social-card qq-card"'), "QQ belongs in Social updates");
+const qq = socialGroup.split('class="social-card qq-card"')[1];
+assert.ok(qq.includes('<span>QQ</span>'));
+assert.ok(qq.includes('<small class="qq-qid">@ranhi39</small>'));
+assert.ok(!qq.includes('contactQqHint'));
+assert.ok(!page.includes("3430158862"));
+assert.ok(!page.includes("1597638582"));
+assert.ok(!page.includes('id="qq-title"'));
+assert.ok(!qq.includes("href="), "QQ QID should not depend on an unverified app link");
+assert.ok(css.includes(".social-card:not(.qq-card):is(:hover, :focus-visible) .social-mark"));
+assert.ok(!/\.social-mark--qq\s*\{[^}]*--brand-hover/.test(css), "QQ stays monochrome in both themes");
+console.log("PASS: contact links, brand icons, localized Pixiv/WeChat milestones, QQ identity and original QR card.");

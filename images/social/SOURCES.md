@@ -14,3 +14,7 @@ CSS masks preserve the paths and let the site set accessible monochrome colours.
 Misskey added 2026-10-19, unmodified path from
 https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/misskey.svg
 (same Simple Icons CC0 license and trademark disclaimer).
+
+QQ added 2026-10-22, unmodified path from
+https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/qq.svg
+(same Simple Icons CC0 license and trademark disclaimer).
