@@ -231,7 +231,7 @@ async function main() {
     assert.ok(html.includes('>THANK YOU</small>'));
     assert.ok(html.includes('html[data-i18n-state="loading"] body { visibility: hidden; }'));
     assert.ok(/<script src="(?:\.\.\/)?i18n\.js\?v=[^"]+"><\/script>/.test(html), "Locale boot must run before the body");
-    assert.equal((html.match(/data-last-updated datetime="2026-10-22"/g) || []).length, 1);
+    assert.equal((html.match(/data-last-updated datetime="2026-11-03"/g) || []).length, 1);
     for (const [, key] of html.matchAll(/data-i18n="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     for (const [, key] of html.matchAll(/data-page-(?:title|description)="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     for (const [, asset] of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
@@ -240,7 +240,9 @@ async function main() {
     }
     if (page === "10-years-with-miku") {
       assert.ok(html.includes('id="series"'));
-      assert.ok(html.includes('data-i18n="anniversarySoon"'));
+      assert.ok(html.includes('data-i18n="sp01Title"'));
+      assert.ok(html.includes('id="special-series"'));
+      assert.ok(html.includes('id="song-series"'));
       assert.ok(!html.includes('class="work-card"'), "Do not assign existing art to the new series");
       assert.ok(html.includes('viewBox="247 289 506 520"'), "Frame the updated logo without cropping its artwork");
     }
