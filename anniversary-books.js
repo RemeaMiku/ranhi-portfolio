@@ -1,59 +1,124 @@
 (() => {
   "use strict";
 
-  const books = [...document.querySelectorAll(".series-path[aria-controls]")].map(button => ({
+  const shelf = document.querySelector(".series-paths");
+  if (!shelf) return;
+  const books = [...shelf.querySelectorAll(".series-path[aria-controls]")].map(button => ({
     button,
     panel: document.getElementById(button.getAttribute("aria-controls")),
-    animation: null,
+    animations: [],
+    revision: 0,
+    open: false,
+    coverHeight: button.getBoundingClientRect().height,
   })).filter(book => book.panel);
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  // Cancel the previous transition before measuring, so fast clicks stay consistent.
-  function setOpen(book, open, animate = true) {
-    const { button, panel } = book;
-    const height = panel.hidden ? 0 : panel.getBoundingClientRect().height;
-    if (book.animation) book.animation.cancel();
-    book.animation = null;
-    button.setAttribute("aria-expanded", String(open));
-    panel.inert = !open;
-    if (!open && panel.contains(document.activeElement)) button.focus();
-    panel.hidden = false;
-    panel.style.removeProperty("height");
-    panel.style.removeProperty("overflow");
-    const target = open ? panel.getBoundingClientRect().height : 0;
+  function setOpen(book, open, motion = true, returnFocus = false) {
+    const from = book.slot.getBoundingClientRect().height;
+    const interrupted = book.slot.classList.contains("is-turning");
+    const rotation = interrupted ? getComputedStyle(book.button).transform : null;
+    if (!interrupted && !book.button.hidden) {
+      book.coverHeight = book.button.getBoundingClientRect().height;
+    }
+    const revision = ++book.revision;
+    book.animations.forEach(animation => animation.cancel());
+    book.animations = [];
+    book.slot.classList.remove("is-turning");
+    book.open = open;
+    book.button.setAttribute("aria-expanded", String(open));
+    book.panel.hidden = false;
+    book.panel.inert = !open;
+    const target = open ? book.panel.getBoundingClientRect().height : book.coverHeight;
 
-    if (!animate || reducedMotion.matches || !panel.animate) {
-      panel.hidden = !open;
+    function finish() {
+      book.panel.hidden = !open;
+      book.button.hidden = open;
+      book.button.inert = false;
+      book.slot.classList.remove("is-turning");
+      book.animations.forEach(animation => animation.cancel());
+      book.animations = [];
+      if (returnFocus) book.button.focus({ preventScroll: true });
+      else if (open && motion && book.button.contains(document.activeElement)) {
+        book.close.focus({ preventScroll: true });
+      }
+    }
+    if (!motion || reducedMotion.matches || !book.slot.animate) {
+      finish();
       return;
     }
 
-    panel.style.overflow = "hidden";
-    const animation = panel.animate([
-      { height: height + "px", opacity: height ? 1 : 0 },
-      { height: target + "px", opacity: open ? 1 : 0 },
-    ], { duration: open ? 620 : 380, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "both" });
-    book.animation = animation;
-    animation.finished.then(() => {
-      if (book.animation !== animation) return;
-      panel.hidden = !open;
-      panel.style.removeProperty("overflow");
-      animation.cancel();
-      book.animation = null;
-    }).catch(() => { /* A newer click replaces this transition. */ });
+    book.button.hidden = false;
+    if (open) book.close.focus({ preventScroll: true });
+    book.button.inert = true;
+    book.slot.classList.add("is-turning");
+    const duration = open ? 1200 : 1300;
+    const options = { duration, easing: "cubic-bezier(.37, 0, .63, 1)", fill: "both" };
+    const play = (element, frames) => {
+      const animation = element.animate(frames, options);
+      book.animations.push(animation);
+      return animation;
+    };
+
+    // Opening unfolds the cover around the spine; closing reverses the same motion.
+    // Keep the pages at reading size until the returning cover has covered them.
+    const size = play(book.slot, open ? [
+      { height: from + "px", offset: 0 },
+      { height: target + "px", offset: .82 },
+      { height: target + "px", offset: 1 },
+    ] : [
+      { height: from + "px", offset: 0 },
+      { height: from + "px", offset: .55 },
+      { height: target + "px", offset: 1 },
+    ]);
+    play(book.button, open ? [
+      { transform: rotation || "rotateY(0deg)", offset: 0 },
+      { transform: "rotateY(-165deg)", offset: 1 },
+    ] : [
+      { transform: rotation || "rotateY(-165deg)", offset: 0 },
+      { transform: "rotateY(0deg)", offset: .82 },
+      { transform: "rotateY(0deg)", offset: 1 },
+    ]);
+    play(book.shadow, [
+      { opacity: 0, transform: "scaleX(.05)", offset: 0 },
+      { opacity: .32, transform: "scaleX(1)", offset: .42 },
+      { opacity: 0, transform: "scaleX(.05)", offset: 1 },
+    ]);
+    size.finished.then(() => {
+      if (book.revision === revision) finish();
+    }).catch(() => { /* A newer interaction replaces the current turn. */ });
   }
 
-  const fragment = document.getElementById(location.hash.slice(1));
   books.forEach(book => {
-    // Without JavaScript both series remain readable; with it the covers control them.
-    setOpen(book, !!fragment && book.panel.contains(fragment), false);
+    // Progressive enhancement: the artwork stays readable without JavaScript.
+    book.slot = document.createElement("div");
+    book.slot.className = "series-book-slot";
+    book.button.before(book.slot);
+    book.slot.append(book.button, book.panel);
+    const back = document.createElement("span");
+    back.className = "series-book-back";
+    back.setAttribute("aria-hidden", "true");
+    book.button.append(back);
+    book.shadow = document.createElement("span");
+    book.shadow.className = "series-turn-shadow";
+    book.shadow.setAttribute("aria-hidden", "true");
+    book.slot.append(book.shadow);
+    book.close = book.panel.querySelector("[data-close-book]");
+    book.close.hidden = false;
     book.button.disabled = false;
+    book.panel.hidden = true;
+    book.panel.inert = true;
     book.button.addEventListener("click", () => {
-      const open = book.button.getAttribute("aria-expanded") !== "true";
       books.forEach(other => {
-        if (other === book || other.button.getAttribute("aria-expanded") === "true") {
-          setOpen(other, other === book && open);
-        }
+        if (other !== book && other.open) setOpen(other, false);
       });
+      setOpen(book, true);
     });
+    book.close.addEventListener("click", () => setOpen(book, false, true, true));
+  });
+  const fragment = document.getElementById(location.hash.slice(1));
+  const initialBook = books.find(book => fragment && book.panel.contains(fragment));
+  if (initialBook) setOpen(initialBook, true, false);
+  reducedMotion.addEventListener("change", () => {
+    books.forEach(book => setOpen(book, book.open, false));
   });
 })();

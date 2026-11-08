@@ -10,15 +10,15 @@
     <link rel="apple-touch-icon" href="../images/favicon.png" />
     <script src="../theme.js?v=20261007-1"></script>
     <style>html[data-i18n-state="loading"] body { visibility: hidden; }</style>
-    <script src="../i18n.js?v=20261105-1"></script>
+    <script src="../i18n.js?v=20261108-5"></script>
     <script src="../anniversary-music.js?v=20261007-1" defer></script>
-    <script src="../anniversary-books.js?v=20261103-1" defer></script>
+    <script src="../anniversary-books.js?v=20261108-5" defer></script>
     <script src="../logo-reveal.js?v=20261005-2" defer></script>
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../atmosphere.css" />
     <link rel="stylesheet" href="../theme.css?v=20260922-8" />
     <link rel="stylesheet" href="../i18n.css?v=20261004-4" />
-    <link rel="stylesheet" href="../anniversary.css?v=20261103-1" />
+    <link rel="stylesheet" href="../anniversary.css?v=20261108-5" />
   </head>
   <body class="anniversary-page" data-page-title="anniversaryTitle" data-page-description="anniversaryDescription">
     <header class="site-header">
@@ -93,30 +93,55 @@
           </div>
         </div>
         <div class="series-paths" role="group" aria-label="Series">
-          <button class="series-path series-path--sp" type="button" aria-controls="special-series" aria-expanded="false" disabled>
-            <span class="series-book-cover">
-            <span class="series-code" lang="en">SP</span>
-            <svg class="series-path-art series-path-memory" viewBox="0 0 160 64" aria-hidden="true" focusable="false"><path class="memory-line" d="M8 48H42L78 16H116L152 40" /><circle cx="8" cy="48" r="4" /><circle cx="78" cy="16" r="4" /><circle cx="152" cy="40" r="4" /></svg>
-            <strong data-i18n="seriesSpTitle">Miku and me</strong>
-            <span class="series-book-action"><span data-book-open data-i18n="seriesBookOpen">Open sketchbook</span><span data-book-close data-i18n="seriesBookClose">Close sketchbook</span></span>
-            <span class="series-path-arrow" aria-hidden="true">+</span>
-            </span>
-          </button>
           <button class="series-path series-path--songs" type="button" aria-controls="song-series" aria-expanded="false" disabled>
             <span class="series-book-cover">
-            <span class="series-code" lang="en">01</span>
-            <span class="series-path-art series-path-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            <span class="series-cover-label" lang="en">SONG MEMORIES</span>
+            <span class="series-cover-object cover-record" aria-hidden="true"><span class="cover-record-disc"><span lang="en">01—</span></span><span class="cover-record-jacket"></span><span class="cover-notes"><i>♪</i><i>♫</i><i>♪</i></span></span>
             <strong data-i18n="seriesSongTitle">Melodies I remember</strong>
-            <span class="series-book-action"><span data-book-open data-i18n="seriesBookOpen">Open sketchbook</span><span data-book-close data-i18n="seriesBookClose">Close sketchbook</span></span>
-            <span class="series-path-arrow" aria-hidden="true">+</span>
+            <span class="series-cover-description" data-i18n="seriesSongLead">Classics never grow old. These songs have left a lasting impression on me over the past ten years.</span>
+            <span class="series-path-arrow" aria-hidden="true"><svg class="book-motion-icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M14 14c-3-2-6-3-10-2v11c4-1 7 0 10 2 3-2 6-3 10-2V12c-4-1-7 0-10 2Zm0 0v11M21 8C18 3 10 3 7 7M7 3v4h4"/></svg></span>
             </span>
           </button>
-        </div>
-        <!-- The SP and song sequences are independent; planned entries are not gallery works. -->
+        <section class="series-track series-track--songs series-book-panel" id="song-series" aria-labelledby="song-title">
+          <div class="series-sheet">
+          <header class="series-track-heading">
+            <p class="eyebrow" lang="en">01— / SONG MEMORIES</p>
+            <button class="series-book-close" type="button" data-close-book="song-series" hidden><span data-i18n="seriesBookClose">Close sketchbook</span><svg class="book-motion-icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M14 14c-3-2-6-3-10-2v11c4-1 7 0 10 2 3-2 6-3 10-2V12c-4-1-7 0-10 2Zm0 0v11M7 8c3-5 11-5 14-1m0-4v4h-4"/></svg></button>
+            <h3 id="song-title" data-i18n="seriesSongTitle">Melodies I remember</h3>
+            <p data-i18n="seriesSongLead">Classics never grow old. These songs have left a lasting impression on me over the past ten years.</p>
+          </header>
+          <figure class="series-teaser" id="song01">
+            <div class="record-sleeve">
+              <span class="record-disc" aria-hidden="true"><span>01</span></span>
+            <div class="series-teaser-art">
+              <img src="../images/01-senbonzakura-teaser.webp" width="1600" height="1600" loading="lazy" decoding="async" alt="Silhouette preview of Hatsune Miku for Senbonzakura" />
+            </div>
+              <p class="record-catalog" lang="en"><span>RANHI / 10 YEARS WITH MIKU</span><span>01</span></p>
+            </div>
+            <figcaption class="series-teaser-copy">
+              <span class="series-teaser-number" aria-hidden="true">01</span>
+              <p class="eyebrow" lang="en">ILLUSTRATION / SONG MEMORIES</p>
+              <h4 data-i18n="seriesSong01">Senbonzakura</h4>
+              <p class="series-teaser-note" data-i18n="seriesSong01Note">The song that introduced me to Miku.</p>
+              <p class="series-teaser-status" data-i18n="seriesTeaser">Preview · In progress</p>
+            </figcaption>
+          </figure>
+          </div>
+        </section>
+          <button class="series-path series-path--sp" type="button" aria-controls="special-series" aria-expanded="false" disabled>
+            <span class="series-book-cover">
+            <span class="series-cover-label" lang="en">PERSONAL STORIES</span>
+            <span class="series-cover-object cover-pages" aria-hidden="true"><span class="cover-page"></span><span class="cover-page"></span><span class="cover-page"><span lang="en">SP</span></span><span class="cover-sketch-marks"><i></i><i></i><i></i></span></span>
+            <strong data-i18n="seriesSpTitle">Miku and me</strong>
+            <span class="series-cover-description" data-i18n="seriesSpLead">Capturing my time with Miku through illustration.</span>
+            <span class="series-path-arrow" aria-hidden="true"><svg class="book-motion-icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M14 14c-3-2-6-3-10-2v11c4-1 7 0 10 2 3-2 6-3 10-2V12c-4-1-7 0-10 2Zm0 0v11M21 8C18 3 10 3 7 7M7 3v4h4"/></svg></span>
+            </span>
+          </button>
         <section class="series-track series-track--sp series-book-panel" id="special-series" aria-labelledby="sp-title">
           <div class="series-sheet">
           <header class="series-track-heading">
             <p class="eyebrow" lang="en">SP / PERSONAL STORIES</p>
+            <button class="series-book-close" type="button" data-close-book="special-series" hidden><span data-i18n="seriesBookClose">Close sketchbook</span><svg class="book-motion-icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M14 14c-3-2-6-3-10-2v11c4-1 7 0 10 2 3-2 6-3 10-2V12c-4-1-7 0-10 2Zm0 0v11M7 8c3-5 11-5 14-1m0-4v4h-4"/></svg></button>
             <h3 id="sp-title" data-i18n="seriesSpTitle">Miku and me</h3>
             <p data-i18n="seriesSpLead">Capturing my time with Miku through illustration.</p>
           </header>
@@ -139,19 +164,7 @@
           </article>
           </div>
         </section>
-        <section class="series-track series-track--songs series-book-panel" id="song-series" aria-labelledby="song-title">
-          <div class="series-sheet">
-          <header class="series-track-heading">
-            <p class="eyebrow" lang="en">01— / SONG MEMORIES</p>
-            <h3 id="song-title" data-i18n="seriesSongTitle">Melodies I remember</h3>
-            <p data-i18n="seriesSongLead">Classics never grow old. These songs have left a lasting impression on me over the past ten years.</p>
-          </header>
-          <div class="series-planned">
-            <span class="series-code" lang="en">01</span>
-            <div><p class="anniversary-status" data-i18n="seriesPlanned">Planned</p><h4 data-i18n="seriesSong01">Senbonzakura</h4><p data-i18n="seriesSong01Note">The song that introduced me to Miku.</p></div>
-          </div>
-          </div>
-        </section>
+        </div>
         <div class="anniversary-afterword">
           <p data-i18n="anniversaryPersonal">A personal fan-art project by RANHI.</p>
           <a class="text-link" href="../works/" data-i18n="anniversaryOtherWorks">BROWSE OTHER WORKS <span aria-hidden="true">→</span></a>
@@ -161,7 +174,7 @@
     <footer class="footer container">
       <div class="footer-meta">
         <span lang="en">RANHI / ILLUSTRATION PORTFOLIO</span>
-        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-11-05">November 5, 2026</time></span>
+        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-11-08">November 8, 2026</time></span>
       </div>
       <div class="footer-signoff">
         <span>© 2026 RANHI</span>

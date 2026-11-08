@@ -14,8 +14,11 @@ assert.ok(!html.includes('href="#song-series"'));
 assert.equal((html.match(/class="anniversary-artwork"/g) || []).length, 1);
 assert.ok(html.includes('datetime="2026-10-27"'));
 assert.ok(html.includes('width="2560" height="1785"'));
-assert.ok(html.includes('class="series-planned"'));
-assert.ok(!html.split('id="song-series"')[1].split("</section>")[0].includes("<img"), "Do not invent a finished song illustration");
+const song = html.split('id="song-series"')[1].split("</section>")[0];
+assert.ok(song.includes('class="series-teaser"'));
+assert.ok(song.includes('data-i18n="seriesTeaser"'), "Identify the supplied silhouette as a teaser, not a finished illustration");
+assert.ok(song.includes('01-senbonzakura-teaser.webp'));
+assert.ok(fs.statSync(path.join(root, "images/01-senbonzakura-teaser.webp")).size > 0);
 assert.ok(css.includes("height: auto; object-fit: contain"));
 for (const suffix of ["", "-1280"]) {
   assert.ok(fs.statSync(path.join(root, "images", "sp01-meeting-you-is-the-greatest-gift" + suffix + ".webp")).size > 0);
@@ -32,4 +35,4 @@ const hans = JSON.parse(fs.readFileSync(path.join(root, "locales/zh-Hans.json"))
 const ja = JSON.parse(fs.readFileSync(path.join(root, "locales/ja.json"))).ui;
 assert.equal(hans.sp01Title, "与你的相遇便是最好的礼物");
 assert.equal(ja.sp01Title, "君に出会えたことが最高のプレゼント");
-console.log("PASS: SP01 artwork, exact titles, four-language credits, separate SP/song numbering and planned-only song entry.");
+console.log("PASS: SP01 artwork, exact titles, four-language credits and song 01 silhouette teaser.");
