@@ -20,6 +20,7 @@
     "seriesViewImage": "拡大して見る",
     "wechatMilestone": "100フォロワー達成",
     "pixivMilestone": "100フォロワー達成",
+    "xiaohongshuMilestone": "100フォロワー達成",
     "contactEmail": "メール",
     "contactArtPlatforms": "作品投稿サイト",
     "contactSocialPlatforms": "SNS",
@@ -116,7 +117,10 @@
     "songDesignLink": "公式モジュール紹介",
     "song01Credit": "共同制作：本作品の制作工程の一部に、あさひクロイ先生にも携わっていただきました。丁寧なご指導に心より感謝いたします。",
     "imageViewerTitle": "画像を拡大表示",
-    "imageViewerClose": "閉じる"
+    "imageViewerClose": "閉じる",
+    "song02Status": "次回予告",
+    "song02PreviewNote": "次に描く曲は「DECORATOR」。イラストの公開をお楽しみに。",
+    "song02Alt": "DECORATOR — 第02作の幾何学模様の予告ジャケット"
   },
   "types": {
     "GUMI / Illustration": "GUMI / イラスト",

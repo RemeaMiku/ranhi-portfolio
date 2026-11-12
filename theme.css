@@ -291,17 +291,13 @@ html.home-intro-pending body {
     --pink: #ed91b9;
   }
 }
-.navlinks a {
+/* One fixed-size link box and one underline for current, hover and keyboard focus. */
+.navlinks > a {
   position: relative;
-}
-.navlinks a[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -9px;
-  height: 2px;
-  background: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
 }
 .navlinks a:hover,
 .text-link,
@@ -616,17 +612,18 @@ button:focus-visible {
   background-color: color-mix(in srgb, var(--accent) 8%, transparent);
   border-color: var(--accent);
 }
-.navlinks a::before {
+.navlinks > a::before {
   content: "";
   position: absolute;
-  inset: auto 0 -9px;
+  inset: auto 0 0;
   height: 2px;
   background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.2s ease;
 }
-.navlinks a:focus-visible::before {
+.navlinks > a[aria-current="page"]::before,
+.navlinks > a:focus-visible::before {
   transform: scaleX(1);
 }
 .variant button:active,

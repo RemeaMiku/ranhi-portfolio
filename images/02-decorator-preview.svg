@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <linearGradient id="paper" x2="1" y2="1"><stop stop-color="#f2fff9"/><stop offset="1" stop-color="#eaf0ff"/></linearGradient>
+    <linearGradient id="ribbon" x2="1" y2="1"><stop stop-color="#72d6d5"/><stop offset=".5" stop-color="#8caeea"/><stop offset="1" stop-color="#ee9cb9"/></linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#36595f" stroke-opacity=".08"/></pattern>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#paper)"/>
+  <rect width="1200" height="1200" fill="url(#grid)"/>
+  <circle cx="1020" cy="190" r="260" fill="#f5d879" opacity=".55"/>
+  <circle cx="190" cy="1060" r="290" fill="#80d7d8" opacity=".3"/>
+  <path d="M-130 430C150 20 440 300 280 540S620 1000 820 770 1240 480 1330 800" fill="none" stroke="url(#ribbon)" stroke-width="118"/>
+  <path d="M-130 430C150 20 440 300 280 540S620 1000 820 770 1240 480 1330 800" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2"/>
+  <g fill="none" stroke="#29656d">
+    <circle cx="887" cy="330" r="145" stroke-width="2"/>
+    <circle cx="887" cy="330" r="121" stroke-dasharray="2 18" stroke-width="5"/>
+    <path d="M82 82h62M82 82v62M1118 1118h-62M1118 1118v-62" stroke-width="2"/>
+  </g>
+  <g fill="#ed91b0"><path d="m138 706 36-20 20 36-36 20Z"/><path d="m810 138 16-36 16 36 36 16-36 16-16 36-16-36-36-16Z"/><circle cx="1030" cy="923" r="19"/></g>
+  <g fill="#6ea5d8"><path d="m640 210 34 18-18 34-34-18Z"/><path d="m384 1020 25-43 25 43Z"/><circle cx="110" cy="890" r="10"/></g>
+  <g fill="#e9bf59"><path d="m952 1050 22-45 22 45 45 22-45 22-22 45-22-45-45-22Z"/><rect x="450" y="130" width="14" height="48" transform="rotate(30 457 154)"/></g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#23494f">
+    <text x="84" y="116" font-size="20" letter-spacing="5">10 YEARS WITH MIKU</text>
+    <text x="86" y="595" font-size="119" font-weight="900" letter-spacing="-6">DECORATOR</text>
+    <text x="92" y="650" font-size="19" letter-spacing="9">NEXT ILLUSTRATION / 02</text>
+    <text x="85" y="1078" font-size="110" font-weight="900" letter-spacing="-8">02</text>
+    <text x="1115" y="1090" text-anchor="end" font-size="18" letter-spacing="4">RANHI / PREVIEW</text>
+  </g>
+</svg>

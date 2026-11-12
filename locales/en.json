@@ -18,8 +18,9 @@
     "seriesSong01": "Senbonzakura",
     "seriesSong01Note": "The song that introduced me to Miku.",
     "seriesViewImage": "View full size",
-    "wechatMilestone": "100 followers milestone",
-    "pixivMilestone": "100 followers milestone",
+    "wechatMilestone": "100 followers reached",
+    "pixivMilestone": "100 followers reached",
+    "xiaohongshuMilestone": "100 followers reached",
     "contactEmail": "EMAIL",
     "contactArtPlatforms": "Art platforms",
     "contactSocialPlatforms": "Social updates",
@@ -116,7 +117,10 @@
     "songDesignLink": "Official costume details",
     "song01Credit": "Creative collaboration: あさひクロイ contributed to part of the creative process for this illustration. My sincere thanks for the thoughtful guidance.",
     "imageViewerTitle": "Full-size image",
-    "imageViewerClose": "Close"
+    "imageViewerClose": "Close",
+    "song02Status": "Next illustration",
+    "song02PreviewNote": "The next song in the series is DECORATOR. Illustration coming soon.",
+    "song02Alt": "DECORATOR — geometric teaser cover for illustration 02"
   },
   "types": {
     "GUMI / Illustration": "GUMI / Illustration",

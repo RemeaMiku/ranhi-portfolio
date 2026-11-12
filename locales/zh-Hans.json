@@ -18,8 +18,9 @@
     "seriesSong01": "千本樱",
     "seriesSong01Note": "让我认识 Miku 的入坑曲。",
     "seriesViewImage": "放大查看",
-    "wechatMilestone": "100 关注纪念",
-    "pixivMilestone": "100 关注纪念",
+    "wechatMilestone": "100粉丝数达成",
+    "pixivMilestone": "100粉丝数达成",
+    "xiaohongshuMilestone": "100粉丝数达成",
     "contactEmail": "邮箱",
     "contactArtPlatforms": "作品平台",
     "contactSocialPlatforms": "社交动态",
@@ -116,7 +117,10 @@
     "songDesignLink": "官方衣装介绍",
     "song01Credit": "联合创作：あさひクロイ参与了本作品的一部分制作流程，感谢老师的细心指导。",
     "imageViewerTitle": "图片全屏查看",
-    "imageViewerClose": "关闭"
+    "imageViewerClose": "关闭",
+    "song02Status": "下一作预告",
+    "song02PreviewNote": "下一首，DECORATOR。插画敬请期待。",
+    "song02Alt": "DECORATOR — 第02作的几何图形预告封面"
   },
   "types": {
     "GUMI / Illustration": "GUMI / 插画",
