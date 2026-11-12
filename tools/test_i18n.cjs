@@ -231,7 +231,7 @@ async function main() {
     assert.ok(html.includes('>THANK YOU</small>'));
     assert.ok(html.includes('html[data-i18n-state="loading"] body { visibility: hidden; }'));
     assert.ok(/<script src="(?:\.\.\/)?i18n\.js\?v=[^"]+"><\/script>/.test(html), "Locale boot must run before the body");
-    assert.equal((html.match(/data-last-updated datetime="2026-11-08"/g) || []).length, 1);
+    assert.equal((html.match(/data-last-updated datetime="2026-11-12"/g) || []).length, 1);
     for (const [, key] of html.matchAll(/data-i18n="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     for (const [, key] of html.matchAll(/data-page-(?:title|description)="([^"]+)"/g)) assert.ok(resources.en.ui[key], key);
     for (const [, asset] of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
@@ -256,7 +256,7 @@ async function main() {
       assert.ok(theme.includes('document.querySelector(".home-page [data-home-content-start]")'));
     }
     if (page === "works") {
-      assert.equal((html.match(/data-artwork-title=/g) || []).length, 15);
+      assert.equal((html.match(/data-artwork-title=/g) || []).length, Object.keys(resources.en.artworkTitles).length);
       assert.ok(!html.includes('<p lang="zh-CN">中秋明月 桂影婵娟</p>'));
       for (const id of ["miku-with-you", "magical-mirai", "hikari", "miku-and-teto"]) {
         assert.ok(html.includes('data-artwork-title="' + id + '" data-title-original'));
@@ -275,10 +275,10 @@ async function main() {
   const works = fs.readFileSync(path.join(root, "works/index.html"), "utf8");
   const homeIds = [...home.matchAll(/data-artwork-title="([^"]+)"/g)].map((match) => match[1]);
   const workIds = [...works.matchAll(/data-artwork-title="([^"]+)"/g)].map((match) => match[1]);
-  assert.equal(workIds[0], "rain-and-hydrangeas");
+  assert.equal(workIds[0], "senbonzakura");
   assert.deepEqual(homeIds, workIds.slice(0, 4), "Home always shows the latest four works");
   const numbers = [...works.matchAll(/<div class="detail-info">\s*<p class="eyebrow">(\d+)<\/p>/g)].map((match) => Number(match[1]));
-  assert.deepEqual(numbers, Array.from({ length: 15 }, (_, i) => i + 1));
+  assert.deepEqual(numbers, Array.from({ length: workIds.length }, (_, i) => i + 1));
   assert.equal(resources.ja.artworkTitles["rain-and-hydrangeas"], "雨音と紫陽花");
   assert.ok(works.includes("2564 × 1520 px"));
   for (const resource of Object.values(resources)) {

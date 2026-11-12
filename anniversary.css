@@ -446,31 +446,22 @@
 .series-art-copy .eyebrow { font-size: 13px; line-height: 1.8; letter-spacing: 0.04em; }
 .series-art-notes p { margin: 0 0 20px; font-size: 17px; line-height: 2; }
 .series-art-notes .series-credit { padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
-/* Tint the supplied transparent silhouette without changing its contours. */
-.series-teaser {
+/* Song illustrations use a square album sleeve. */
+.series-album {
   display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   margin: 0; border: 1px solid var(--line);
   background: color-mix(in srgb, var(--anniversary-mint) 5%, var(--paper));
   scroll-margin-top: 120px;
 }
-.series-teaser-art {
+.series-album-art {
   position: relative; align-self: center;
   background: radial-gradient(ellipse at 75% 20%, color-mix(in srgb, var(--anniversary-pink) 15%, transparent), transparent 65%), var(--paper);
 }
-.series-teaser-art img { display: block; width: 100%; height: auto; object-fit: contain; }
-@supports (mask-image: url("images/01-senbonzakura-teaser.webp")) {
-  .series-teaser-art img { opacity: 0; }
-  .series-teaser-art::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(145deg, color-mix(in srgb, var(--anniversary-mint) 65%, var(--ink)), color-mix(in srgb, var(--anniversary-mint) 80%, var(--ink)) 65%, color-mix(in srgb, var(--anniversary-pink) 65%, var(--ink)));
-    mask: url("images/01-senbonzakura-teaser.webp") center / contain no-repeat;
-  }
-}
-.series-teaser-copy { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: clamp(24px, 3vw, 44px); border-left: 1px solid var(--line); }
-.series-teaser-number { position: absolute; z-index: -1; top: -.12em; right: -.02em; font-size: clamp(130px, 20vw, 260px); font-weight: 900; line-height: 1; letter-spacing: -.08em; color: color-mix(in srgb, var(--anniversary-mint) 14%, transparent); user-select: none; }
-.series-teaser-copy h4 { margin: 20px 0; font-size: clamp(30px, 3.8vw, 52px); line-height: 1.4; overflow-wrap: anywhere; }
-.series-teaser-note { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.9; }
-.series-teaser-status { align-self: flex-start; margin: 32px 0 0; padding: 10px 0 0; border-top: 3px solid var(--anniversary-pink); font-size: 14px; letter-spacing: .04em; }
+.series-album-art img { display: block; width: 100%; height: auto; object-fit: contain; }
+.series-album-copy { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: clamp(24px, 3vw, 44px); border-left: 1px solid var(--line); }
+.series-album-number { position: absolute; z-index: -1; top: -.12em; right: -.02em; font-size: clamp(130px, 20vw, 260px); font-weight: 900; line-height: 1; letter-spacing: -.08em; color: color-mix(in srgb, var(--anniversary-mint) 14%, transparent); user-select: none; }
+.series-album-copy h4 { margin: 20px 0; font-size: clamp(30px, 3.8vw, 52px); line-height: 1.4; overflow-wrap: anywhere; }
+.series-album-note { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.9; }
 /* Quiet running header and an image-led spread, with a narrow printed gutter. */
 .series-sheet > .series-track-heading {
   display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 24px;
@@ -480,12 +471,11 @@
 .series-sheet > .series-track-heading h3 { grid-column: 1; margin: 0; font-size: clamp(25px, 2.6vw, 34px); }
 .series-sheet > .series-track-heading > p:last-child { grid-column: 1; margin: 0; font-size: 15px; line-height: 1.8; }
 .series-sheet .series-book-close { grid-column: 2; grid-row: 1 / 4; align-self: start; float: none; margin: 0; padding: 9px 12px; font-size: 14px; background: transparent; }
-.series-sheet .series-teaser { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); border: 0; background: none; gap: clamp(28px, 4vw, 60px); }
-.series-sheet .series-teaser-art { align-self: start; border: 1px solid var(--line); }
-.series-sheet .series-teaser-copy { padding: 36px 0 28px clamp(28px, 4vw, 56px); border: 0; border-left: 1px solid var(--line); justify-content: center; }
-.series-sheet .series-teaser-number { position: static; order: -1; font-size: clamp(80px, 10vw, 140px); line-height: 1; letter-spacing: -.07em; color: color-mix(in srgb, var(--track-color) 45%, var(--muted)); margin-bottom: 24px; font-weight: 300; }
-.series-sheet .series-teaser-copy h4 { margin: 14px 0 24px; font-size: clamp(30px, 3.5vw, 48px); }
-.series-sheet .series-teaser-status { margin-top: 40px; }
+.series-sheet .series-album { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); border: 0; background: none; gap: clamp(28px, 4vw, 60px); }
+.series-sheet .series-album-art { align-self: start; border: 1px solid var(--line); }
+.series-sheet .series-album-copy { padding: 36px 0 28px clamp(28px, 4vw, 56px); border: 0; border-left: 1px solid var(--line); justify-content: center; }
+.series-sheet .series-album-number { position: static; order: -1; font-size: clamp(80px, 10vw, 140px); line-height: 1; letter-spacing: -.07em; color: color-mix(in srgb, var(--track-color) 45%, var(--muted)); margin-bottom: 24px; font-weight: 300; }
+.series-sheet .series-album-copy h4 { margin: 14px 0 24px; font-size: clamp(30px, 3.5vw, 48px); }
 .series-sheet .anniversary-artwork { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); column-gap: clamp(28px, 4vw, 56px); align-items: start; }
 .series-sheet .series-art-topline { grid-column: 1 / -1; border: 0; padding: 0 0 24px; }
 .series-sheet .series-art-topline .series-code { color: var(--track-color); font-size: 25px; }
@@ -511,8 +501,8 @@
   .series-sheet { padding: 24px 16px; }
   .series-track { scroll-margin-top: 145px; }
   .anniversary-artwork { scroll-margin-top: 145px; }
-  .series-teaser { grid-template-columns: 1fr; }
-  .series-teaser-copy { border-left: 0; border-top: 1px solid var(--line); }
+  .series-album { grid-template-columns: 1fr; }
+  .series-album-copy { border-left: 0; border-top: 1px solid var(--line); }
   .series-paths .series-book-cover { padding: 28px 24px 54px; }
   .series-paths .series-path strong { max-width: 85%; font-size: 28px; }
   .series-paths .series-path-art { width: 52px; right: 18px; }
@@ -523,11 +513,10 @@
   .series-sheet > .series-track-heading > p:last-child { grid-column: 1 / -1; }
   .series-sheet .series-book-close { grid-row: 1; width: 44px; height: 44px; justify-content: center; padding: 0; }
   .series-sheet .series-book-close > span:first-child { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .series-sheet .series-teaser { grid-template-columns: 1fr; gap: 24px; }
-  .series-sheet .series-teaser-copy { padding: 0; border: 0; }
-  .series-sheet .series-teaser-number { font-size: 64px; margin-bottom: 16px; }
-  .series-sheet .series-teaser-copy h4 { font-size: 32px; margin: 12px 0 18px; }
-  .series-sheet .series-teaser-status { margin-top: 24px; }
+  .series-sheet .series-album { grid-template-columns: 1fr; gap: 24px; }
+  .series-sheet .series-album-copy { padding: 0; border: 0; }
+  .series-sheet .series-album-number { font-size: 64px; margin-bottom: 16px; }
+  .series-sheet .series-album-copy h4 { font-size: 32px; margin: 12px 0 18px; }
   .series-sheet .series-art-copy { display: block; }
   .series-sheet .series-art-notes p { font-size: 17px; }
 }
@@ -542,10 +531,10 @@
 .series-paths .series-path-arrow { display: grid; place-items: center; width: 44px; height: 44px; right: 30px; bottom: 23px; border: 1px solid var(--line); font-size: 25px; }
 .series-paths .series-path:hover .series-path-arrow { border-color: var(--track-color); background: color-mix(in srgb, var(--track-color) 10%, transparent); }
 /* A square jacket and a decorative vinyl edge, never a simulated music player. */
-.series-sheet .series-teaser { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); align-items: center; }
+.series-sheet .series-album { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); align-items: center; }
 .record-sleeve { position: relative; isolation: isolate; min-width: 0; padding-right: 14%; }
-.record-sleeve .series-teaser-art { position: relative; z-index: 1; aspect-ratio: 1; box-shadow: 6px 8px 24px rgb(0 0 0 / .22); }
-.record-sleeve .series-teaser-art img { aspect-ratio: 1; object-fit: contain; }
+.record-sleeve .series-album-art { position: relative; z-index: 1; aspect-ratio: 1; box-shadow: 6px 8px 24px rgb(0 0 0 / .22); }
+.record-sleeve .series-album-art img { aspect-ratio: 1; object-fit: contain; }
 .record-disc {
   position: absolute; z-index: 0; top: 5%; right: 0; width: 80%; aspect-ratio: 1; border-radius: 50%;
   display: grid; place-items: center; border: 1px solid #343c40;
@@ -554,11 +543,9 @@
 }
 .record-disc > span { display: grid; place-items: center; width: 27%; aspect-ratio: 1; border-radius: 50%; border: 8px solid #151b1f; background: var(--anniversary-mint); color: #173d42; font-size: clamp(16px, 3vw, 32px); }
 .record-catalog { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 12px; margin: 16px 0 0; font-size: 10px; letter-spacing: .1em; color: var(--muted); line-height: 1.6; }
-.series-sheet .series-teaser-copy { border-left: 0; padding: 24px 0; }
-.series-sheet .series-teaser-number { font-size: clamp(54px, 6vw, 82px); font-weight: 650; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line); letter-spacing: -.04em; }
-.series-sheet .series-teaser-copy h4 { font-size: clamp(32px, 3.8vw, 50px); }
-.series-sheet .series-teaser-status { width: 100%; margin-top: 32px; border-top: 1px solid var(--line); padding-top: 18px; }
-.series-sheet .series-teaser-status::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 10px; background: var(--anniversary-pink); vertical-align: middle; }
+.series-sheet .series-album-copy { border-left: 0; padding: 24px 0; }
+.series-sheet .series-album-number { font-size: clamp(54px, 6vw, 82px); font-weight: 650; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line); letter-spacing: -.04em; }
+.series-sheet .series-album-copy h4 { font-size: clamp(32px, 3.8vw, 50px); }
 @media (max-width: 760px) {
   .series-paths .series-path { min-height: 200px; }
   .series-paths .series-book-cover { padding: 64px 24px 62px; }
@@ -568,11 +555,90 @@
   .series-paths .series-book-cover > .series-code { font-size: 155px; right: 16px; top: 16px; opacity: .1; }
   .series-paths .series-path-art { width: 44px; height: 28px; top: 21px; right: 20px; }
   .series-paths .series-path-arrow { right: 20px; bottom: 16px; width: 38px; height: 38px; }
-  .series-sheet .series-teaser { grid-template-columns: 1fr; gap: 20px; }
-  .series-sheet .series-teaser-copy { padding: 0; }
-  .series-sheet .series-teaser-number { font-size: 48px; padding-bottom: 12px; margin-bottom: 18px; }
-  .series-sheet .series-teaser-copy h4 { font-size: 32px; }
+  .series-sheet .series-album { grid-template-columns: 1fr; gap: 20px; }
+  .series-sheet .series-album-copy { padding: 0; }
+  .series-sheet .series-album-number { font-size: 48px; padding-bottom: 12px; margin-bottom: 18px; }
+  .series-sheet .series-album-copy h4 { font-size: 32px; }
   .record-catalog { font-size: 9px; letter-spacing: .04em; }
+}
+/* Senbonzakura's printed margin echoes the artwork without tinting the image. */
+.series-sheet .senbonzakura {
+  --sakura-ink: color-mix(in srgb, #bd718a 72%, var(--ink));
+  position: relative;
+  isolation: isolate;
+  padding: clamp(20px, 2.5vw, 36px);
+  border: 1px solid color-mix(in srgb, #bd718a 28%, var(--line));
+  background:
+    repeating-linear-gradient(135deg, transparent 0 5px, color-mix(in srgb, var(--ink) 2%, transparent) 5px 6px),
+    linear-gradient(120deg, color-mix(in srgb, #d5b27c 9%, var(--paper)), color-mix(in srgb, #bd718a 6%, var(--paper)));
+}
+.senbonzakura .sakura-ornaments {
+  position: absolute; z-index: -1; right: 0; top: 0;
+  width: auto; height: 100%; max-width: 100%;
+  opacity: .28; pointer-events: none; overflow: hidden;
+}
+.sakura-blossom { transform-origin: 216px 88px; animation: sakura-sway 6s ease-in-out infinite paused; }
+.sakura-petal { animation: sakura-drift 5s ease-in-out infinite paused; }
+.sakura-petal:nth-of-type(2) { animation-delay: -1.6s; }
+.sakura-petal:nth-of-type(3) { animation-delay: -3.2s; }
+.sakura-pinwheel { transform-origin: 224px 376px; animation: sakura-spin 12s linear infinite paused; }
+.senbonzakura:is(:hover, :focus-within) :is(.sakura-blossom, .sakura-petal, .sakura-pinwheel) { animation-play-state: running; }
+@keyframes sakura-sway { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+@keyframes sakura-drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-10px, 14px); } }
+@keyframes sakura-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .senbonzakura :is(.sakura-blossom, .sakura-petal, .sakura-pinwheel) { animation: none; }
+}
+.senbonzakura .series-album-copy { overflow: visible; }
+/* The edition number crosses the jacket edge, behind the printed title. */
+.song-edition-heading { position: relative; isolation: isolate; margin: 36px 0 28px; padding: 26px 0 12px; }
+.series-sheet .senbonzakura .series-album-number {
+  position: absolute; z-index: -1; top: -72px; right: -54px;
+  margin: 0; padding: 0; border: 0;
+  font-size: clamp(150px, 17vw, 220px); font-weight: 900; line-height: 1;
+  letter-spacing: -.08em; color: color-mix(in srgb, var(--sakura-ink) 24%, transparent);
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--sakura-ink) 42%, transparent);
+  pointer-events: none;
+}
+.series-sheet .senbonzakura .song-edition-heading h4 {
+  position: relative; margin: 0; font-size: clamp(36px, 4.5vw, 64px);
+  font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
+  font-weight: 700; line-height: 1.4; letter-spacing: .06em;
+  text-shadow: 0 2px 16px var(--paper);
+}
+.song-edition-heading::before { content: ""; display: block; width: 44px; height: 3px; margin-bottom: 22px; background: var(--sakura-ink); }
+.series-sheet .senbonzakura .song-edition-heading h4:lang(en) { letter-spacing: -.025em; }
+@media (max-width: 760px) {
+  .song-edition-heading { margin: 44px 0 24px; padding-top: 16px; }
+  .series-sheet .senbonzakura .series-album-number { top: -38px; right: -27px; font-size: 144px; }
+  .series-sheet .senbonzakura .song-edition-heading h4 { font-size: 38px; }
+}
+.senbonzakura .record-disc > span { background: #d9a4af; color: #593740; }
+.song-credits { margin: 8px 0 0; }
+.song-credits > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.song-credits dt { color: var(--muted); font-size: 12px; line-height: 1.7; }
+.song-credits dd { margin: 0; font-size: 15px; line-height: 1.7; overflow-wrap: anywhere; }
+.song-costume { display: block; color: var(--muted); font-size: 13px; }
+.song-source-links { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-top: 24px; }
+.song-source-links a { padding: 6px 0; border-bottom: 1px solid var(--sakura-ink); font-size: 14px; }
+/* Liner notes sit below the jacket so the full illustration keeps its space. */
+.song-liner-notes { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.5fr); gap: clamp(24px, 4vw, 56px); margin-top: 40px; padding-top: 36px; border-top: 1px solid var(--line); }
+.song-liner-notes h5 { margin: 18px 0; font-size: clamp(24px, 3vw, 34px); line-height: 1.5; }
+.song-liner-copy p { margin: 0 0 24px; font-size: 16px; line-height: 2; }
+.song-liner-copy p:last-child { margin-bottom: 0; }
+.song-liner-copy .series-credit { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+@media (max-width: 760px) {
+  .song-liner-notes { grid-template-columns: 1fr; gap: 8px; margin-top: 28px; padding-top: 24px; }
+}
+.senbonzakura .series-art-date {
+  margin: 32px 0 0; padding: 4px 0 4px 14px;
+  border-left: 2px solid var(--sakura-ink);
+  color: var(--muted); font-size: 13px; letter-spacing: .16em;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 760px) {
+  .series-sheet .senbonzakura { padding: 18px; }
+  .senbonzakura .sakura-ornaments { top: auto; bottom: 0; width: 200px; height: auto; opacity: .2; }
 }
 /* Small physical objects distinguish the two series without oversized numbering. */
 .series-cover-object { position: absolute; right: 115px; top: 29px; width: 220px; height: 150px; pointer-events: none; }

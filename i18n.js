@@ -257,7 +257,7 @@
     }
     bind(".wechat-qr", "contactQrAlt", "", "alt");
     bind(".series-art-figure img", "sp01Alt", "", "alt");
-    bind(".series-teaser-art img", "seriesTeaserAlt", "", "alt");
+    bind("#song01 img", "song01Alt", "", "alt");
     bind(".series-paths", "anniversarySeries", "", "aria-label");
     document.querySelectorAll(".type, .work-card > p").forEach((element) => {
       element.dataset.originalType = element.textContent.trim();

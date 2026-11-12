@@ -232,6 +232,25 @@ button {
   font-size: 12px;
   letter-spacing: 0.03em;
 }
+/* Anniversary editions share a label across the home cards and works archive. */
+.anniversary-work-badge {
+  display: inline-flex; align-items: center; gap: 14px;
+  max-width: 100%; padding: 9px 12px;
+  border-left: 3px solid #70d0d7;
+  background: linear-gradient(105deg, rgb(112 208 215 / .12), rgb(235 138 166 / .08));
+  color: var(--ink); font-size: 10px; letter-spacing: .1em; line-height: 1.6;
+}
+.anniversary-work-badge b { color: var(--muted); font-size: 13px; letter-spacing: .03em; }
+.work-card--anniversary .anniversary-work-badge { margin-top: 14px; }
+.anniversary-work-label {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+  width: fit-content; max-width: 100%; margin: 16px 0 28px;
+  font-size: 12px; line-height: 1.6; color: var(--muted);
+  transition: color .25s;
+}
+.anniversary-work-label:hover { color: var(--ink); }
+.anniversary-work-label:focus-visible { outline: 2px solid #70d0d7; outline-offset: 5px; }
+.detail--anniversary .detail-image { border-bottom: 3px solid #70d0d7; }
 .artist-intro {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -377,6 +396,7 @@ button {
   color: #3d4b50;
   margin: 10px 0 0;
 }
+.notes--paragraphs p { white-space: pre-line; }
 .variant {
   display: flex;
   align-items: center;
@@ -507,3 +527,6 @@ button {
     margin-top: 32px;
   }
 }
+
+/* Artwork attribution uses a quiet divider and a single line of text. */
+.series-credit { margin: 24px 0 0; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 2; }

@@ -108,9 +108,7 @@
     book.panel.hidden = true;
     book.panel.inert = true;
     book.button.addEventListener("click", () => {
-      books.forEach(other => {
-        if (other !== book && other.open) setOpen(other, false);
-      });
+      // Each album keeps its own open state.
       setOpen(book, true);
     });
     book.close.addEventListener("click", () => setOpen(book, false, true, true));

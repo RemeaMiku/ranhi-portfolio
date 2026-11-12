@@ -14,11 +14,10 @@
     "sp01Credit": "Recreation / tribute: based on a work by あさひクロイ from eleven years ago.",
     "sp01Alt": "SP01: Hatsune Miku leans out from a drawing on a monitor, reaching for Ranhi's hand outside the screen.",
     "seriesPlanned": "Planned",
-    "seriesTeaser": "Preview · In progress",
-    "seriesTeaserAlt": "Silhouette preview of Hatsune Miku for Senbonzakura",
+    "song01Alt": "Hatsune Miku in her Senbonzakura outfit, surrounded by cherry blossoms and pinwheels",
     "seriesSong01": "Senbonzakura",
     "seriesSong01Note": "The song that introduced me to Miku.",
-    "seriesViewImage": "Open image ↗",
+    "seriesViewImage": "View full size",
     "wechatMilestone": "100 followers milestone",
     "pixivMilestone": "100 followers milestone",
     "contactEmail": "EMAIL",
@@ -105,7 +104,19 @@
     "focusValue": "Anime illustration\nVocaloid / Fan art",
     "contactTitle": "GET IN\nTOUCH",
     "contactLead": "For illustration commissions, collaborations, or requests for artwork source files, please get in touch using the links below.",
-    "xiaohongshu": "Xiaohongshu"
+    "xiaohongshu": "Xiaohongshu",
+    "anniversaryCollection": "10th anniversary project",
+    "song01NotesTitle": "It started with this song",
+    "song01Note1": "About ten years ago, I happened across a Project DIVA video of Senbonzakura on a music platform. At first, I was simply drawn to the character on screen and wanted to know who she was. That curiosity led me to Hatsune Miku. Looking back, that chance encounter was the beginning of these ten years.",
+    "song01Note2": "On September 17, 2026, Senbonzakura marked fifteen years since its original upload to Niconico. The familiar melody still moves me. Its interweaving of old and new imagery also brings to mind the way tradition and modernity coexist in Japan, and the everyday lives of ordinary people through changing times.",
+    "song01Note3": "In these unsettled times, I value all the more the simple freedom to listen to music, draw, and get to know one another in peace. I sincerely hope that young people in Japan and around the world can find more ways to connect and fewer barriers between them; that they have the courage to protect their homes and peace in the face of oppression and violence; and that they remain curious and open to new things.",
+    "songCreditMusic": "Music / P",
+    "songCreditDesign": "Costume design",
+    "songOriginalLink": "Listen to the original",
+    "songDesignLink": "Official costume details",
+    "song01Credit": "Creative collaboration: あさひクロイ contributed to part of the creative process for this illustration. My sincere thanks for the thoughtful guidance.",
+    "imageViewerTitle": "Full-size image",
+    "imageViewerClose": "Close"
   },
   "types": {
     "GUMI / Illustration": "GUMI / Illustration",
@@ -130,7 +141,9 @@
     "character-art": "Character arts of Miku, Rin, Luka, and Meiko",
     "place-for-two": "A Place for the Two of Us",
     "first-step": "The First Step",
-    "miku-and-teto": "MIKU & TETO"
+    "miku-and-teto": "MIKU & TETO",
+    "senbonzakura": "Senbonzakura",
+    "meeting-you-is-the-greatest-gift": "Meeting You Is the Greatest Gift"
   },
   "artworkNotes": {
     "rain-and-hydrangeas": "My June entry for the “GUMI 2027年公式カレンダーイラストコンテスト” hosted on charaforio. GUMI bends down to look at the hydrangeas, reaching out with her left hand while holding an umbrella in her right. The rain has only just stopped, and sunlight streams in from the upper-right corner of the sky, capturing a quiet moment after the rain.",
@@ -147,6 +160,8 @@
     "character-art": "My entry for a POPPRO illustration contest: full-body drawings of Hatsune Miku, Kagamine Rin, Megurine Luka, and MEIKO in their official PIAPRO CHARACTERS outfits. This was my first time drawing a set of full-body character illustrations, and it took a lot of work.",
     "place-for-two": "A young Sylphiette from Mushoku Tensei gazes at the wand Rudeus gave her in the shade of a tree. Through soft light and her look of admiration, I wanted to revisit a warm moment from their childhood together.",
     "first-step": "Roxy from Mushoku Tensei looks toward the morning sun after saying goodbye to the young Rudeus and his family. She helped him take his first step outside the house. I wanted to capture her reluctance to leave the family, alongside her hopes for how both she and Rudeus would grow.",
-    "miku-and-teto": "Drawn for a university club event. Miku, in her NT outfit, and Teto, in her SV outfit, press their cheeks together and make heart signs with their hands. I wanted their gestures and interaction to show the closeness between the two virtual singers."
+    "miku-and-teto": "Drawn for a university club event. Miku, in her NT outfit, and Teto, in her SV outfit, press their cheeks together and make heart signs with their hands. I wanted their gestures and interaction to show the closeness between the two virtual singers.",
+    "senbonzakura": "About ten years ago, I happened across a Project DIVA video of Senbonzakura on a music platform. At first, I was simply drawn to the character on screen and wanted to know who she was. That curiosity led me to Hatsune Miku. Looking back, that chance encounter was the beginning of these ten years.\n\nOn September 17, 2026, Senbonzakura marked fifteen years since its original upload to Niconico. The familiar melody still moves me. Its interweaving of old and new imagery also brings to mind the way tradition and modernity coexist in Japan, and the everyday lives of ordinary people through changing times.\n\nIn these unsettled times, I value all the more the simple freedom to listen to music, draw, and get to know one another in peace. I sincerely hope that young people in Japan and around the world can find more ways to connect and fewer barriers between them; that they have the courage to protect their homes and peace in the face of oppression and violence; and that they remain curious and open to new things.",
+    "meeting-you-is-the-greatest-gift": "Back in my hometown, I didn't have my usual drawing setup, so this birthday illustration came a little late. I finished it in a loose, sketch-like style as a gift to myself for my 24th birthday, and as part of this project marking ten years since I discovered Hatsune Miku.\n\nThis is a recreation of a work that あさひクロイ created eleven years ago. Through it, I wanted to revisit the moment I encountered Miku around ten years ago. Meeting you was the greatest gift of all."
   }
 }
