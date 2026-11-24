@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../image-viewer.css?v=20261112-1" />
     <script src="../image-viewer.js?v=20261112-1" defer></script>
     <link rel="stylesheet" href="../atmosphere.css?v=20261124-3" />
+    <link rel="stylesheet" href="../anniversary-hero.css?v=20261124-1" />
     <script src="../stars.js?v=20261123-2" defer></script>
     <script src="../language-menu.js?v=20261124-1" defer></script>
   </head>
@@ -55,11 +56,22 @@
           <span lang="en">RANHI × HATSUNE MIKU</span>
         </div>
         <div class="anniversary-stage">
-          <div>
-            <h1 class="anniversary-heading" id="anniversary-title" lang="en"><span>10 Years</span><span>with Miku</span></h1>
+          <h1 class="anniversary-heading" id="anniversary-title" lang="en"><span class="anniversary-title-first"><strong>10</strong> <span>Years</span></span><span class="anniversary-title-second">with <em>Miku</em></span></h1>
+          <div class="anniversary-copy">
             <p class="anniversary-lead" data-i18n="anniversaryLead">2026 marks ten years since I discovered Hatsune Miku. There are still so many new stories I want to draw…</p>
             <p class="anniversary-intro" data-i18n="anniversaryIntro">It's almost ten years since I discovered Hatsune Miku. With this new illustration series, I want to celebrate the time I've spent with Miku and keep expressing that love through my art.</p>
             <a class="text-link" href="#series" data-i18n="anniversaryExplore">THE ILLUSTRATION SERIES <span aria-hidden="true">↓</span></a>
+          </div>
+          <div class="anniversary-emblem anniversary-emblem--animated">
+            <div class="anniversary-orbits" aria-hidden="true"><i></i><i></i><b></b><b></b></div>
+            <div class="anniversary-logo-player" data-logo-player role="img" aria-label="MIKU &amp; RANHI 10th" lang="en">
+              <!-- Static fallback also supplies the exact final frame and reduced-motion view. -->
+              <svg class="anniversary-logo" viewBox="247 289 506 520" aria-hidden="true" focusable="false">
+                <image href="../images/10-years-with-miku.png?v=20261004-2" width="1000" height="1000" />
+              </svg>
+              <canvas class="anniversary-logo-canvas" width="1000" height="1000" aria-hidden="true" hidden></canvas>
+            </div>
+          </div>
             <div class="anniversary-music" data-music-player>
               <div class="anniversary-music-track">
                 <span data-i18n="musicLabel">BACKGROUND MUSIC</span>
@@ -74,16 +86,6 @@
               </button>
               <p class="anniversary-music-error" data-music-error data-i18n="musicError" role="status" hidden>Unable to play the music. Please try again.</p>
             </div>
-          </div>
-          <div class="anniversary-emblem anniversary-emblem--animated">
-            <div class="anniversary-logo-player" data-logo-player role="img" aria-label="MIKU &amp; RANHI 10th" lang="en">
-              <!-- Static fallback also supplies the exact final frame and reduced-motion view. -->
-              <svg class="anniversary-logo" viewBox="247 289 506 520" aria-hidden="true" focusable="false">
-                <image href="../images/10-years-with-miku.png?v=20261004-2" width="1000" height="1000" />
-              </svg>
-              <canvas class="anniversary-logo-canvas" width="1000" height="1000" aria-hidden="true" hidden></canvas>
-            </div>
-          </div>
         </div>
         <div class="anniversary-dateline" lang="en">
           <span>2016</span><span class="anniversary-thread" aria-hidden="true"></span><span>2026 / 10TH ANNIVERSARY</span>
