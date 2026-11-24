@@ -95,14 +95,6 @@
     return cache.get(locale);
   }
 
-  function updateTheme(theme) {
-    const button = document.querySelector("[data-theme-toggle]");
-    if (!button || !dictionary.ui) return;
-    const key = { auto: "themeAuto", dark: "themeDark", light: "themeLight" }[theme] || "themeAuto";
-    button.textContent = translate("theme") + " / " + translate(key);
-    button.setAttribute("aria-label", button.textContent + ". " + translate("themeHint"));
-  }
-
   const bindings = [];
   function bind(selector, key, prefix = "", attribute = null) {
     document.querySelectorAll(selector).forEach((element) => {
@@ -169,7 +161,6 @@
     });
     const select = document.querySelector("[data-language-select]");
     if (select) select.value = language;
-    updateTheme(document.documentElement.dataset.theme || "auto");
     document.querySelectorAll("time[data-last-updated]").forEach((element) => {
       element.textContent = new Intl.DateTimeFormat(language, {
         year: "numeric", month: "long", day: "numeric", timeZone: "UTC",
@@ -213,7 +204,7 @@
     }
   }
 
-  window.RanhiI18n = { resolveLanguage, updateTheme };
+  window.RanhiI18n = { resolveLanguage };
   // Start downloads while the HTML is still being parsed, not after it is visible.
   void loadResource("en").catch(() => {});
   void loadResource(preference || systemLanguage()).catch(() => {});

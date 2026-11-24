@@ -1,25 +1,518 @@
-/* A quiet colour field behind the portfolio; artwork remains the visual focus. */
-body {
+/* One night sky across the portfolio. Artwork keeps its original colours. */
+:root {
+  color-scheme: dark;
+  --paper: #080f1d;
+  --surface: rgba(10, 20, 37, .78);
+  --ink: #eaf3fa;
+  --muted: #a4b6c8;
+  --line: rgba(166, 205, 233, .19);
+  --image-surface: #111f30;
+  --accent: #94e4e5;
+  --accent-fill: #94e4e5;
+  --accent-on: #102b33;
+  --pink: #deb2d9;
+  --edge-glow: 0 1px 0 rgba(204, 237, 255, .12);
+}
+html { background: var(--paper); }
+body, body.anniversary-page {
+  isolation: isolate;
   background:
-    radial-gradient(
-      68rem 46rem at -12% 24%,
-      rgba(102, 217, 210, 0.12),
-      transparent 62%
-    ),
-    radial-gradient(
-      58rem 44rem at 112% 63%,
-      rgba(218, 166, 220, 0.1),
-      transparent 61%
-    ),
-    #f3f7f7;
+    radial-gradient(ellipse at 16% 20%, #214a6438, transparent 58%),
+    radial-gradient(ellipse at 85% 65%, #55466e30, transparent 55%),
+    var(--paper);
   background-attachment: fixed;
 }
+.night-sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 30% 36%, #3d7c8520, transparent 45%),
+    radial-gradient(ellipse at 78% 68%, #6262a524, transparent 48%),
+    linear-gradient(125deg, transparent 22%, #7fa1bf08 44%, transparent 64%);
+}
+.sky-star {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 0;
+  background: #e0f4ff;
+  opacity: var(--brightness);
+  animation: star-breathe var(--duration) ease-in-out var(--delay) infinite;
+}
+.sky-star--bright {
+  background: #fff;
+}
+.sky-star--bright::before, .sky-star--bright::after {
+  content: "";
+  position: absolute;
+  inset: -3px 0;
+  background: #c2e8f559;
+  z-index: -1;
+}
+.sky-star--bright::after { inset: 0 -3px; }
+@keyframes star-breathe {
+  0%, 100% { opacity: var(--brightness); }
+  50% { opacity: .4; }
+}
+/* A short pass followed by a long quiet interval. */
+.sky-meteor {
+  position: absolute;
+  top: 8%;
+  left: 58%;
+  width: 150px;
+  height: 1px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, #b8eaff 85%, #fff);
+  transform: rotate(138deg);
+  animation: meteor-pass 27s linear 7s infinite;
+}
+.sky-meteor:last-child {
+  top: 38%;
+  left: 92%;
+  width: 110px;
+  animation-duration: 41s;
+  animation-delay: 19s;
+}
+@keyframes meteor-pass {
+  0% { opacity: 0; transform: translate(0, 0) rotate(138deg); }
+  1% { opacity: .65; }
+  4% { opacity: 0; transform: translate(-340px, 306px) rotate(138deg); }
+  100% { opacity: 0; transform: translate(-340px, 306px) rotate(138deg); }
+}
+.night-sky.is-paused * { animation-play-state: paused; }
 
-.artist-intro {
-  background: linear-gradient(
-    100deg,
-    rgba(255, 255, 255, 0.34),
-    rgba(208, 239, 237, 0.2),
-    rgba(255, 255, 255, 0.28)
-  );
+/* Glass, cool edges and points of light replace broad neon halos. */
+.site-header, .site-header--overlay.is-scrolled {
+  background: rgba(8, 15, 29, .72);
+  border-bottom-color: var(--line);
+  box-shadow: 0 1px 0 #e0f4ff08;
+}
+.site-header--overlay:not(.is-scrolled) { background: transparent; }
+.glass-panel {
+  border-top: 1px solid #c4f4ff80;
+  background: linear-gradient(120deg, #0c1c31bd, #101d32a6);
+  box-shadow: inset 0 1px #efffff14, 0 24px 60px #02071130;
+}
+.artist-intro { background: linear-gradient(110deg, #162d3c66, #151d3266, #22304438); }
+.anniversary-promo { background: linear-gradient(110deg, #17344466, #26213a42); }
+.social-card, .contact-email, .wechat-card { background-color: #0c192caa; }
+.navlinks > a:is(:hover, :focus-visible, [aria-current="page"]) {
+  color: #d5f8ff;
+  text-shadow: none;
+}
+.navlinks > a::before {
+  inset: auto 8% -3px;
+  width: auto;
+  height: 2px;
+  background: #c8f5ff;
+  clip-path: none;
+  box-shadow: 0 0 7px #a8eaffb3, 0 0 15px #a8eaff4d;
+  transform: none;
+}
+.glass-panel .hero-footer a {
+  background: linear-gradient(115deg, #9ee6e5, #d0f2f6);
+  box-shadow: inset 0 1px #fff9, 0 0 16px #a4e6ff12;
+}
+.glass-panel .hero-footer a:is(:hover, :focus-visible) {
+  background: linear-gradient(115deg, #b7f0ed, #e2faff);
+  box-shadow: inset 0 1px #fff, 0 0 20px #a4e6ff2b;
+}
+.text-link, .social-card, .contact-email, .anniversary-promo { position: relative; }
+:is(.text-link, .social-card, .contact-email, .anniversary-promo)::after {
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+  background:
+    linear-gradient(transparent, #eaffff, transparent) center / 1px 100% no-repeat,
+    linear-gradient(90deg, transparent, #eaffff, transparent) center / 100% 1px no-repeat;
+  opacity: 0;
+  transform: scale(.5);
+  transition: opacity 350ms ease, transform 450ms ease;
+}
+:is(.text-link, .social-card, .contact-email, .anniversary-promo):focus-visible::after {
+  opacity: .9;
+  transform: scale(1);
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(.text-link, .social-card:not(.qq-card), .contact-email, .anniversary-promo):hover::after {
+    opacity: .9;
+    transform: scale(1);
+  }
+  :is(.social-card:not(.qq-card), .contact-email, .anniversary-promo):hover {
+    border-color: #b2e6ed80;
+    background-color: #19304370;
+    box-shadow: inset 0 1px #d9faff16;
+  }
+}
+/* Frosted controls stay readable over the sky, with a solid fallback. */
+.text-link,
+.anniversary-music-toggle,
+.series-sheet .series-book-close,
+.language-picker :is(select, .language-trigger) {
+  background: linear-gradient(135deg, #32495b70, #18293dd9), #102035;
+  border-color: #b6ddeb4d;
+  color: var(--ink);
+  box-shadow: inset 0 1px #f0faff21, inset 0 -1px #0003, 0 4px 14px #02081126;
+  transition: background-color 240ms ease, border-color 240ms ease, color 240ms ease;
+}
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .text-link,
+  .anniversary-music-toggle,
+  .series-sheet .series-book-close,
+  .language-picker :is(select, .language-trigger) {
+    background: linear-gradient(135deg, #b6d9ef12, #15283b38);
+    backdrop-filter: blur(18px) saturate(115%);
+    -webkit-backdrop-filter: blur(18px) saturate(115%);
+  }
+}
+.text-link:is(:hover, :focus-visible),
+.anniversary-music-toggle:is(:hover, :focus-visible, [data-state="playing"]),
+.series-sheet .series-book-close:is(:hover, :focus-visible),
+.language-picker :is(select, .language-trigger):is(:hover, :focus-visible) {
+  border-color: #c1edf5b3;
+  color: #edfcff;
+  background-color: #91b7ce18;
+}
+/* Orbit + musical note: keep the Miku waveform on the cover itself. */
+.eyebrow:not(.eyebrow--light)::before {
+  flex-basis: 40px;
+  width: 40px;
+  height: 24px;
+  background: var(--accent);
+  -webkit-mask: url("images/orbital-note.svg") center / contain no-repeat;
+  mask: url("images/orbital-note.svg") center / contain no-repeat;
+  animation: none;
+}
+.anniversary-emblem::before, .anniversary-emblem::after {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  background: var(--anniversary-mint);
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+}
+.anniversary-emblem::after { background: var(--anniversary-pink); }
+.series-path::after {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--track-color), transparent);
+  opacity: .25;
+  transform: none;
+  transition: opacity 350ms ease;
+}
+.series-path:is(:hover, :focus-visible, [aria-expanded="true"])::after {
+  opacity: .9;
+  transform: none;
+}
+/* Shared star-map details connect the pages without covering the artwork. */
+:root {
+  --starlight-edge: #b9e8f55c;
+  --starlight-halo: 0 0 22px #91dcff14;
+}
+.page-intro { isolation: isolate; }
+.page-intro::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 40px 0 auto auto;
+  width: min(48%, 520px);
+  height: clamp(260px, 32vw, 440px);
+  background: url("images/orbital-chart.svg") right center / contain no-repeat;
+  opacity: .7;
+  pointer-events: none;
+}
+.page-intro::after {
+  width: min(260px, 65%);
+  height: 1px;
+  background: linear-gradient(90deg, #ecfcff, #9adfe8 18%, #9adfe800);
+  box-shadow: 0 0 8px #c3f3ff6b;
+}
+.page-intro h1, .section-heading h2, .artist-story > h2 {
+  text-shadow: 0 0 30px #b6e8ff1a;
+}
+.eyebrow:not(.eyebrow--light)::before {
+  filter: drop-shadow(0 0 4px #9ceaff66);
+}
+.detail, .footer { position: relative; }
+.detail::after, .footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 11px;
+  background:
+    linear-gradient(#bdefff00, #ebfcff, #bdefff00) 18% center / 1px 11px no-repeat,
+    linear-gradient(90deg, #bdefff00, #ebfcff, #bdefff00) 18% center / 11px 1px no-repeat,
+    linear-gradient(90deg, transparent, #a8e6f866 18%, #a8e6f819 58%, transparent) center / 100% 1px no-repeat;
+  pointer-events: none;
+}
+.footer::before { top: -6px; bottom: auto; }
+.detail-image, .work-card .thumb {
+  position: relative;
+  outline: 1px solid #b2e7ef30;
+  outline-offset: 5px;
+  box-shadow: 0 0 24px #7ecbff0c;
+  transition: outline-color 350ms ease, box-shadow 350ms ease;
+}
+.detail-image::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: -6px;
+  background:
+    linear-gradient(#e3faff, #e3faff) left top / 24px 1px no-repeat,
+    linear-gradient(#e3faff, #e3faff) left top / 1px 24px no-repeat,
+    linear-gradient(#94e4e5, #94e4e5) right bottom / 24px 1px no-repeat,
+    linear-gradient(#94e4e5, #94e4e5) right bottom / 1px 24px no-repeat;
+  opacity: .65;
+  filter: drop-shadow(0 0 3px #c1eeff55);
+  pointer-events: none;
+  transition: opacity 350ms ease;
+}
+.detail-image:focus-within, .work-card:focus-visible .thumb {
+  outline-color: var(--starlight-edge);
+  box-shadow: var(--starlight-halo);
+}
+.work-card h3 { transition: color 300ms ease, text-shadow 300ms ease; }
+.card-meta {
+  padding-top: 12px;
+  border-top: 1px solid #a7dfea26;
+  color: #b9ccdb;
+}
+.detail dl, .facts .fact {
+  border-top-color: var(--starlight-edge);
+  background: linear-gradient(115deg, #9adbea0b, transparent 75%);
+  box-shadow: 0 -5px 16px -13px #bdefff;
+}
+.detail dl dt, .fact > span { color: #b7d9e6; }
+.detail dl { padding: 24px; gap: 24px; }
+.facts .fact { padding: 20px 24px; }
+.detail-image { outline-offset: 10px; }
+.detail-image::after { inset: -11px; }
+.anniversary-work-badge, .social-milestone {
+  border-color: #b5eced70;
+  background: linear-gradient(110deg, #6191a42e, #53648a24);
+  box-shadow: inset 0 1px #d6f9ff20, 0 0 14px #8bdef512;
+}
+.social-milestone svg { filter: drop-shadow(0 0 3px #baf5ff80); }
+/* A compact commemorative mark, separate from the illustration's series number. */
+.anniversary-work-badge {
+  gap: 0;
+  padding: 0;
+  border: 1px solid #b8e8ef55;
+  border-left: 0;
+  background: linear-gradient(110deg, #a8e3ef10, #7b8fc40d);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.anniversary-work-badge > span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 10px 14px;
+  border-left: 2px solid #c5f7ff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: #e7fbff;
+}
+.anniversary-work-badge em { font-size: 10px; font-style: normal; color: var(--accent); }
+.anniversary-work-badge b {
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  padding: 0 13px;
+  border-left: 1px solid #b8e8ef33;
+  color: #c5dbe7;
+  font-size: 12px;
+}
+.anniversary-work-label { margin: 0 0 24px; gap: 10px; }
+.card-meta { justify-content: flex-end; }
+.variant .expression-switch {
+  background: #11253bd9;
+  border-color: var(--starlight-edge);
+  box-shadow: inset 0 1px #e2faff18;
+}
+.expression-switch::before { box-shadow: 0 0 12px #9de6ee38; }
+.series-book-cover {
+  background:
+    url("images/orbital-chart.svg") right center / auto 150% no-repeat,
+    linear-gradient(110deg, color-mix(in srgb, var(--track-color) 14%, #101c30), #0b1425);
+}
+.series-book-cover::before {
+  border-inline-color: #b6e8f54d;
+  box-shadow: -3px 0 12px #b4e8ff12;
+}
+.series-cover-label { text-shadow: 0 0 12px #adebff4d; }
+.series-paths .series-path-arrow {
+  background: #152a40cc;
+  border-color: var(--starlight-edge);
+  box-shadow: inset 0 1px #e1faff1a;
+}
+/* One editorial profile card: portrait and introduction, then a compact fact strip. */
+.about-page-grid {
+  grid-template-columns: clamp(170px, 19vw, 240px) minmax(0, 1fr);
+  gap: 32px clamp(32px, 5vw, 68px);
+  align-items: center;
+  margin: clamp(40px, 6vw, 80px) 0 0;
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid #b3e7ed30;
+  border-top-color: #c7f1ff73;
+  background: linear-gradient(125deg, #95d8e20c, #1a284126);
+  box-shadow: inset 0 1px #e6fbff0c, 0 14px 45px #02081124;
+}
+.about-page-grid .artist-copy { display: contents; }
+.about-page-grid .artist-portrait { width: 100%; margin: 0; grid-column: 1; grid-row: 1; }
+.about-page-grid .artist-copy > div { grid-column: 2; grid-row: 1; }
+.about-page-grid .bio { font-size: clamp(17px, 1.4vw, 20px); line-height: 1.9; margin: 0 0 20px; }
+.about-page-grid .bio:last-child { margin-bottom: 0; color: #b8cbd9; }
+.about-page-grid .facts {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid #b3e7ed30;
+  padding-top: 24px;
+}
+.about-page-grid .fact { padding: 4px 24px; border: 0; background: none; box-shadow: none; }
+.about-page-grid .fact:first-child { padding-left: 0; }
+.about-page-grid .fact + .fact { border-left: 1px solid #b3e7ed30; }
+.about-page-grid .fact > span { font-size: 12px; letter-spacing: .08em; }
+.about-page-grid .fact strong { font-size: 16px; margin-top: 10px; line-height: 1.7; }
+.about-page-grid .fact small { font-size: 12px; }
+@media (max-width: 760px) {
+  .about-page-grid { grid-template-columns: 1fr; gap: 26px; }
+  .about-page-grid .artist-portrait { width: 120px; }
+  .about-page-grid .artist-copy > div { grid-column: 1; grid-row: 2; }
+  .about-page-grid .facts { grid-template-columns: 1fr; padding-top: 8px; }
+  .about-page-grid .fact, .about-page-grid .fact:first-child {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px 0;
+  }
+  .about-page-grid .fact + .fact { border-left: 0; border-top: 1px solid #b3e7ed20; }
+  .about-page-grid .fact strong { margin: 0; font-size: 15px; }
+}
+.artist-timeline li {
+  position: relative;
+  padding-left: 28px;
+  border-top: 0;
+  border-left: 1px solid #9cdfe64d;
+}
+.artist-timeline li::before {
+  content: "";
+  position: absolute;
+  top: 38px;
+  left: -5px;
+  width: 9px;
+  height: 9px;
+  background: #dafaff;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+.artist-timeline time { text-shadow: 0 0 15px #9fe6ef40; }
+/* A horizontal constellation with one readable story beneath the selected star. */
+.constellation-viewport { overflow-x: auto; padding-top: 28px; scrollbar-width: thin; scrollbar-color: #6babb777 transparent; }
+.constellation-map { position: relative; min-width: 760px; height: 230px; }
+.constellation-map > svg { position: absolute; inset: 0; width: 100%; height: 230px; overflow: visible; pointer-events: none; }
+.constellation-map path { fill: none; stroke: #b4e6f059; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.constellation-node {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: absolute;
+  left: var(--node-x);
+  top: var(--node-y);
+  width: 18%;
+  min-height: 115px;
+  padding: 0;
+  transform: translateX(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+}
+.constellation-node::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: calc(50% - 5px);
+  top: -5px;
+  background: #c6eaf4;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  transition: transform 300ms ease, background-color 300ms ease;
+}
+.constellation-node::after {
+  content: "";
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: -14px;
+  left: calc(50% - 14px);
+  border: 1px solid #c2f4ff00;
+  border-radius: 50%;
+  box-shadow: 0 0 22px #bceeff00;
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+.constellation-year { position: absolute; bottom: calc(100% + 21px); left: 0; width: 100%; font-size: 19px; letter-spacing: .04em; color: #bce8ed; }
+.constellation-label { display: block; padding: 26px 7px 10px; line-height: 1.6; font-size: 14px; }
+.constellation-node[aria-selected="true"] { color: #e7faff; }
+.constellation-node[aria-selected="true"]::before { transform: scale(1.5); background: #fff; }
+.constellation-node:is(:hover, :focus-visible, [aria-selected="true"])::after { border-color: #c2f4ff80; box-shadow: 0 0 22px #bceeff33; }
+.constellation-node:focus-visible { outline: 1px dashed #a7e2ee; outline-offset: 6px; }
+.artist-timeline.constellation-panels li {
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid #a8dce42e;
+  border-top-color: #c1efff73;
+  background: linear-gradient(120deg, #a7dce510, #10213444);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: constellation-reveal 360ms ease both;
+}
+.artist-timeline.constellation-panels li[hidden] { display: none; }
+.artist-timeline.constellation-panels li::before { display: none; }
+@keyframes constellation-reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.story-closing {
+  border-left-color: #c2f5ff;
+  background: url("images/orbital-chart.svg") right top / 290px auto no-repeat, #102237a6;
+  box-shadow: -9px 0 25px -20px #b9efff, inset 0 1px #b9efff1c;
+}
+.miku-signature b { color: #d4f8ff; text-shadow: 0 0 13px #a6eaff66; }
+@media (hover: hover) and (pointer: fine) {
+  .detail-image:hover, .work-card:hover .thumb {
+    outline-color: #b5edff85;
+    box-shadow: 0 0 28px #91dcff22;
+  }
+  .detail-image:hover::after { opacity: 1; }
+  .work-card:hover h3 {
+    color: #d5f8ff;
+    text-shadow: 0 0 18px #aee9ff3d;
+  }
+}
+@media (max-width: 760px) {
+  .detail dl { padding: 20px; gap: 22px 16px; }
+  .detail-image { outline-offset: 5px; }
+  .detail-image::after { inset: -6px; }
+  .constellation-viewport { margin-inline: -4px; }
+  .page-intro::before { width: 62%; opacity: .4; }
+  .sky-star:nth-child(n + 61) { display: none; }
+  .sky-meteor { width: 85px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky-star { animation: none; }
+  .sky-meteor { display: none; }
+  :is(.text-link, .social-card, .contact-email, .anniversary-promo)::after { transition: none; }
+  .navlinks > a::before, .series-path::after, .text-link,
+  .anniversary-music-toggle, .series-sheet .series-book-close,
+  .language-picker :is(select, .language-trigger) { transition: none; }
 }

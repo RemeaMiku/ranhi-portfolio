@@ -46,21 +46,13 @@ console.log("PASS: SP01 and finished song 01 artwork, responsive assets, exact t
 const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const archive = fs.readFileSync(path.join(root, "works/index.html"), "utf8");
 const latest = [...home.matchAll(/class="work-card[^\"]*" href="works\/#([^\"]+)"/g)].map(match => match[1]);
-assert.deepEqual(latest, ["senbonzakura", "meeting-you-is-the-greatest-gift", "rain-and-hydrangeas", "winter-midnight"]);
-for (const id of latest.slice(0, 2)) {
-  const entry = archive.split('id="' + id + '"')[1].split("</article>")[0];
-  assert.ok(entry.includes("anniversary-work-badge"));
-  if (id === "senbonzakura") {
-    assert.ok(entry.includes('class="notes notes--paragraphs"'));
-    assert.ok(entry.includes('<dd>2026.11</dd>'));
-    assert.ok(!entry.includes('2026.11.11'));
-  } else {
-    assert.ok(entry.includes('class="notes notes--paragraphs"'));
-    for (const locale of ["en", "ja", "zh-Hans", "zh-Hant"]) {
-      const dictionary = JSON.parse(fs.readFileSync(path.join(root, "locales", locale + ".json")));
-      assert.equal(dictionary.artworkNotes[id], dictionary.ui.sp01Note1 + "\n\n" + dictionary.ui.sp01Note2);
-      assert.ok(dictionary.artworkNotes[id].includes("あさひクロイ"));
-    }
-    assert.ok(entry.includes('<dd>2026.10</dd>'));
-  }
-}
+assert.deepEqual(latest, ["senbonzakura", "rain-and-hydrangeas", "winter-midnight", "moonlight-and-osmanthus"]);
+assert.ok(!home.includes("meeting-you-is-the-greatest-gift"));
+assert.ok(!archive.includes("meeting-you-is-the-greatest-gift"));
+assert.ok(html.includes("sp01-meeting-you-is-the-greatest-gift.webp"), "SP01 remains in the special collection");
+const entry = archive.split('id="senbonzakura"')[1].split("</article>")[0];
+assert.ok(entry.includes("anniversary-work-badge"));
+assert.ok(entry.includes("M&amp;R <em>10TH</em>"));
+assert.ok(entry.includes('class="notes notes--paragraphs"'));
+assert.ok(entry.includes('<dd>2026.11</dd>'));
+assert.ok(!entry.includes('2026.11.11'));

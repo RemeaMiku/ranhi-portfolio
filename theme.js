@@ -1,13 +1,6 @@
 (() => {
-  const key = "ranhi-theme";
-  let saved = "auto";
-  try {
-    const stored = localStorage.getItem(key);
-    if (["auto", "dark", "light"].includes(stored)) saved = stored;
-  } catch {
-    /* Themes still work when storage is unavailable. */
-  }
-  document.documentElement.dataset.theme = saved;
+  // A single dark palette, independent of system or older saved preferences.
+  document.documentElement.dataset.theme = "dark";
 
   const introKey = "ranhi-home-intro-seen";
   const homePath = new URL("./", document.currentScript.src).pathname;
@@ -24,23 +17,6 @@
       document.documentElement.classList.add("home-intro-pending");
   } catch {
     /* Storage can be unavailable in strict privacy modes. */
-  }
-
-  const labels = { auto: "AUTO", dark: "DARK", light: "LIGHT" };
-  const order = ["auto", "dark", "light"];
-
-  function updateButton(theme) {
-    if (window.RanhiI18n) {
-      window.RanhiI18n.updateTheme(theme);
-      return;
-    }
-    const button = document.querySelector("[data-theme-toggle]");
-    if (!button) return;
-    button.textContent = `THEME / ${labels[theme]}`;
-    button.setAttribute(
-      "aria-label",
-      `Colour theme: ${labels[theme]}. Activate to change.`,
-    );
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -191,21 +167,6 @@
         { passive: true },
       );
     }
-    let theme = document.documentElement.dataset.theme || "auto";
-    updateButton(theme);
-    document
-      .querySelector("[data-theme-toggle]")
-      ?.addEventListener("click", () => {
-        theme = order[(order.indexOf(theme) + 1) % order.length];
-        document.documentElement.dataset.theme = theme;
-        try {
-          localStorage.setItem(key, theme);
-        } catch {
-          /* Keep the selection for this page. */
-        }
-        updateButton(theme);
-      });
-
     const revealTitles = document.querySelectorAll(
       ".section h2, .page-intro h1, .detail-info h2",
     );

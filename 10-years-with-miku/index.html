@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="canonical" href="https://ranhi.net/10-years-with-miku/" />
@@ -8,19 +8,21 @@
     <title>RANHI — 10 Years with Miku</title>
     <link rel="icon" type="image/png" href="../images/favicon.png" />
     <link rel="apple-touch-icon" href="../images/favicon.png" />
-    <script src="../theme.js?v=20261007-1"></script>
+    <script src="../theme.js?v=20261123-1"></script>
     <style>html[data-i18n-state="loading"] body { visibility: hidden; }</style>
-    <script src="../i18n.js?v=20261113-1"></script>
+    <script src="../i18n.js?v=20261123-1"></script>
     <script src="../anniversary-music.js?v=20261007-1" defer></script>
     <script src="../anniversary-books.js?v=20261112-5" defer></script>
     <script src="../logo-reveal.js?v=20261005-2" defer></script>
     <link rel="stylesheet" href="../style.css?v=20261112-5" />
-    <link rel="stylesheet" href="../atmosphere.css" />
-    <link rel="stylesheet" href="../theme.css?v=20261112-2" />
-    <link rel="stylesheet" href="../i18n.css?v=20261004-4" />
+    <link rel="stylesheet" href="../theme.css?v=20261124-1" />
+    <link rel="stylesheet" href="../i18n.css?v=20261124-1" />
     <link rel="stylesheet" href="../anniversary.css?v=20261112-11" />
     <link rel="stylesheet" href="../image-viewer.css?v=20261112-1" />
     <script src="../image-viewer.js?v=20261112-1" defer></script>
+    <link rel="stylesheet" href="../atmosphere.css?v=20261124-3" />
+    <script src="../stars.js?v=20261123-2" defer></script>
+    <script src="../language-menu.js?v=20261124-1" defer></script>
   </head>
   <body class="anniversary-page" data-page-title="anniversaryTitle" data-page-description="anniversaryDescription">
     <header class="site-header">
@@ -29,8 +31,8 @@
         <nav class="navlinks" aria-label="Primary">
           <a href="../" data-i18n="home">HOME</a><a href="../works/" data-i18n="works">WORKS</a>
           <a href="../about/" data-i18n="about">ABOUT</a><a href="../contact/" data-i18n="contact">CONTACT</a>
-          <button class="theme-toggle" type="button" data-theme-toggle>THEME / AUTO</button>
-          <label class="language-picker">
+
+          <div class="language-picker">
             <svg class="language-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
               <circle cx="12" cy="12" r="9"></circle>
               <ellipse cx="12" cy="12" rx="4" ry="9"></ellipse>
@@ -42,7 +44,7 @@
               <option value="en" lang="en">English</option>
               <option value="ja" lang="ja">日本語</option>
             </select>
-          </label>
+          </div>
         </nav>
       </div>
     </header>
@@ -90,7 +92,6 @@
       <section class="section anniversary-series container" id="series" aria-labelledby="series-title">
         <div class="section-head">
           <div>
-            <p class="eyebrow" lang="en">01 / ILLUSTRATIONS</p>
             <h2 id="series-title" data-i18n="anniversarySeries">The illustration series</h2>
           </div>
         </div>
@@ -107,7 +108,6 @@
         <section class="series-track series-track--songs series-book-panel" id="song-series" aria-labelledby="song-title">
           <div class="series-sheet">
           <header class="series-track-heading">
-            <p class="eyebrow" lang="en">01— / SONG MEMORIES</p>
             <button class="series-book-close" type="button" data-close-book="song-series" hidden><span data-i18n="seriesBookClose">Close sketchbook</span><svg class="book-motion-icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M14 14c-3-2-6-3-10-2v11c4-1 7 0 10 2 3-2 6-3 10-2V12c-4-1-7 0-10 2Zm0 0v11M7 8c3-5 11-5 14-1m0-4v4h-4"/></svg></button>
             <h3 id="song-title" data-i18n="seriesSongTitle">Melodies I remember</h3>
             <p data-i18n="seriesSongLead">Classics never grow old. These songs have left a lasting impression on me over the past ten years.</p>
@@ -135,7 +135,7 @@
                 <img src="../images/01-senbonzakura.webp?v=20261112-2" srcset="../images/01-senbonzakura-1280.webp?v=20261112-2 1280w, ../images/01-senbonzakura.webp?v=20261112-2 2560w" sizes="(max-width: 760px) 80vw, 48vw" width="2560" height="2560" loading="lazy" decoding="async" alt="Hatsune Miku in her Senbonzakura outfit, surrounded by cherry blossoms and pinwheels" />
               </a>
             </div>
-              <p class="record-catalog" lang="en"><span>RANHI / 10 YEARS WITH MIKU</span><span>01</span></p>
+              <p class="record-catalog" lang="en"><span>M&amp;R 10TH</span><span>01</span></p>
             </div>
             <figcaption class="series-album-copy">
               <div class="song-edition-heading">
@@ -171,7 +171,7 @@
                   <img src="../images/02-decorator-preview.svg" width="1200" height="1200" loading="lazy" decoding="async" alt="DECORATOR — geometric teaser cover for illustration 02" />
                 </a>
               </div>
-              <p class="record-catalog" lang="en"><span>RANHI / 10 YEARS WITH MIKU</span><span>02</span></p>
+              <p class="record-catalog" lang="en"><span>M&amp;R 10TH</span><span>02</span></p>
             </div>
             <figcaption class="series-album-copy">
               <div class="song-edition-heading">
@@ -205,7 +205,6 @@
         <section class="series-track series-track--sp series-book-panel" id="special-series" aria-labelledby="sp-title">
           <div class="series-sheet">
           <header class="series-track-heading">
-            <p class="eyebrow" lang="en">SP / PERSONAL STORIES</p>
             <button class="series-book-close" type="button" data-close-book="special-series" hidden><span data-i18n="seriesBookClose">Close sketchbook</span><svg class="book-motion-icon" viewBox="0 0 28 28" aria-hidden="true" focusable="false"><path d="M14 14c-3-2-6-3-10-2v11c4-1 7 0 10 2 3-2 6-3 10-2V12c-4-1-7 0-10 2Zm0 0v11M7 8c3-5 11-5 14-1m0-4v4h-4"/></svg></button>
             <h3 id="sp-title" data-i18n="seriesSpTitle">Miku and me</h3>
             <p data-i18n="seriesSpLead">Capturing my time with Miku through illustration.</p>
@@ -216,7 +215,7 @@
               <a class="series-art-link" href="../images/sp01-meeting-you-is-the-greatest-gift.webp" target="_blank" rel="noopener noreferrer">
                 <img src="../images/sp01-meeting-you-is-the-greatest-gift.webp" srcset="../images/sp01-meeting-you-is-the-greatest-gift-1280.webp 1280w, ../images/sp01-meeting-you-is-the-greatest-gift.webp 2560w" sizes="(max-width: 760px) 92vw, (max-width: 1400px) 94vw, 1320px" width="2560" height="1785" loading="lazy" alt="SP01 — Hatsune Miku reaches out from a drawing on a monitor to meet RANHI's hand." />
               </a>
-              <figcaption><span lang="en">SP01 / 10 YEARS WITH MIKU</span><a href="../images/sp01-meeting-you-is-the-greatest-gift.webp" target="_blank" rel="noopener noreferrer" data-i18n="seriesViewImage">Open image ↗</a></figcaption>
+              <figcaption><span lang="en">SP01 / M&amp;R 10TH</span><a href="../images/sp01-meeting-you-is-the-greatest-gift.webp" target="_blank" rel="noopener noreferrer" data-i18n="seriesViewImage">Open image ↗</a></figcaption>
             </figure>
             <div class="series-art-copy">
               <div><p class="eyebrow" data-i18n="sp01Occasion">24th birthday · Ten years with Miku</p><h4 id="sp01-title" data-i18n="sp01Title">Meeting You Is the Greatest Gift</h4></div>
@@ -239,7 +238,7 @@
     <footer class="footer container">
       <div class="footer-meta">
         <span lang="en">RANHI / ILLUSTRATION PORTFOLIO</span>
-        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-11-13">November 13, 2026</time></span>
+        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-11-24">November 24, 2026</time></span>
       </div>
       <div class="footer-signoff">
         <span>© 2026 RANHI</span>

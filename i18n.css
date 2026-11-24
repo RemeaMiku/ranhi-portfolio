@@ -19,6 +19,7 @@ html:is(:lang(zh), :lang(ja)) .last-updated {
 
 /* Language controls share the site's sharp-edged, theme-aware design. */
 .language-picker {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -34,7 +35,56 @@ html:is(:lang(zh), :lang(ja)) .last-updated {
   stroke: currentColor;
   stroke-width: 1.5;
 }
-.language-picker select {
+.language-trigger { display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; }
+.language-trigger > span { white-space: nowrap; }
+.language-trigger > svg { width: 14px; height: 14px; flex: 0 0 14px; fill: none; stroke: currentColor; stroke-width: 1.5; transition: transform 220ms ease; }
+.is-open .language-trigger > svg { transform: rotate(180deg); }
+.language-picker .language-trigger:active { transform: none; }
+.language-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 180px;
+  padding: 6px;
+  border: 1px solid #b6ddeb55;
+  background: #13253be6;
+  box-shadow: inset 0 1px #effaff24, 0 12px 32px #02061066;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 200ms ease, transform 220ms ease, visibility 0s linear 220ms;
+}
+.is-open .language-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+@supports (backdrop-filter: blur(18px)) {
+  .language-menu { background: #14283bd1; backdrop-filter: blur(18px) saturate(115%); -webkit-backdrop-filter: blur(18px) saturate(115%); }
+}
+.language-option {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 11px 30px 11px 12px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.language-option:is(:hover, :focus-visible) { outline: none; background: #b3e8ff18; color: #e6fcff; }
+.language-option[aria-selected="true"] { color: #b2f0f2; background: #a0dce40d; }
+.language-option[aria-selected="true"]::after { content: ""; position: absolute; right: 12px; top: 50%; width: 5px; height: 5px; margin-top: -2px; background: #c4faff; box-shadow: 0 0 6px #a6eaff80; }
+.language-picker :is(select, .language-trigger) {
   min-width: 0;
   max-width: 100%;
   min-height: 36px;
@@ -50,18 +100,17 @@ html:is(:lang(zh), :lang(ja)) .last-updated {
   color: var(--ink);
   background: var(--paper);
 }
-.language-picker select:focus-visible {
+.language-picker :is(select, .language-trigger):focus-visible {
   outline: 2px solid var(--accent, var(--aqua));
   outline-offset: 3px;
 }
-.language-picker select:hover {
+.language-picker :is(select, .language-trigger):hover {
   border-color: var(--accent, var(--aqua));
 }
 .navlinks {
   gap: clamp(12px, 2vw, 26px);
 }
-.navlinks > a,
-.theme-toggle {
+.navlinks > a {
   white-space: nowrap;
 }
 html:lang(zh) body {
@@ -95,11 +144,9 @@ html:not(:lang(en)) .hero-subtitle {
     gap: 14px;
     letter-spacing: 0.04em;
   }
-  .theme-toggle {
-    padding-left: 12px;
-  }
+
 }
-/* Two rows keep all four page links and both controls accessible on phones. */
+/* Two rows keep all four page links and the language selector accessible on phones. */
 @media (max-width: 800px) {
   .detail {
     scroll-margin-top: 108px;
@@ -129,20 +176,14 @@ html:not(:lang(en)) .hero-subtitle {
     font-size: 10px;
     letter-spacing: 0.02em;
   }
-  .navlinks .theme-toggle {
-    grid-column: 4 / 8;
-    grid-row: 1;
-    padding: 6px 0;
-    border-left: 0;
-    font-size: 9px;
-    letter-spacing: 0;
-  }
+
   .language-picker {
     grid-column: 8 / 13;
     grid-row: 1;
     justify-content: flex-end;
   }
-  .language-picker select {
+  .language-menu { top: calc(100% + 52px); }
+  .language-picker :is(select, .language-trigger) {
     width: calc(100% - 26px);
     font-size: 11px;
   }
@@ -150,16 +191,14 @@ html:not(:lang(en)) .hero-subtitle {
 
 /* Dense CJK glyphs need larger controls, not the Latin display tracking. */
 html:is(:lang(zh), :lang(ja)) .navlinks > a,
-html:is(:lang(zh), :lang(ja)) .navlinks .theme-toggle,
-html:is(:lang(zh), :lang(ja)) .language-picker select,
+
+html:is(:lang(zh), :lang(ja)) .language-picker :is(select, .language-trigger),
 html:is(:lang(zh), :lang(ja)) .variant > span {
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: 0.02em;
 }
-html:is(:lang(zh), :lang(ja)) .theme-toggle {
-  font-family: inherit;
-}
+
 html:is(:lang(zh), :lang(ja)) .text-link,
 html:is(:lang(zh), :lang(ja)) .hero-footer a {
   font-size: 16px;
@@ -167,11 +206,11 @@ html:is(:lang(zh), :lang(ja)) .hero-footer a {
   letter-spacing: 0.03em;
 }
 @media (max-width: 800px) {
-  html:is(:lang(zh), :lang(ja)) .navlinks .theme-toggle,
-  html:is(:lang(zh), :lang(ja)) .language-picker select {
+
+  html:is(:lang(zh), :lang(ja)) .language-picker :is(select, .language-trigger) {
     letter-spacing: 0;
   }
-  html:is(:lang(zh), :lang(ja)) .language-picker select {
+  html:is(:lang(zh), :lang(ja)) .language-picker :is(select, .language-trigger) {
     padding-inline: 4px;
   }
   /* Give the longer Japanese labels more room without shrinking the type. */

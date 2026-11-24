@@ -1,13 +1,3 @@
-:root,
-[data-theme="light"] {
-  color-scheme: light;
-  --ink: #182126;
-  --paper: #f3f7f7;
-  --line: rgba(24, 33, 38, 0.18);
-  --muted: #637076;
-  --surface: rgba(244, 248, 248, 0.9);
-  --image-surface: #e4e9e7;
-}
 html {
   scrollbar-gutter: stable;
   scrollbar-width: thin;
@@ -31,18 +21,8 @@ html::-webkit-scrollbar-thumb:hover {
 html::-webkit-scrollbar-corner {
   background: var(--paper);
 }
-@media (prefers-color-scheme: dark) {
-  :root[data-theme="auto"] {
-    color-scheme: dark;
-    --ink: #edf5f3;
-    --paper: #101719;
-    --line: rgba(229, 244, 241, 0.18);
-    --muted: #a1b1b0;
-    --surface: rgba(16, 23, 25, 0.88);
-    --image-surface: #1b292b;
-  }
-}
-[data-theme="dark"] {
+
+:root {
   color-scheme: dark;
   --ink: #edf5f3;
   --paper: #101719;
@@ -83,20 +63,7 @@ body {
 .notes p {
   color: var(--ink);
 }
-.theme-toggle {
-  border: 0;
-  border-left: 1px solid var(--line);
-  background: transparent;
-  color: inherit;
-  padding: 2px 0 2px 20px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  cursor: pointer;
-}
-.theme-toggle:hover {
-  color: var(--aqua);
-}
+
 .artist-portrait {
   width: min(190px, 45vw);
   aspect-ratio: 1;
@@ -111,10 +78,7 @@ body {
   gap: clamp(24px, 4vw, 55px);
 }
 @media (max-width: 760px) {
-  .theme-toggle {
-    padding-left: 12px;
-    font-size: 8px;
-  }
+
   .artist-copy {
     display: block;
   }
@@ -134,21 +98,8 @@ body {
 }
 
 /* The homepage header stays above the cover and becomes glass on scroll. */
+
 :root {
-  --paper: #f2f9f8;
-  --surface: rgba(242, 249, 248, 0.92);
-  --ambient-mint: rgba(100, 220, 208, 0.14);
-  --ambient-pink: rgba(219, 167, 211, 0.08);
-  --edge-glow: none;
-  --hero-overlay:
-    linear-gradient(
-      120deg,
-      rgba(53, 204, 196, 0.08),
-      rgba(204, 112, 166, 0.045)
-    ),
-    linear-gradient(rgba(7, 25, 34, 0.045), rgba(7, 25, 34, 0.1));
-}
-[data-theme="dark"] {
   --paper: #0b141c;
   --surface: rgba(11, 20, 28, 0.92);
   --image-surface: #13212b;
@@ -159,19 +110,7 @@ body {
     linear-gradient(120deg, rgba(15, 112, 116, 0.17), rgba(82, 38, 91, 0.14)),
     linear-gradient(rgba(3, 10, 18, 0.16), rgba(3, 10, 18, 0.28));
 }
-@media (prefers-color-scheme: dark) {
-  :root[data-theme="auto"] {
-    --paper: #0b141c;
-    --surface: rgba(11, 20, 28, 0.92);
-    --image-surface: #13212b;
-    --ambient-mint: rgba(57, 187, 181, 0.12);
-    --ambient-pink: rgba(126, 108, 174, 0.08);
-    --edge-glow: 0 1px 14px rgba(103, 215, 210, 0.09);
-    --hero-overlay:
-      linear-gradient(120deg, rgba(15, 112, 116, 0.17), rgba(82, 38, 91, 0.14)),
-      linear-gradient(rgba(3, 10, 18, 0.16), rgba(3, 10, 18, 0.28));
-  }
-}
+
 body {
   background:
     radial-gradient(
@@ -271,27 +210,15 @@ html.home-intro-pending body {
 }
 
 /* Miku-inspired accents: mint controls, pink terminals, quiet musical ticks. */
+
 :root {
-  --accent: #087b78;
-  --accent-fill: #087b78;
-  --accent-on: #fff;
-  --pink: #c94f88;
-}
-[data-theme="dark"] {
   --accent: #67d7d2;
   --accent-fill: #67d7d2;
   --accent-on: #102627;
   --pink: #ed91b9;
 }
-@media (prefers-color-scheme: dark) {
-  :root[data-theme="auto"] {
-    --accent: #67d7d2;
-    --accent-fill: #67d7d2;
-    --accent-on: #102627;
-    --pink: #ed91b9;
-  }
-}
-/* One fixed-size link box and one underline for current, hover and keyboard focus. */
+
+/* Stable navigation boxes; the star indicator fades in without stretching. */
 .navlinks > a {
   position: relative;
   display: inline-flex;
@@ -301,7 +228,6 @@ html.home-intro-pending body {
 }
 .navlinks a:hover,
 .text-link,
-.theme-toggle:hover,
 .contact-list a:hover,
 .work-card:hover h3 {
   color: var(--accent);
@@ -445,9 +371,7 @@ button:focus-visible {
     color 0.2s ease,
     border-color 0.2s ease;
 }
-.site-header--overlay .theme-toggle {
-  border-left-color: rgba(255, 255, 255, 0.3);
-}
+
 .site-header--overlay.is-scrolled {
   background: var(--surface);
   background: color-mix(in srgb, var(--paper) 74%, transparent);
@@ -455,9 +379,6 @@ button:focus-visible {
   border-bottom-color: var(--line);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-}
-.site-header--overlay.is-scrolled .theme-toggle {
-  border-left-color: var(--line);
 }
 
 /* Short, interaction-led motion: nothing loops or delays reading. */
@@ -570,7 +491,6 @@ button:focus-visible {
 .hero-footer a,
 .work-card,
 .variant button,
-.theme-toggle,
 .artist-portrait {
   transition:
     transform 0.2s ease,
@@ -615,24 +535,17 @@ button:focus-visible {
 .navlinks > a::before {
   content: "";
   position: absolute;
-  inset: auto 0 0;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.2s ease;
+  opacity: 0;
+  transition: opacity 240ms ease;
 }
 .navlinks > a[aria-current="page"]::before,
-.navlinks > a:focus-visible::before {
-  transform: scaleX(1);
-}
-.variant button:active,
-.theme-toggle:active {
+.navlinks > a:focus-visible::before { opacity: 1; }
+.variant button:active {
   transform: scale(0.95);
 }
 @media (hover: hover) and (pointer: fine) {
   .navlinks a:hover::before {
-    transform: scaleX(1);
+    opacity: 1;
   }
   .text-link:hover {
     background-color: color-mix(in srgb, var(--accent) 8%, transparent);
@@ -687,7 +600,6 @@ button:focus-visible {
   .work-card:hover img,
   .artist-portrait:hover,
   .variant button:active,
-  .theme-toggle:active,
   .text-link > span,
   .contact-list a > span,
   .hero-footer a > span {
