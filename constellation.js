@@ -3,14 +3,17 @@
   const timeline = document.querySelector(".artist-timeline");
   if (!timeline) return;
   const entries = [...timeline.children];
-  const heights = [88, 48, 98, 38, 78];
+  const heights = [88, 48, 98, 38, 78, 44];
+  const positions = entries.map((_, index) => 8 + index * 84 / Math.max(1, entries.length - 1));
   const viewport = document.createElement("div");
   viewport.className = "constellation-viewport";
   const map = document.createElement("div");
   map.className = "constellation-map";
   map.setAttribute("role", "tablist");
   map.setAttribute("aria-labelledby", "story-title");
-  map.innerHTML = '<svg viewBox="0 0 1000 230" preserveAspectRatio="none" aria-hidden="true"><path d="M100 88 300 48 500 98 700 38 900 78" /></svg>';
+  map.style.minWidth = Math.max(760, entries.length * 150) + "px";
+  const points = positions.map((x, i) => `${x * 10} ${heights[i % heights.length]}`).join(" ");
+  map.innerHTML = `<svg viewBox="0 0 1000 230" preserveAspectRatio="none" aria-hidden="true"><path d="M${points}" /></svg>`;
   const tabs = entries.map((entry, index) => {
     const tab = document.createElement("button");
     const heading = entry.querySelector("h3");
@@ -19,11 +22,15 @@
     tab.id = "story-node-" + index;
     tab.setAttribute("role", "tab");
     tab.setAttribute("aria-controls", "story-panel-" + index);
-    tab.style.setProperty("--node-x", (10 + index * 20) + "%");
-    tab.style.setProperty("--node-y", heights[index] + "px");
+    tab.style.setProperty("--node-x", positions[index] + "%");
+    tab.style.setProperty("--node-y", heights[index % heights.length] + "px");
     const date = document.createElement("span");
     date.className = "constellation-year";
-    date.textContent = entry.querySelector("time").textContent;
+    const sourceDate = entry.querySelector("time, .timeline-date");
+    const syncDate = () => { date.textContent = sourceDate.textContent; };
+    syncDate();
+    new MutationObserver(syncDate).observe(sourceDate, { childList: true, subtree: true, characterData: true });
+    tab.style.width = (84 / entries.length) + "%";
     const label = document.createElement("span");
     label.className = "constellation-label";
     const syncLabel = () => { label.textContent = heading.textContent; };
