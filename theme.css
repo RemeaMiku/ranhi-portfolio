@@ -144,9 +144,11 @@ html.home-intro-pending body {
 }
 .home-intro-pending .glass-panel {
   transition:
-    opacity var(--home-intro-duration) ease,
-    transform var(--home-intro-duration) cubic-bezier(0.2, 0.75, 0.22, 1),
-    filter var(--home-intro-duration) ease;
+    clip-path var(--home-intro-duration) cubic-bezier(.22,.72,.22,1),
+    opacity var(--home-intro-duration) ease;
+}
+.home-intro-pending .glass-panel > * {
+  transition: transform var(--home-intro-duration) cubic-bezier(.22,.72,.22,1);
 }
 .home-intro-pending:not(.home-intro-revealing) .site-header--overlay {
   opacity: 0;
@@ -154,8 +156,13 @@ html.home-intro-pending body {
 }
 .home-intro-pending:not(.home-intro-revealing) .glass-panel {
   opacity: 0;
-  transform: translateX(58px) scale(0.98);
-  filter: blur(8px);
+  clip-path: inset(0 0 0 100%);
+}
+.home-intro-pending:not(.home-intro-revealing) .glass-panel > * {
+  transform: translateY(9px);
+}
+.home-intro-pending.home-intro-revealing .glass-panel {
+  clip-path: inset(0);
 }
 .home-intro-pending.home-intro-revealing .site-header--overlay,
 .home-intro-pending.home-intro-revealing .glass-panel {

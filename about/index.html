@@ -10,20 +10,26 @@
     <script src="../theme.js?v=20261123-1"></script>
     <style>html[data-i18n-state="loading"] body { visibility: hidden; }</style>
     <script src="../i18n.js?v=20261125-1"></script>
-    <link rel="stylesheet" href="../style.css?v=20261112-5" />
+    <link rel="stylesheet" href="../style.css?v=20261127-2" />
     <link rel="stylesheet" href="../theme.css?v=20261124-1" />
     <link rel="stylesheet" href="../i18n.css?v=20261125-1" />
     <link rel="stylesheet" href="../image-viewer.css?v=20261112-1" />
     <script src="../image-viewer.js?v=20261112-1" defer></script>
-    <link rel="stylesheet" href="../atmosphere.css?v=20261124-3" />
+    <link rel="stylesheet" href="../atmosphere.css?v=20261127-1" />
     <script src="../stars.js?v=20261123-2" defer></script>
     <script src="../constellation.js?v=20261125-1" defer></script>
     <script src="../language-menu.js?v=20261124-1" defer></script>
+    <link rel="stylesheet" href="../fonts/type.css?v=20261127-1" />
   </head>
   <body data-page-title="about">
     <header class="site-header">
       <div class="container nav">
-        <a class="brand" href="../">RANHI</a>
+        <a class="brand" href="../" aria-label="RANHI home">
+          <svg class="brand-wordmark" viewBox="0 0 124 32" aria-hidden="true" focusable="false">
+            <use href="../images/ranhi-wordmark.svg?v=3#wordmark"></use>
+            <use class="brand-glint" href="../images/ranhi-wordmark.svg?v=3#wordmark"></use>
+          </svg>
+        </a>
         <nav class="navlinks" aria-label="Primary">
           <a href="../" data-i18n="home">HOME</a><a href="../works/" data-i18n="works">WORKS</a
           ><a href="../about/" aria-current="page" data-i18n="about">ABOUT</a
@@ -48,7 +54,12 @@
     <main class="container">
       <section class="page-intro">
         <p class="eyebrow" lang="en">PROFILE</p>
-        <h1>RANHI</h1>
+        <h1 class="profile-name" aria-label="RANHI · 岚曦">
+          <svg class="profile-wordmark" viewBox="0 0 124 32" aria-hidden="true" focusable="false">
+            <use href="../images/ranhi-wordmark.svg?v=3#wordmark"></use>
+          </svg>
+          <span class="profile-seal" lang="zh-Hans" aria-hidden="true">岚曦</span>
+        </h1>
         <p class="page-lead">
           The world is my school; nature and human life are my textbooks.
         </p>
@@ -136,7 +147,7 @@
     <footer class="footer container">
       <div class="footer-meta">
         <span lang="en">RANHI / ILLUSTRATION PORTFOLIO</span>
-        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-11-25">November 25, 2026</time></span>
+        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-11-28">November 28, 2026</time></span>
       </div>
       <div class="footer-signoff">
         <span>© 2026 RANHI</span

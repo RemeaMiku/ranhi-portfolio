@@ -93,10 +93,71 @@ body, body.anniversary-page {
   box-shadow: 0 1px 0 #e0f4ff08;
 }
 .site-header--overlay:not(.is-scrolled) { background: transparent; }
-.glass-panel {
-  border-top: 1px solid #c4f4ff80;
-  background: linear-gradient(120deg, #0c1c31bd, #101d32a6);
-  box-shadow: inset 0 1px #efffff14, 0 24px 60px #02071130;
+.home-page .hero {
+  min-height: 100svh;
+  align-content: end;
+  padding: 118px 0 clamp(24px, 5svh, 64px);
+}
+.hero .hero-layout {
+  width: min(92%, 1560px);
+  margin-inline: auto;
+}
+.hero .glass-panel {
+  position: relative;
+  width: min(100%, clamp(350px, 34vw, 470px));
+  padding: clamp(20px, 2.3vw, 34px);
+  background: linear-gradient(112deg, #0a1b2ed9, #0c2439af 58%, #19394b77);
+  border: 1px solid #d1f6ff42;
+  box-shadow: inset 0 1px #efffff28, 0 12px 34px #02071136;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.cover-edition {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c7e5e9;
+  font: 500 14px/1 var(--catalogue-font, sans-serif);
+  letter-spacing: .12em;
+}
+.cover-edition::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: #bbf5ed;
+  clip-path: polygon(50% 0,60% 39%,100% 50%,60% 61%,50% 100%,40% 61%,0 50%,40% 39%);
+}
+.cover-edition::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, #b9eded75, transparent);
+}
+.hero .glass-panel h1 { margin: 12px 0 16px; }
+.hero .cover-wordmark { width: min(85%, 280px); }
+.hero .glass-panel .hero-footer {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  gap: 12px;
+  align-items: end;
+}
+.hero .glass-panel .hero-subtitle {
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.3;
+  letter-spacing: .07em;
+  color: #edf4f6;
+}
+.hero-subtitle:lang(zh) br { display: none; }
+.hero-footer .hero-subtitle:lang(zh) { font-size: 21px; letter-spacing: .08em; }
+@media (max-width: 760px) {
+  .home-page .hero { padding-bottom: max(18px, env(safe-area-inset-bottom)); }
+  .hero .hero-layout { width: calc(100% - 32px); }
+  .hero .glass-panel { width: min(100%, 340px); padding: 17px 21px; }
+  .hero .cover-wordmark { width: min(73%, 194px); }
+  .hero .glass-panel h1 { margin: 8px 0; }
+  .hero .hero-background { background-position: 39% center; }
+  .hero .glass-panel .hero-footer a { min-height: 44px; padding: 8px 14px; }
 }
 .artist-intro { background: linear-gradient(110deg, #162d3c66, #151d3266, #22304438); }
 .anniversary-promo { background: linear-gradient(110deg, #17344466, #26213a42); }
@@ -441,24 +502,25 @@ body, body.anniversary-page {
   text-align: center;
   cursor: pointer;
 }
-.constellation-node::before {
+.constellation-node::before,
+.constellation-node::after {
   content: "";
   position: absolute;
+  box-sizing: border-box;
+  left: 50%;
+  top: 0;
+  translate: -50% -50%;
+}
+.constellation-node::before {
   width: 10px;
   height: 10px;
-  left: calc(50% - 5px);
-  top: -5px;
   background: #c6eaf4;
   clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
   transition: transform 300ms ease, background-color 300ms ease;
 }
 .constellation-node::after {
-  content: "";
-  position: absolute;
   width: 28px;
   height: 28px;
-  top: -14px;
-  left: calc(50% - 14px);
   border: 1px solid #c2f4ff00;
   border-radius: 50%;
   box-shadow: 0 0 22px #bceeff00;

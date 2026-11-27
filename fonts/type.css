@@ -1,0 +1,62 @@
+/* Titles use regional glyphs. Each subset includes the published titles and Latin letters. */
+@font-face {
+  font-family: "Portfolio Serif SC";
+  src: url("serif-sc.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Portfolio Serif TC";
+  src: url("serif-tc.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Portfolio Serif JP";
+  src: url("serif-jp.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow Semi Condensed";
+  src: url("barlow-catalogue.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: Barlow;
+  src: url("barlow-interface.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+:root {
+  --artwork-serif: "Portfolio Serif SC", "Noto Serif SC", Georgia, serif;
+  --catalogue-font: "Barlow Semi Condensed", system-ui, sans-serif;
+}
+:root:lang(zh-Hant) { --artwork-serif: "Portfolio Serif TC", "Noto Serif TC", Georgia, serif; }
+:root:lang(ja) { --artwork-serif: "Portfolio Serif JP", "Noto Serif JP", Georgia, serif; }
+
+[data-artwork-title],
+.series-sheet .series-art-copy h4,
+.series-sheet .song-edition-heading h4,
+.series-path strong,
+.series-track-heading h3 {
+  font-family: var(--artwork-serif);
+  font-weight: 600;
+}
+[data-artwork-title] { line-height: 1.25; letter-spacing: 0; }
+.detail-info [data-artwork-title] { line-height: 1.25; overflow-wrap: anywhere; }
+.navlinks > a:lang(en) { font-family: Barlow, system-ui, sans-serif; font-weight: 500; }
+
+.catalogue-value, .card-meta, .hero-footer > span,
+time, .constellation-year, .contact-group-number, .anniversary-dateline,
+.anniversary-work-badge b, .series-code, .record-catalog,
+.series-album-number, .cover-record-disc span {
+  font-family: var(--catalogue-font);
+  font-variant-numeric: tabular-nums;
+}
+.detail-info .catalogue-value, .detail-info .anniversary-work-badge b {
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}

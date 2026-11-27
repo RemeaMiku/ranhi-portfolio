@@ -11,18 +11,24 @@
     <script src="theme.js?v=20261123-1"></script>
     <style>html[data-i18n-state="loading"] body { visibility: hidden; }</style>
     <script src="i18n.js?v=20261125-1"></script>
-    <link rel="stylesheet" href="style.css?v=20261112-5" />
-    <link rel="stylesheet" href="theme.css?v=20261124-1" />
+    <link rel="stylesheet" href="style.css?v=20261127-3" />
+    <link rel="stylesheet" href="theme.css?v=20261127-cover" />
     <link rel="stylesheet" href="i18n.css?v=20261124-1" />
-    <link rel="stylesheet" href="anniversary.css?v=20261112-11" />
-    <link rel="stylesheet" href="atmosphere.css?v=20261124-3" />
+    <link rel="stylesheet" href="anniversary.css?v=20261127-1" />
+    <link rel="stylesheet" href="atmosphere.css?v=20261127-cover" />
     <script src="stars.js?v=20261123-2" defer></script>
     <script src="language-menu.js?v=20261124-1" defer></script>
+    <link rel="stylesheet" href="fonts/type.css?v=20261127-1" />
   </head>
   <body class="home-page" data-page-title="portfolio">
     <header class="site-header site-header--overlay">
       <div class="container nav">
-        <a class="brand" href="./" aria-label="RANHI home">RANHI</a>
+        <a class="brand" href="./" aria-label="RANHI home">
+          <svg class="brand-wordmark" viewBox="0 0 124 32" aria-hidden="true" focusable="false">
+            <use href="images/ranhi-wordmark.svg?v=3#wordmark"></use>
+            <use class="brand-glint" href="images/ranhi-wordmark.svg?v=3#wordmark"></use>
+          </svg>
+        </a>
         <nav class="navlinks" aria-label="Primary">
           <a href="./" aria-current="page" data-i18n="home">HOME</a
           ><a href="works/" data-i18n="works">WORKS</a><a href="about/" data-i18n="about">ABOUT</a
@@ -55,11 +61,29 @@
         <div class="hero-shade"></div>
         <div class="container hero-layout">
           <div class="glass-panel">
-            <h1 id="hero-title">RANHI</h1>
-            <p class="hero-subtitle">ILLUSTRATION<br />PORTFOLIO</p>
+            <div class="cover-edition"><span>2025 — 2026</span></div>
+            <h1 id="hero-title" aria-label="RANHI">
+              <svg class="cover-wordmark" viewBox="-9 -9 145 49" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="cover-orbit-fade">
+                    <stop stop-color="#a7ddd9" stop-opacity=".62"></stop>
+                    <stop offset=".74" stop-color="#a7ddd9" stop-opacity=".18"></stop>
+                    <stop offset="1" stop-color="#a7ddd9" stop-opacity="0"></stop>
+                  </linearGradient>
+                </defs>
+                <g transform="rotate(-13 62 15)" fill="none" stroke="url(#cover-orbit-fade)" stroke-width=".48">
+                  <path d="M18 6.14A69 11.5 0 0 0 -7 15A69 11.5 0 0 0 29 25.1"></path>
+                  <path transform="rotate(180 62 15)" d="M18 6.14A69 11.5 0 0 0 -7 15A69 11.5 0 0 0 29 25.1"></path>
+                </g>
+                <use href="images/ranhi-wordmark.svg?v=3#wordmark" width="124" height="32"></use>
+                <g transform="rotate(-13 62 15)">
+                  <path transform="translate(131 15)" d="M0-2.3.65-.65 2.3 0 .65.65 0 2.3-.65.65-2.3 0-.65-.65Z" fill="#d2f9f4"></path>
+                </g>
+              </svg>
+            </h1>
             <div class="hero-footer">
-              <span>2025 — 2026</span
-              ><a href="works/"
+              <p class="hero-subtitle">ILLUSTRATION<br />PORTFOLIO</p>
+              <a href="works/"
                 >VIEW WORKS <span aria-hidden="true">↘</span></a
               >
             </div>
@@ -69,15 +93,20 @@
       <!-- The special project is the first stop after the cover. -->
       <div class="anniversary-entry" data-home-content-start>
         <a class="anniversary-promo container" href="10-years-with-miku/" aria-labelledby="anniversary-promo-title anniversary-promo-action">
-          <svg class="anniversary-logo" viewBox="247 289 506 520" aria-hidden="true" focusable="false">
-            <image href="images/10-years-with-miku.png?v=20261004-2" width="1000" height="1000" />
-          </svg>
+          <span class="promo-book" aria-hidden="true">
+            <img class="promo-page" src="images/sp01-meeting-you-is-the-greatest-gift-1280.webp" alt="" loading="lazy" />
+            <span class="promo-cover">
+              <svg class="anniversary-logo" viewBox="247 289 506 520" focusable="false">
+                <image href="images/10-years-with-miku.png?v=20261004-2" width="1000" height="1000" />
+              </svg>
+            </span>
+          </span>
           <div>
             <p class="anniversary-kicker" data-i18n="anniversaryLabel">Anniversary illustration project</p>
-            <h2 id="anniversary-promo-title" lang="en">10 Years with Miku</h2>
+            <h2 id="anniversary-promo-title" lang="en">10 Years <em>with Miku</em></h2>
             <p data-i18n="anniversaryPromo">Ten years, captured here—</p>
           </div>
-          <span class="anniversary-promo-cta" id="anniversary-promo-action" data-i18n="anniversaryVisit">VISIT THE SPECIAL PAGE <span aria-hidden="true">↗</span></span>
+          <span class="anniversary-promo-cta"><span id="anniversary-promo-action" data-i18n="anniversaryVisit">VISIT THE SPECIAL PAGE</span><span aria-hidden="true">↗</span></span>
         </a>
       </div>
       <!-- Latest four works; keep this order in sync with the Works page. -->
@@ -159,7 +188,7 @@
     <footer class="footer container">
       <div class="footer-meta">
         <span lang="en">RANHI / ILLUSTRATION PORTFOLIO</span>
-        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-11-25">November 25, 2026</time></span>
+        <span class="last-updated"><span data-i18n="lastUpdated">Last updated</span> · <time data-last-updated datetime="2026-11-28">November 28, 2026</time></span>
       </div>
       <div class="footer-signoff">
         <span>© 2026 RANHI</span

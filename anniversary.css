@@ -10,7 +10,7 @@
 }
 .anniversary-promo {
   display: grid;
-  grid-template-columns: 150px minmax(0, 1fr) auto;
+  grid-template-columns: clamp(112px, 13vw, 160px) minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(24px, 4vw, 58px);
   margin-bottom: 0;
@@ -27,6 +27,44 @@
   outline: 2px solid var(--accent);
   outline-offset: 5px;
 }
+.promo-book {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  perspective: 540px;
+  transform: rotate(-4deg);
+  border: 1px solid #879b9e;
+  box-shadow: 2px 1px #27394b, 4px 2px #899a9d, 6px 3px #243546, 7px 12px 18px #03081480;
+}
+.promo-page, .promo-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.promo-page { object-fit: cover; object-position: 52% center; }
+.promo-cover {
+  display: grid;
+  place-items: center;
+  transform-origin: left center;
+  transform: rotateY(-9deg);
+  border: 1px solid #72999c;
+  background: linear-gradient(90deg, #112d38 3%, #56767a 4%, #193e49 6%, #112733 56%, #10202d);
+}
+.promo-cover::before {
+  content: "";
+  position: absolute;
+  inset: 7% 7% 7% 12%;
+  border: 1px solid #7ca6a64d;
+}
+.promo-cover .anniversary-logo { width: 66%; margin-left: 5%; }
+@media (prefers-reduced-motion: no-preference) {
+  .promo-cover { transition: transform 520ms cubic-bezier(.2,.65,.25,1); }
+  .anniversary-promo:focus-visible .promo-cover { transform: rotateY(-45deg); }
+  @media (hover: hover) {
+    .anniversary-promo:hover .promo-cover { transform: rotateY(-45deg); }
+  }
+}
 .anniversary-logo {
   display: block;
   width: 100%;
@@ -35,10 +73,16 @@
   overflow: hidden;
 }
 .anniversary-promo h2 {
-  font-size: clamp(26px, 3.5vw, 44px);
+  font-size: clamp(29px, 3.6vw, 54px);
   line-height: 1.12;
   letter-spacing: -0.04em;
   margin: 10px 0 14px;
+}
+.anniversary-promo h2 em {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  color: #c7e6e3;
+  white-space: nowrap;
 }
 .anniversary-promo p {
   margin: 0;
@@ -51,10 +95,14 @@
   color: var(--muted);
 }
 .anniversary-promo-cta {
-  display: flex;
+  display: inline-flex;
+  justify-self: start;
   align-items: center;
-  gap: 24px;
-  padding: 14px 0;
+  gap: 1em;
+  padding: .75em 1em;
+  border: 1px solid #9cc6c45c;
+  color: #dcf4f0;
+  background: #132b36;
   font-size: 16px;
   white-space: nowrap;
 }
@@ -601,8 +649,8 @@
 }
 .series-sheet .senbonzakura .song-edition-heading h4 {
   position: relative; margin: 0; font-size: clamp(36px, 4.5vw, 64px);
-  font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif CJK SC", "Songti SC", Georgia, serif;
-  font-weight: 700; line-height: 1.4; letter-spacing: .06em;
+  font-family: var(--artwork-serif);
+  font-weight: 600; line-height: 1.4; letter-spacing: .06em;
   text-shadow: 0 2px 16px var(--paper);
 }
 .song-edition-heading::before { content: ""; display: block; width: 44px; height: 3px; margin-bottom: 22px; background: var(--sakura-ink); }
@@ -740,7 +788,7 @@
 }
 @media (max-width: 900px) {
   .anniversary-promo { grid-template-columns: 120px minmax(0, 1fr); }
-  .anniversary-promo-cta { grid-column: 2; padding: 0; }
+  .anniversary-promo-cta { grid-column: 2; }
   .anniversary-stage { gap: 32px; }
   .anniversary-emblem { padding: 24px; }
 }
@@ -753,9 +801,9 @@
   .anniversary-thread { margin-inline: 0; }
   .anniversary-waiting { grid-template-columns: 1fr; }
   .anniversary-monogram { font-size: 100px; }
-  .anniversary-promo { grid-template-columns: 1fr; gap: 20px; }
-  .anniversary-promo .anniversary-logo { width: 110px; }
-  .anniversary-promo-cta { grid-column: 1; }
+  .anniversary-promo { grid-template-columns: minmax(54px, 23%) minmax(0, 1fr); gap: 16px; }
+  .anniversary-promo .promo-book { align-self: start; }
+  .anniversary-promo-cta { grid-column: 2; white-space: normal; font-size: 14px; }
 }
 
 /* Alternate song sleeves by entry order; the reading order stays image-first on mobile. */

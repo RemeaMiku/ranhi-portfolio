@@ -58,9 +58,47 @@ button {
   justify-content: space-between;
 }
 .brand {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  width: 100px;
+  min-height: 44px;
+}
+.brand-wordmark { display: block; width: 100%; height: auto; }
+.brand-glint {
+  --wordmark-ink: #75f9ed;
+  opacity: 0;
+  pointer-events: none;
+}
+.brand:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.brand:focus-visible, .brand:hover { --wordmark-ink: #c7f4ee; }
+@media (prefers-reduced-motion: no-preference) {
+  .brand:focus-visible .brand-glint { animation: brand-trace 760ms ease-in-out; }
+  @media (hover: hover) {
+    .brand:hover .brand-glint { animation: brand-trace 760ms ease-in-out; }
+  }
+}
+@keyframes brand-trace {
+  from { opacity: 1; clip-path: polygon(-40% 0, -10% 0, -20% 100%, -50% 100%); }
+  to { opacity: 1; clip-path: polygon(115% 0, 145% 0, 135% 100%, 105% 100%); }
+}
+.profile-name {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 34px);
+  width: fit-content;
+  max-width: 100%;
+}
+.profile-wordmark { display: block; width: clamp(180px, 36vw, 490px); max-width: 78vw; height: auto; }
+.profile-seal {
+  display: inline-block;
+  writing-mode: vertical-rl;
+  padding: .38em .21em;
+  border: 1px solid currentColor;
+  color: #e5a2b0;
+  font: 500 clamp(16px, 2.1vw, 27px)/1.1 "Songti SC", SimSun, serif;
+  letter-spacing: .09em;
+  transform: rotate(4deg);
 }
 .navlinks {
   display: flex;
@@ -138,6 +176,11 @@ button {
   line-height: 0.82;
   letter-spacing: -0.075em;
   margin: 30px 0 23px;
+}
+.cover-wordmark {
+  display: block;
+  width: min(100%, clamp(190px, 25vw, 330px));
+  height: auto;
 }
 .hero-subtitle {
   font-size: clamp(17px, 2.1vw, 25px);
@@ -459,7 +502,7 @@ button {
     letter-spacing: 0.11em;
   }
   .brand {
-    font-size: 16px;
+    width: min(84px, 100%);
   }
   .hero {
     padding: 100px 0 32px;

@@ -47,12 +47,14 @@ const home = fs.readFileSync(path.join(root, "index.html"), "utf8");
 const archive = fs.readFileSync(path.join(root, "works/index.html"), "utf8");
 const latest = [...home.matchAll(/class="work-card[^\"]*" href="works\/#([^\"]+)"/g)].map(match => match[1]);
 assert.deepEqual(latest, ["senbonzakura", "rain-and-hydrangeas", "winter-midnight", "moonlight-and-osmanthus"]);
-assert.ok(!home.includes("meeting-you-is-the-greatest-gift"));
+// SP01 can appear inside the anniversary book cover, but not in the latest works grid.
+const latestSection = home.split('<section class="section selected">')[1].split("</section>")[0];
+assert.ok(!latestSection.includes("meeting-you-is-the-greatest-gift"));
 assert.ok(!archive.includes("meeting-you-is-the-greatest-gift"));
 assert.ok(html.includes("sp01-meeting-you-is-the-greatest-gift.webp"), "SP01 remains in the special collection");
 const entry = archive.split('id="senbonzakura"')[1].split("</article>")[0];
 assert.ok(entry.includes("anniversary-work-badge"));
 assert.ok(entry.includes("M&amp;R <em>10TH</em>"));
 assert.ok(entry.includes('class="notes notes--paragraphs"'));
-assert.ok(entry.includes('<dd>2026.11</dd>'));
+assert.ok(entry.includes('<time datetime="2026-11">2026.11</time>'));
 assert.ok(!entry.includes('2026.11.11'));
