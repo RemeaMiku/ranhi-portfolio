@@ -156,7 +156,7 @@ body, body.anniversary-page {
   .hero .glass-panel { width: min(100%, 340px); padding: 17px 21px; }
   .hero .cover-wordmark { width: min(73%, 194px); }
   .hero .glass-panel h1 { margin: 8px 0; }
-  .hero .hero-background { background-position: 39% center; }
+  .hero-background img { object-position: 39% center; }
   .hero .glass-panel .hero-footer a { min-height: 44px; padding: 8px 14px; }
 }
 .artist-intro { background: linear-gradient(110deg, #162d3c66, #151d3266, #22304438); }

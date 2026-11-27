@@ -129,9 +129,17 @@ button {
 .hero-background {
   position: absolute;
   inset: -22px;
-  background: url("images/cover-the-new-mirai.webp") center/cover no-repeat;
-  filter: brightness(0.77) saturate(0.84) blur(5px);
   z-index: -2;
+}
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* The cover can paint while localized text is still waiting for its dictionary. */
+html[data-i18n-state="loading"] .hero-background,
+html[data-i18n-state="loading"] .hero-shade {
+  visibility: visible;
 }
 .hero-shade {
   position: absolute;
@@ -509,7 +517,6 @@ button {
     min-height: 760px;
   }
   .hero-background {
-    background-position: 45% center;
     inset: -15px;
   }
   .glass-panel {

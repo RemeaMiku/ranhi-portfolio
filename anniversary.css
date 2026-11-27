@@ -1,69 +1,8 @@
 /* A separate visual identity, using the colours of the original anniversary logo. */
-.anniversary-page,
-.anniversary-promo {
+.anniversary-page {
   --anniversary-mint: #70d0d7;
   --anniversary-peach: #f2c58b;
   --anniversary-pink: #eb8aa6;
-}
-.anniversary-entry {
-  padding-top: clamp(48px, 7vw, 96px);
-}
-.anniversary-promo {
-  display: grid;
-  grid-template-columns: clamp(112px, 13vw, 160px) minmax(0, 1fr) auto;
-  align-items: center;
-  gap: clamp(24px, 4vw, 58px);
-  margin-bottom: 0;
-  padding: clamp(24px, 4vw, 48px);
-  border-block: 1px solid var(--line);
-  background: linear-gradient(110deg, #70d0d716, #f2c58b12);
-  transition: background-color 350ms ease, border-color 350ms ease;
-}
-.anniversary-promo:hover {
-  border-color: var(--anniversary-mint);
-  background-color: #70d0d709;
-}
-.anniversary-promo:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 5px;
-}
-.promo-book {
-  position: relative;
-  display: block;
-  aspect-ratio: 4 / 5;
-  perspective: 540px;
-  transform: rotate(-4deg);
-  border: 1px solid #879b9e;
-  box-shadow: 2px 1px #27394b, 4px 2px #899a9d, 6px 3px #243546, 7px 12px 18px #03081480;
-}
-.promo-page, .promo-cover {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.promo-page { object-fit: cover; object-position: 52% center; }
-.promo-cover {
-  display: grid;
-  place-items: center;
-  transform-origin: left center;
-  transform: rotateY(-9deg);
-  border: 1px solid #72999c;
-  background: linear-gradient(90deg, #112d38 3%, #56767a 4%, #193e49 6%, #112733 56%, #10202d);
-}
-.promo-cover::before {
-  content: "";
-  position: absolute;
-  inset: 7% 7% 7% 12%;
-  border: 1px solid #7ca6a64d;
-}
-.promo-cover .anniversary-logo { width: 66%; margin-left: 5%; }
-@media (prefers-reduced-motion: no-preference) {
-  .promo-cover { transition: transform 520ms cubic-bezier(.2,.65,.25,1); }
-  .anniversary-promo:focus-visible .promo-cover { transform: rotateY(-45deg); }
-  @media (hover: hover) {
-    .anniversary-promo:hover .promo-cover { transform: rotateY(-45deg); }
-  }
 }
 .anniversary-logo {
   display: block;
@@ -71,40 +10,6 @@
   height: auto;
   aspect-ratio: 506 / 520;
   overflow: hidden;
-}
-.anniversary-promo h2 {
-  font-size: clamp(29px, 3.6vw, 54px);
-  line-height: 1.12;
-  letter-spacing: -0.04em;
-  margin: 10px 0 14px;
-}
-.anniversary-promo h2 em {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  color: #c7e6e3;
-  white-space: nowrap;
-}
-.anniversary-promo p {
-  margin: 0;
-  line-height: 1.8;
-}
-.anniversary-kicker {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-}
-.anniversary-promo-cta {
-  display: inline-flex;
-  justify-self: start;
-  align-items: center;
-  gap: 1em;
-  padding: .75em 1em;
-  border: 1px solid #9cc6c45c;
-  color: #dcf4f0;
-  background: #132b36;
-  font-size: 16px;
-  white-space: nowrap;
 }
 .anniversary-page {
   background:
@@ -787,8 +692,6 @@
   }
 }
 @media (max-width: 900px) {
-  .anniversary-promo { grid-template-columns: 120px minmax(0, 1fr); }
-  .anniversary-promo-cta { grid-column: 2; }
   .anniversary-stage { gap: 32px; }
   .anniversary-emblem { padding: 24px; }
 }
@@ -801,9 +704,6 @@
   .anniversary-thread { margin-inline: 0; }
   .anniversary-waiting { grid-template-columns: 1fr; }
   .anniversary-monogram { font-size: 100px; }
-  .anniversary-promo { grid-template-columns: minmax(54px, 23%) minmax(0, 1fr); gap: 16px; }
-  .anniversary-promo .promo-book { align-self: start; }
-  .anniversary-promo-cta { grid-column: 2; white-space: normal; font-size: 14px; }
 }
 
 /* Alternate song sleeves by entry order; the reading order stays image-first on mobile. */
